@@ -1,0 +1,39 @@
+package com.android.app.justbarit.presentation.feature_home.viewmodel
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.android.app.justbarit.R
+import com.android.app.justbarit.domain.model.Category
+import com.android.app.justbarit.domain.model.CategoryType
+import com.android.app.justbarit.presentation.AppState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class HomeViewModel @Inject constructor() : ViewModel() {
+    private val _categories = MutableStateFlow<AppState>(AppState.Default)
+    val categories: Flow<AppState> get() = _categories.asStateFlow()
+
+    fun getListOfCategories() {
+        viewModelScope.launch {
+            _categories.emit(AppState.Loading)
+            delay(4000)
+            val data = getHardCodeCategories()
+            _categories.emit(AppState.Success(data))
+        }
+    }
+
+    private fun getHardCodeCategories(): ArrayList<Category> {
+        return arrayListOf(
+            Category("Food", R.drawable.food_icon, true, CategoryType.Food),
+            Category("Jazz", R.drawable.icon_karaoke, false, CategoryType.Jazz),
+            Category("Karaoke", R.drawable.icon_karaoke, false, CategoryType.Karaoke),
+            Category("Sports", R.drawable.sport_icon, false, CategoryType.Sport)
+        )
+    }
+}

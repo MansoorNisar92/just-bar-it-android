@@ -2,7 +2,7 @@ package com.android.app.justbarit.presentation.splash
 
 import android.os.Bundle
 import com.android.app.justbarit.databinding.ActivitySplashBinding
-import com.android.app.justbarit.presentation.base.JustBarItBaseActvity
+import com.android.app.justbarit.presentation.base.JustBarItBaseActivity
 import com.android.app.justbarit.presentation.common.ext.navigate
 import com.android.app.justbarit.presentation.dashboard.DashboardScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,7 +12,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SplashScreen : JustBarItBaseActvity() {
+class SplashScreen : JustBarItBaseActivity() {
     private lateinit var binding: ActivitySplashBinding
     private val delay: Long = 8000 // 8 seconds
 

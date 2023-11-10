@@ -9,4 +9,5 @@
     <color name="bottom_navigation_tab_color">#FF9800</color>
     <color name="rippleColor">#1A000000</color>
     <color name="search_edit_background_color">#A73F2C</color>
+    <color name="loaderBg">#A6000000</color>
 </resources>
