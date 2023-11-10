@@ -4,5 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF2B00</color>
     <color name="blue">#2E3CFF</color>
+    <color name="top_bar_color">#D34F38</color>
     <color name="nav_bar_color">#871910</color>
+    <color name="bottom_navigation_tab_color">#FF9800</color>
 </resources>

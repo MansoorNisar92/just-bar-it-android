@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.android.app.justbarit.presentation.feature_home.view.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.android.app.justbarit.presentation.feature_calendar.view.CalendarFragment"
+        android:label="CalendarFragment"
+        tools:layout="@layout/fragment_calendar"/>
+    <fragment
+        android:id="@+id/starFragment"
+        android:name="com.android.app.justbarit.presentation.feature_star.view.StarFragment"
+        android:label="StarFragment"
+        tools:layout="@layout/fragment_star"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.android.app.justbarit.presentation.feature_profile.view.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>
