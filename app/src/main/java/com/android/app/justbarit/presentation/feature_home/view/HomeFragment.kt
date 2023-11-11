@@ -1,6 +1,7 @@
 package com.android.app.justbarit.presentation.feature_home.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.android.app.justbarit.domain.model.Category
 import com.android.app.justbarit.domain.model.Event
 import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.common.customviews.EventTodayItem
+import com.android.app.justbarit.presentation.common.customviews.SwipeGestureListener
 import com.android.app.justbarit.presentation.common.ext.bitmapFromVector
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
@@ -73,6 +75,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private fun initTodayEvents(events: ArrayList<Event>) {
         eventsList = events
         showEvent(currentEventIndex)
+
+        val swipeGestureListener = SwipeGestureListener { isNext ->
+            if (isNext) {
+                showNextEvent()
+            } else {
+                showPreviousEvent()
+            }
+        }
+
+// Attach the SwipeGestureListener to the addEventTodayLinearLayout for touch events
+        binding.addEventTodayLinearLayout.setOnTouchListener(swipeGestureListener)
     }
 
     private fun observe() {

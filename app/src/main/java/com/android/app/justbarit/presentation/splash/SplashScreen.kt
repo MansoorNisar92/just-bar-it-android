@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SplashScreen : JustBarItBaseActivity() {
     private lateinit var binding: ActivitySplashBinding
-    private val delay: Long = 8000 // 8 seconds
+    private val delay: Long = 6000 // 8 seconds
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
