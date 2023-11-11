@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import com.android.app.justbarit.databinding.ItemEventTodayBinding
+import com.android.app.justbarit.domain.model.Event
 
 class EventTodayItem @JvmOverloads constructor(
     context: Context,
@@ -23,8 +24,11 @@ class EventTodayItem @JvmOverloads constructor(
 
         this.layoutParams = layoutParams
     }
-    fun addEvent(event: String) {
-        binding.eventNameTextView.text = event
+    fun addEvent(event: Event) {
+        binding.eventNameTextView.text = event.eventName
+        binding.eventDescTextView.text = event.eventDesc
+        binding.eventDateTextView.text = event.eventDate
+        binding.eventTimeTextView.text = event.evenTime
     }
 
 

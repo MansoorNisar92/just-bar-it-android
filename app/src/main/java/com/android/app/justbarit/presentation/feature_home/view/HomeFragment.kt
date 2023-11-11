@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.FragmentHomeBinding
 import com.android.app.justbarit.domain.model.Category
+import com.android.app.justbarit.domain.model.Event
 import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.common.customviews.EventTodayItem
 import com.android.app.justbarit.presentation.common.ext.bitmapFromVector
@@ -37,7 +38,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private lateinit var categoryAdapter: CategoryAdapter
     private var currentEventIndex = 0
 
-    private var eventsList = arrayListOf<String>()
+    private var eventsList = arrayListOf<Event>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,7 +70,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         binding.categoryRecyclerView.adapter = categoryAdapter
     }
 
-    private fun initTodayEvents(events: ArrayList<String>) {
+    private fun initTodayEvents(events: ArrayList<Event>) {
         eventsList = events
         showEvent(currentEventIndex)
     }
@@ -106,7 +107,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
                         is AppState.Success<*> -> {
                             hideProgress()
-                            initTodayEvents(it.response as ArrayList<String>)
+                            initTodayEvents(it.response as ArrayList<Event>)
                         }
 
                         is AppState.Failure<*> -> {
@@ -162,7 +163,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         return eventsList.size
     }
 
-    private fun getEventAtIndex(index: Int): String {
+    private fun getEventAtIndex(index: Int): Event {
         return eventsList[index]
     }
 
