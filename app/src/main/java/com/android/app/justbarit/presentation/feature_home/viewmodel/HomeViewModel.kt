@@ -19,6 +19,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     private val _categories = MutableStateFlow<AppState>(AppState.Default)
     val categories: Flow<AppState> get() = _categories.asStateFlow()
 
+    private val _eventsToday = MutableStateFlow<AppState>(AppState.Default)
+    val eventsToday: Flow<AppState> get() = _eventsToday.asStateFlow()
+
     fun getListOfCategories() {
         viewModelScope.launch {
             _categories.emit(AppState.Loading)
@@ -28,12 +31,32 @@ class HomeViewModel @Inject constructor() : ViewModel() {
         }
     }
 
+    fun getListOfEventsToday() {
+        viewModelScope.launch {
+            _eventsToday.emit(AppState.Loading)
+            delay(4000)
+            val data = getHardEventsToday()
+            _eventsToday.emit(AppState.Success(data))
+        }
+    }
+
     private fun getHardCodeCategories(): ArrayList<Category> {
         return arrayListOf(
             Category("Food", R.drawable.food_icon, true, CategoryType.Food),
             Category("Jazz", R.drawable.icon_karaoke, false, CategoryType.Jazz),
             Category("Karaoke", R.drawable.icon_karaoke, false, CategoryType.Karaoke),
             Category("Sports", R.drawable.sport_icon, false, CategoryType.Sport)
+        )
+    }
+
+
+    private fun getHardEventsToday(): ArrayList<String> {
+        return arrayListOf(
+            "Friday Night - Fire",
+            "O’REILLYS - CHEAP MONDAY",
+            "Let's roll it - Dude",
+            "Smoking Lounge and Treat",
+            "Crashing Tonight - Blast",
         )
     }
 }

@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/item_category_background"
-        android:layout_marginEnd="@dimen/_20sdp">
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:animateLayoutChanges="true">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/itemCategoryImageView"
