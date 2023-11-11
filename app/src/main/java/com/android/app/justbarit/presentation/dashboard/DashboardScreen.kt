@@ -11,12 +11,12 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.ActivityDashboardBinding
-import com.android.app.justbarit.presentation.base.JustBarItBaseActvity
+import com.android.app.justbarit.presentation.base.JustBarItBaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class DashboardScreen : JustBarItBaseActvity() {
+class DashboardScreen : JustBarItBaseActivity() {
     private lateinit var binding: ActivityDashboardBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

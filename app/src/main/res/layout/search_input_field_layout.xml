@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/search_edit_text_background">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/searchInputField"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_50sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/locationIconImageView"
+        android:background="@null"
+        android:hint="@string/search"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:fontFamily="@font/lexend_regular"
+        android:textCursorDrawable="@null"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:imeOptions="actionDone|actionGo|actionSearch"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/locationIconImageView"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/searchInputField"
+        android:src="@drawable/location_icon"
+        android:padding="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:foreground="@drawable/ripple" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

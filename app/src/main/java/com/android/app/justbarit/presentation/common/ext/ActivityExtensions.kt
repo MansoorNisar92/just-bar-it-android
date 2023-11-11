@@ -5,7 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import com.android.app.justbarit.R
+import com.android.app.justbarit.presentation.base.JustBarItBaseActivity
 import java.io.Serializable
+
+fun JustBarItBaseActivity.showProgress() {
+    justBarItProgress.show()
+}
+
+fun JustBarItBaseActivity.hideProgress() {
+    justBarItProgress.dismiss()
+}
+
 
 /** An inline function is one for which the compiler copies the code from the function definition
  *  directly into the code of the calling function rather than creating a separate set of instructions in memory.
