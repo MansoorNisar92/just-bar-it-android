@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/eventCardView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_170sdp"
+        android:layout_height="@dimen/_180sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_20sdp"
@@ -39,8 +40,8 @@
                 android:gravity="center"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:maxLines="1"
-                android:textAllCaps="true"
                 android:text="O’REILLYS - CHEAP MONDAY"
+                android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +61,88 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/eventNameTextView">
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:fontFamily="@font/lexend_regular"
+                    android:text="27th Sept"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/event_time_background"
+                    android:fontFamily="@font/lexend_bold"
+                    android:gravity="center_horizontal|center_vertical|center"
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:paddingBottom="@dimen/_1sdp"
+                    android:text="20:00"
+                    android:textColor="@color/eventTodaySeeDetails"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/eventDetailsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:fontFamily="@font/lexend_bold"
+                    android:gravity="center_horizontal|center_vertical|center"
+                    android:text="Cheap ass Monday - 1 euros shots"
+                    android:maxLines="2"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp"
+                    app:layout_constraintBottom_toTopOf="@+id/seeDetailsLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/seeDetailsLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/eventDetailsTextView"
+                    android:background="@drawable/see_details_background">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/seeDetailsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:fontFamily="@font/lexend_regular"
+                        android:gravity="center_horizontal|center_vertical|center"
+                        android:text="@string/see_details"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sdp"
+                        app:layout_constraintEnd_toStartOf="@+id/seeDetailsArrowImageView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/seeDetailsArrowImageView"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/forward_arrow_black" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

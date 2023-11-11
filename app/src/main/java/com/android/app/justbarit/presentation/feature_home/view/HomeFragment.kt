@@ -17,14 +17,19 @@ import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
 import com.android.app.justbarit.presentation.common.ext.showProgress
 import com.android.app.justbarit.presentation.feature_home.adapter.CategoryAdapter
-import com.android.app.justbarit.presentation.feature_home.adapter.EventTodayAdapter
 import com.android.app.justbarit.presentation.feature_home.adapter.categoryClick
 import com.android.app.justbarit.presentation.feature_home.viewmodel.HomeViewModel
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var categoryAdapter: CategoryAdapter
@@ -36,6 +41,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        binding.eventLocationsMapFragment.onCreate(savedInstanceState)
+        binding.eventLocationsMapFragment.getMapAsync(this)
         return binding.root
     }
 
@@ -164,5 +172,13 @@ class HomeFragment : Fragment() {
 
                 }
             }
+    }
+    override fun onMapReady(googleMap: GoogleMap) {
+        val mMap = googleMap
+
+        // Add a marker in a specific location and move the camera
+        val location = LatLng(37.7749, -122.4194) // Example coordinates (San Francisco)
+        mMap.addMarker(MarkerOptions().position(location).title("Marker in San Francisco"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
     }
 }

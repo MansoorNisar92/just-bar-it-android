@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     private fun getHardCodeCategories(): ArrayList<Category> {
         return arrayListOf(
             Category("Food", R.drawable.food_icon, true, CategoryType.Food),
-            Category("Jazz", R.drawable.icon_karaoke, false, CategoryType.Jazz),
+            Category("Jazz", R.drawable.jazz_icon, false, CategoryType.Jazz),
             Category("Karaoke", R.drawable.icon_karaoke, false, CategoryType.Karaoke),
             Category("Sports", R.drawable.sport_icon, false, CategoryType.Sport)
         )

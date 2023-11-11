@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:name=".JustBarItApplication"
         android:allowBackup="true"
@@ -29,7 +32,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAg1lotc8yoLeamnCdIju30PaTQhd-Wv6U" />
+            android:value="AIzaSyAlCqvpgBX7O0jpr53oWUzQfoLtascz79Y" />
     </application>
 
 </manifest>

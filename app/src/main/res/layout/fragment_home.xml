@@ -2,8 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
     android:animateLayoutChanges="true"
     tools:context=".presentation.feature_home.view.HomeFragment">
 
@@ -107,7 +108,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/evenTodayConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_180sdp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_3sdp"
@@ -152,7 +153,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -184,7 +185,7 @@
             app:layout_constraintTop_toBottomOf="@id/exploreYourAreaTextView" >
 
             <com.google.android.gms.maps.MapView
-                android:id="@+id/location_map"
+                android:id="@+id/eventLocationsMapFragment"
                 android:name="com.google.android.gms.maps.MapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
