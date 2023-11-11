@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
-        tools:context=".presentation.feature_home.view.HomeFragment">
+        tools:context=".presentation.feature_home.view.HomeFragment"
+        android:layout_marginBottom="@dimen/_10sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/searchBarLayout"
@@ -23,46 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/fancyANewAdventureTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:fontFamily="@font/lexend_bold"
-                android:text="@string/fancy_a_new_adventure"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_20sdp"
-                app:layout_constraintEnd_toStartOf="@id/searchIconImageView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/searchIconImageView"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_margin="@dimen/_10sdp"
-                android:padding="@dimen/_10sdp"
-                android:src="@drawable/search_icon_white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/fancyANewAdventureTextView"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fancyANewAdventureTextView">
-
-                <include layout="@layout/search_input_field_layout" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <include layout="@layout/top_bar_with_text_and_sarch_input_layout"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -171,6 +133,7 @@
             app:layout_constraintTop_toBottomOf="@id/evenTodayConstraintLayout" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/mapCardView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
             android:layout_gravity="center_horizontal|center_vertical"
@@ -191,5 +154,14 @@
                 android:layout_height="match_parent"
                 android:background="@color/white"/>
         </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ghostTextView"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapCardView"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Just Bar It</string>
-    <string name="google_api_key">AIzaSyAg1lotc8yoLeamnCdIju30PaTQhd-Wv6U</string>
-    <string name="google_api_keyx">AIzaSyAlCqvpgBX7O0jpr53oWUzQfoLtascz79Y</string>
+    <string name="google_api_key">AIzaSyAlCqvpgBX7O0jpr53oWUzQfoLtascz79Y</string>
     <string name="fancy_a_new_adventure">Fancy a new\nadventure?</string>
     <string name="search">Search...</string>
     <string name="food">Food</string>

@@ -13,6 +13,7 @@ import com.android.app.justbarit.databinding.FragmentHomeBinding
 import com.android.app.justbarit.domain.model.Category
 import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.common.customviews.EventTodayItem
+import com.android.app.justbarit.presentation.common.ext.bitmapFromVector
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
 import com.android.app.justbarit.presentation.common.ext.showProgress
@@ -22,7 +23,8 @@ import com.android.app.justbarit.presentation.feature_home.viewmodel.HomeViewMod
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
@@ -176,9 +178,24 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         val mMap = googleMap
 
+        val currentLocation = LatLng(33.5651107, 73.0169135)
+
+        val newCustomMarker: BitmapDescriptor = R.drawable.ic_pin_location.bitmapFromVector(requireContext())
+        val markerOptions = MarkerOptions()
+            .position(currentLocation)
+            .draggable(true)
+            .icon(newCustomMarker)
         // Add a marker in a specific location and move the camera
-        val location = LatLng(37.7749, -122.4194) // Example coordinates (San Francisco)
-        mMap.addMarker(MarkerOptions().position(location).title("Marker in San Francisco"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+        val location = LatLng(33.5651107, 73.0169135) // Example coordinates (San Francisco)
+        mMap.addMarker(markerOptions)
+        //marker.showInfoWindow();
+        val camera = CameraPosition.Builder()
+            .target(currentLocation)
+            .zoom(14f) // limit -> 21
+            .bearing(0f) // 0 - 365º
+            //.tilt(30)           // limit -> 90
+            .build()
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camera))
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
     }
 }
