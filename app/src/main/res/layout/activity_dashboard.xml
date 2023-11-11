@@ -8,31 +8,47 @@
         android:layout_height="match_parent"
         tools:context=".presentation.dashboard.DashboardScreen">
 
-        <androidx.core.widget.NestedScrollView
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigationLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationLayout"
             app:layout_constraintTop_toTopOf="parent">
 
-            <FrameLayout
-                android:id="@+id/container"
+            <fragment
+                android:id="@+id/navHostFragmentView"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/nav_graph" />
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:visibility="visible"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:cardElevation="@dimen/_50sdp"
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/emergencyEventBtn"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:background="@drawable/bottom_nav_search_icon_background"
+                android:translationZ="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <fragment
-                    android:id="@+id/navHostFragmentView"
-                    android:name="androidx.navigation.fragment.NavHostFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:defaultNavHost="true"
-                    app:navGraph="@navigation/nav_graph" />
-            </FrameLayout>
-        </androidx.core.widget.NestedScrollView>
+                app:srcCompat="@drawable/search_icon" />
+        </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomNavigationLayout"
@@ -41,6 +57,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+
             <include
                 android:id="@+id/includedBottomNavigationLayout"
                 layout="@layout/bottom_navigation" />
