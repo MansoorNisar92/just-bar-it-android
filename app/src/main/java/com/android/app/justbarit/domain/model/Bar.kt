@@ -9,5 +9,8 @@ data class Bar(
     var hasDineIn: Boolean = false,
     var hasDrink: Boolean = false,
     var hasBedRoom: Boolean = false,
+    var hasDance: Boolean = false,
+    var hasFreeEntry: Boolean = false,
+    var reviewCount: Int = 0
 )
 
