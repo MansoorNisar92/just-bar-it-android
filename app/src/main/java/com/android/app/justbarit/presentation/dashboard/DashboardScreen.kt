@@ -6,6 +6,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.annotation.IdRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
@@ -96,12 +97,19 @@ class DashboardScreen : JustBarItBaseActivity() {
             includedBottomNavigationLayout.bottomNavigation.menu.findItem(R.id.action_fake).isChecked =
                 true
             searchIconCardView.scaleUpAnimation()
-            updateSearchIconCircle(R.drawable.bottom_nav_search_icon_background_selected)
+            updateSearchIconCircle(
+                R.drawable.bottom_nav_search_icon_background_selected,
+                R.drawable.search_icon_white
+            )
         }
         navigate(R.id.searchFragment)
     }
 
-    private fun updateSearchIconCircle(background: Int = R.drawable.bottom_nav_search_icon_background) {
-        binding.searchButton.setBackgroundResource(background)
+    private fun updateSearchIconCircle(
+        background: Int = R.drawable.bottom_nav_search_icon_white_background,
+        icon: Int = R.drawable.search_icon
+    ) {
+        binding.searchIconCardView.setBackgroundResource(background)
+        binding.searchButton.setImageDrawable(AppCompatResources.getDrawable(this, icon))
     }
 }

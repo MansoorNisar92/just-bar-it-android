@@ -34,6 +34,7 @@
             android:visibility="visible"
             app:cardCornerRadius="@dimen/_50sdp"
             app:cardElevation="@dimen/_50sdp"
+            android:elevation="@dimen/_50sdp"
             app:cardPreventCornerOverlap="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
