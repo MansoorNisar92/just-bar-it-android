@@ -9,21 +9,26 @@
         android:id="@+id/homeFragment"
         android:name="com.android.app.justbarit.presentation.feature_home.view.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.android.app.justbarit.presentation.feature_calendar.view.CalendarFragment"
         android:label="CalendarFragment"
-        tools:layout="@layout/fragment_calendar"/>
+        tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/starFragment"
         android:name="com.android.app.justbarit.presentation.feature_star.view.StarFragment"
         android:label="StarFragment"
-        tools:layout="@layout/fragment_star"/>
+        tools:layout="@layout/fragment_star" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.android.app.justbarit.presentation.feature_profile.view.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.android.app.justbarit.presentation.feature_search.view.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" />
 
 </navigation>

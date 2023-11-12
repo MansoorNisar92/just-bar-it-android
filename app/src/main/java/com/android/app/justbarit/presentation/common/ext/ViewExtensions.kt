@@ -6,9 +6,12 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
+import com.android.app.justbarit.R
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
@@ -18,6 +21,7 @@ fun View.clickToAction(action: () -> Unit = {}) {
         action()
     }
 }
+
 fun View.hideKeyboard() {
     (context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
         windowToken,
@@ -59,4 +63,9 @@ fun Int.bitmapFromVector(context: Context): BitmapDescriptor {
     // after generating our bitmap we are returning our
     // bitmap.
     return BitmapDescriptorFactory.fromBitmap(smallMarker)
+}
+
+fun View.scaleUpAnimation() {
+    val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.scale_up)
+    startAnimation(animation)
 }

@@ -18,8 +18,19 @@
         <item name="itemActiveIndicatorStyle">@style/itemActiveIndicatorStyle</item>
     </style>
 
-    <style name="itemActiveIndicatorStyle" parent="Widget.Material3.NavigationRailView.ActiveIndicator">
+    <style name="itemActiveIndicatorStyle" parent="xxxxxx">
         <item name="android:color">@color/bottom_navigation_tab_color</item>
+        <item name="android:animation">@anim/scale_up</item>
+    </style>
+
+    <style name="xxxxxx" parent="Widget.Material3.NavigationRailView.ActiveIndicator">
+        <item name="android:width">@dimen/_25sdp</item>
+        <item name="android:height">@dimen/_25sdp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.M3.Comp.NavigationRail.ActiveIndicator.Shape</item>
+    </style>
+
+    <style name="itemActiveIndicatorStyleTransparent" parent="Widget.Material3.NavigationRailView.ActiveIndicator">
+        <item name="android:color">@android:color/transparent</item>
         <item name="android:animation">@anim/scale_up</item>
     </style>
 
