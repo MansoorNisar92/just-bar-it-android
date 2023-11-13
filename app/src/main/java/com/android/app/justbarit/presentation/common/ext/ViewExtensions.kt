@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -11,6 +12,9 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
+import androidx.recyclerview.widget.RecyclerView
 import com.android.app.justbarit.R
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -68,4 +72,30 @@ fun Int.bitmapFromVector(context: Context): BitmapDescriptor {
 fun View.scaleUpAnimation() {
     val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.scale_up)
     startAnimation(animation)
+}
+
+fun View.propagationAnimation() {
+    val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.propgration_animation)
+    startAnimation(animation)
+}
+
+fun RecyclerView.smoothScrollToPositionWithUpdate(adapter: RecyclerView.Adapter<*>, targetPosition: Int) {
+    val layoutManager = this.layoutManager as? LinearLayoutManager
+    layoutManager?.let {
+        val smoothScroller = object : LinearSmoothScroller(this.context) {
+            override fun getVerticalSnapPreference(): Int {
+                return SNAP_TO_START
+            }
+
+            override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics): Float {
+                return 0.5f // Adjust the scrolling speed as needed
+            }
+        }
+
+        smoothScroller.targetPosition = targetPosition
+
+        // Update the item position after starting the smooth scroll
+        adapter.notifyDataSetChanged()
+        layoutManager.startSmoothScroll(smoothScroller)
+    }
 }
