@@ -15,4 +15,5 @@
     <color name="eventTodayCardColor">#CCCCCC</color>
     <color name="eventTodaySeeDetails">#F8CC46</color>
     <color name="freeEntryColor">#4285F4</color>
+    <color name="halfRedColor">#EC826E</color>
 </resources>
