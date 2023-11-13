@@ -35,8 +35,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/calendarArrowLeftLayout"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             android:layout_marginStart="@dimen/_7sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:translationZ="100dp"
@@ -65,8 +65,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/calendarArrowRightLayout"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             android:layout_marginEnd="@dimen/_7sdp"
             android:translationZ="100dp"
             app:layout_constraintEnd_toEndOf="parent"
