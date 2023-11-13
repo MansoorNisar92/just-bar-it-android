@@ -100,14 +100,14 @@ class CalendarFragment : Fragment() {
             }
 
             calendarArrowRightLayout.clickToAction {
-                val currentPosition = calendarItemAdapter.selectedItemPosition()
-                val lastPosition = (binding.calendarItemRecyclerView.layoutManager as LinearLayoutManager).itemCount - 1
-
-                if (currentPosition < lastPosition) {
+                val lastPosition =
+                    (binding.calendarItemRecyclerView.layoutManager as LinearLayoutManager).itemCount - 1
+                if (calendarItemAdapter.selectedItemPosition() < lastPosition) {
+                    calendarItemAdapter.updateItemAtPosition(calendarItemAdapter.selectedItemPosition() + 1)
                     val smoothScroller =
                         object : LinearSmoothScroller(binding.calendarItemRecyclerView.context) {
                             override fun getVerticalSnapPreference(): Int {
-                                return SNAP_TO_START
+                                return LinearSmoothScroller.SNAP_TO_START
                             }
 
                             override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics): Float {
@@ -115,11 +115,7 @@ class CalendarFragment : Fragment() {
                             }
                         }
 
-                    smoothScroller.targetPosition = currentPosition + 1
-                    calendarItemAdapter.updateItemAtPosition(currentPosition + 1)
-
-                    // Update the item position after starting the smooth scroll
-
+                    smoothScroller.targetPosition = calendarItemAdapter.selectedItemPosition() + 1
                     (binding.calendarItemRecyclerView.layoutManager as LinearLayoutManager).startSmoothScroll(
                         smoothScroller
                     )
