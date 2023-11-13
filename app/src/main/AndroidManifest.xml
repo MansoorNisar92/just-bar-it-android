@@ -28,7 +28,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.dashboard.DashboardScreen" android:exported="false"/>
+        <activity android:name=".presentation.dashboard.DashboardScreen" android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -27,21 +27,23 @@
         </FrameLayout>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_55sdp"
-            android:layout_height="@dimen/_55sdp"
-            android:layout_marginBottom="@dimen/_15sdp"
+            android:id="@+id/searchIconCardView"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
             android:visibility="visible"
             app:cardCornerRadius="@dimen/_50sdp"
             app:cardElevation="@dimen/_50sdp"
+            android:elevation="@dimen/_50sdp"
             app:cardPreventCornerOverlap="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/emergencyEventBtn"
-                android:layout_width="@dimen/_55sdp"
-                android:layout_height="@dimen/_55sdp"
+                android:id="@+id/searchButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/bottom_nav_search_icon_background"
                 android:translationZ="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"

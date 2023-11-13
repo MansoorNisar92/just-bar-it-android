@@ -54,12 +54,16 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initCategories()
+        initView()
         attachListeners()
         observe()
 
         viewModel.getListOfCategories()
         viewModel.getListOfEventsToday()
+    }
+
+    private fun initView() {
+        initCategories()
     }
 
     private fun initCategories() {

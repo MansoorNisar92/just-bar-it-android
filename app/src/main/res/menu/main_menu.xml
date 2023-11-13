@@ -3,26 +3,26 @@
     <item
         android:id="@+id/action_home"
         android:icon="@drawable/home_icon"
-        android:title="" />
+        android:title="Home" />
 
     <!-- Item 2 -->
     <item
         android:id="@+id/action_calendar"
         android:icon="@drawable/calendar_icon"
-        android:title="" />
+        android:title="Calendar" />
 
     <item
         android:id="@+id/action_fake"
-        android:title="" />
+        android:title="Fake" />
 
     <item
         android:id="@+id/action_star"
-        android:title=""
+        android:title="Start"
         android:icon="@drawable/star_icon"
         />
 
     <item
         android:id="@+id/action_profile"
         android:icon="@drawable/profile_icon"
-        android:title="" />
+        android:title="Profile" />
 </menu>

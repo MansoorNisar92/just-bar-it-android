@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/eventCardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_245sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:clipToPadding="false"
+        android:elevation="@dimen/_3sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/eventTodayCardColor">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/freeEntryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/free_entry_background"
+                android:fontFamily="@font/lexend_semi_bold"
+                android:text="@string/free_entry"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_25sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:translationZ="@dimen/_100sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:background="@drawable/fully_curved_square_background">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/barCoverCardView"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:clipToPadding="false"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/barCoverImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/bar_cover_dummy" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/barNameTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/lexend_bold"
+                    android:maxLines="1"
+                    android:text="The Brazen Head"
+                    android:textSize="@dimen/_16sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/barCoverCardView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/starIconImageView"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/star_filled"
+                    app:layout_constraintStart_toStartOf="@id/barNameTextView"
+                    app:layout_constraintTop_toBottomOf="@id/barNameTextView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/barRatingTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:fontFamily="@font/lexend_bold"
+                    android:text="9.2"
+                    android:textSize="@dimen/_11sdp"
+                    app:layout_constraintStart_toEndOf="@id/starIconImageView"
+                    app:layout_constraintTop_toBottomOf="@id/barNameTextView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/barRatingDescTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/lexend_regular"
+                    android:text="Excellent"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintStart_toEndOf="@id/barRatingTextView"
+                    app:layout_constraintTop_toBottomOf="@id/barNameTextView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/barReviewCountTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:fontFamily="@font/lexend_regular"
+                    android:text="(2298)"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintStart_toEndOf="@id/barRatingDescTextView"
+                    app:layout_constraintTop_toBottomOf="@id/barNameTextView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/barDistanceTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:alpha=".5"
+                    android:fontFamily="@font/lexend_regular"
+                    android:text="Bar Restaurant - 0.8km from city center"
+                    android:textSize="@dimen/_8sdp"
+                    app:layout_constraintStart_toStartOf="@id/starIconImageView"
+                    app:layout_constraintTop_toBottomOf="@id/starIconImageView" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintStart_toStartOf="@id/barDistanceTextView"
+                    app:layout_constraintTop_toBottomOf="@id/barDistanceTextView">
+
+                    <include
+                        android:id="@+id/includedAmenities"
+                        layout="@layout/amenities_layout" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:fontFamily="@font/lexend_regular"
+                    android:text="@string/see_details"
+                    android:textSize="@dimen/_9sdp"
+                    app:layout_constraintEnd_toStartOf="@+id/seeDetailsArrow"
+                    app:layout_constraintTop_toBottomOf="@+id/barDistanceTextView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/seeDetailsArrow"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/forward_arrow_black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/barDistanceTextView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

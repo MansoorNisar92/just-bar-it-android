@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-            <include layout="@layout/top_bar_with_text_and_sarch_input_layout"/>
+            <include android:id="@+id/homeSearchBar" layout="@layout/top_bar_with_text_and_sarch_input_layout"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatTextView

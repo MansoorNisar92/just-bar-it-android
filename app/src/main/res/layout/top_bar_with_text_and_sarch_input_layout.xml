@@ -47,6 +47,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fancyANewAdventureTextView">
 
-        <include layout="@layout/search_input_field_layout" />
+        <include android:id="@+id/includedGeneralSearchBar" layout="@layout/search_input_field_layout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
