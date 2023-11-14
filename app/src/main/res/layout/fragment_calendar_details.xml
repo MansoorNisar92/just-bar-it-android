@@ -25,7 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_220sdp"
         android:scaleType="fitXY"
-        android:src="@drawable/bar_cover_dummy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,6 +46,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/giveRatingImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/_10sdp"
@@ -204,7 +204,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_3sdp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

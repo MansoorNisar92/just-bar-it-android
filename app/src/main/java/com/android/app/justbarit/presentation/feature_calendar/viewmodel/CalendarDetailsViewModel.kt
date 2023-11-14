@@ -53,28 +53,16 @@ class CalendarDetailsViewModel @Inject constructor() : ViewModel() {
                 "Carabao Cup",
                 "11th Nov",
                 "17:00",
-                Team("Man. City", 0),
-                Team("Man. Utd", 0)
+                Team("Newcastle", R.drawable.new_castle),
+                Team("Man. City", R.drawable.man_city)
             ),
             EventDetails(
-                "Premier League", "20th Nov", "20:00", Team("Chelsea", 0),
-                Team("Liverpool", 0)
-            ),
-            EventDetails(
-                "Champions League", "01st Dec", "23:00",
-                Team("Man. City", 0),
-                Team("Barcelona", 0)
-            ),
-            EventDetails(
-                "FA Cup", "10th Dec", "20:00",
-                Team("Man. City", 0),
-                Team("Man. Utd", 0)
-            ),
-            EventDetails(
-                "Premier League", "31st Dec", "23:30",
-                Team("Man. City", 0),
-                Team("Spurs", 0)
-            ),
+                "Carabao Cup",
+                "20th Nov",
+                "17:00",
+                Team("Man. City", R.drawable.man_city),
+                Team("Newcastle", R.drawable.new_castle)
+            )
         )
     }
 

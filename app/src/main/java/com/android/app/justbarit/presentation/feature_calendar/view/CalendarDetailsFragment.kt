@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.FragmentCalendarDetailsBinding
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.domain.model.Review
 import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
+import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 import com.android.app.justbarit.presentation.common.ext.popBackStack
 import com.android.app.justbarit.presentation.common.ext.showProgress
+import com.android.app.justbarit.presentation.common.ext.showSnackBar
 import com.android.app.justbarit.presentation.dashboard.DashboardScreen
 import com.android.app.justbarit.presentation.feature_calendar.adapter.EventAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.ReviewAdapter
@@ -29,7 +33,7 @@ class CalendarDetailsFragment : Fragment() {
     private val viewModel: CalendarDetailsViewModel by viewModels()
     private lateinit var eventAdapter: EventAdapter
     private lateinit var reviewAdapter: ReviewAdapter
-
+    private var givenRating: Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +45,7 @@ class CalendarDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.eventCoverImageView.loadImageFromAssets(R.drawable.bar_cover_dummy)
         initEvents()
         initReviews()
         attachListeners()
@@ -123,6 +128,21 @@ class CalendarDetailsFragment : Fragment() {
                 val lastVisibleItemPosition = (binding.reviewRecyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
                 if (lastVisibleItemPosition < binding.reviewRecyclerView.adapter?.itemCount ?: 0 - 1) {
                     binding.reviewRecyclerView.smoothScrollToPosition(lastVisibleItemPosition + 1)
+                }
+            }
+
+            giveRatingImageView.clickToAction {
+                if (givenRating.not()){
+                    givenRating = true
+                    giveRatingImageView.setImageDrawable(AppCompatResources.getDrawable(requireContext(),
+                        R.drawable.star_filled))
+                    showSnackBar("Bar added a favourite")
+                }else{
+
+                    giveRatingImageView.setImageDrawable(AppCompatResources.getDrawable(requireContext(),
+                        R.drawable.star_icon_black))
+                    givenRating = false
+                    showSnackBar("Bar removed from favourites")
                 }
             }
         }

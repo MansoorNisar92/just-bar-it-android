@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
         android:clipToPadding="false"
         android:elevation="@dimen/_3sdp"
         app:cardCornerRadius="@dimen/_15sdp"

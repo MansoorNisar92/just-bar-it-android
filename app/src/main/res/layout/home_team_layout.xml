@@ -26,7 +26,8 @@
             android:id="@+id/homeTeamImageView"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-            android:src="@drawable/new_castle" />
+            android:src="@drawable/new_castle"
+            android:layout_marginStart="@dimen/_8sdp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

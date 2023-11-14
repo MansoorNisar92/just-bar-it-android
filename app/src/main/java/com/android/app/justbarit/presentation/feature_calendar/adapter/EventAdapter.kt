@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.app.justbarit.databinding.ItemEventListBinding
 import com.android.app.justbarit.domain.model.EventDetails
+import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 
 class EventAdapter constructor(
     eventDetails: ArrayList<EventDetails>,
@@ -36,8 +37,15 @@ class EventAdapter constructor(
                 eventNameTextView.text = eventDetail.eventName
                 eventDateTextView.text = eventDetail.eventDate
                 eventTimeTextView.text = eventDetail.evenTime
-                includedTeamsLayout.includedHomeTeam.homeTeamName.text = eventDetail.homeTeam.teamName
+                includedTeamsLayout.includedHomeTeam.homeTeamName.text =
+                    eventDetail.homeTeam.teamName
+                includedTeamsLayout.includedHomeTeam.homeTeamImageView.loadImageFromAssets(
+                    eventDetail.homeTeam.teamBadge
+                )
                 includedTeamsLayout.includedAwayTeam.awayTeam.text = eventDetail.awayTeam.teamName
+                includedTeamsLayout.includedAwayTeam.awayTeamImageView.loadImageFromAssets(
+                    eventDetail.awayTeam.teamBadge
+                )
             }
         }
     }
