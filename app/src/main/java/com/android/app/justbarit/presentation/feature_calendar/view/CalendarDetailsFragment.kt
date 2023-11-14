@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.app.justbarit.databinding.FragmentCalendarDetailsBinding
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.domain.model.Review
@@ -109,6 +110,20 @@ class CalendarDetailsFragment : Fragment() {
         binding.apply {
             navigateBackFromEventDetailsPage.clickToAction {
                 popBackStack()
+            }
+
+            reviewLeftArrow.clickToAction {
+                val firstVisibleItemPosition = (binding.reviewRecyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                if (firstVisibleItemPosition > 0) {
+                    binding.reviewRecyclerView.smoothScrollToPosition(firstVisibleItemPosition - 1)
+                }
+            }
+
+            reviewRightArrow.clickToAction {
+                val lastVisibleItemPosition = (binding.reviewRecyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                if (lastVisibleItemPosition < binding.reviewRecyclerView.adapter?.itemCount ?: 0 - 1) {
+                    binding.reviewRecyclerView.smoothScrollToPosition(lastVisibleItemPosition + 1)
+                }
             }
         }
     }
