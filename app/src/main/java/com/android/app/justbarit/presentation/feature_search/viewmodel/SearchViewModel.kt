@@ -24,7 +24,7 @@ class SearchViewModel @Inject constructor() : ViewModel() {
     fun getListOfBars() {
         viewModelScope.launch {
             _bars.emit(AppState.Loading)
-            delay(4000)
+            delay(2000)
             val data = getHardCodeBars()
             _bars.emit(AppState.Success(data))
         }
