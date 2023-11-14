@@ -26,7 +26,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     fun getListOfCategories() {
         viewModelScope.launch {
             _categories.emit(AppState.Loading)
-            delay(4000)
+            delay(2000)
             val data = getHardCodeCategories()
             _categories.emit(AppState.Success(data))
         }
@@ -35,7 +35,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     fun getListOfEventsToday() {
         viewModelScope.launch {
             _eventsToday.emit(AppState.Loading)
-            delay(4000)
+            delay(2000)
             val data = getHardEventsToday()
             _eventsToday.emit(AppState.Success(data))
         }

@@ -12,13 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import com.android.app.justbarit.databinding.FragmentCalendarBinding
 import com.android.app.justbarit.domain.model.CalendarItem
+import com.android.app.justbarit.domain.model.Event
 import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
 import com.android.app.justbarit.presentation.common.ext.showProgress
-import com.android.app.justbarit.presentation.common.ext.smoothScrollToPositionWithUpdate
+import com.android.app.justbarit.presentation.feature_calendar.adapter.CalendarAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.CalendarItemAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.calendarItemClick
+import com.android.app.justbarit.presentation.feature_calendar.adapter.eventClick
 import com.android.app.justbarit.presentation.feature_calendar.viewmodel.CalendarViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +30,7 @@ class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
     private val viewModel: CalendarViewModel by viewModels()
     private lateinit var calendarItemAdapter: CalendarItemAdapter
+    private lateinit var calendarAdapter: CalendarAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,9 +42,11 @@ class CalendarFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCalendarItems()
+        initEvents()
         attachListeners()
         observe()
         viewModel.getListOfCalendarItems()
+        viewModel.getListOfEvents()
     }
 
     private fun observe() {
@@ -56,6 +61,27 @@ class CalendarFragment : Fragment() {
                         is AppState.Success<*> -> {
                             hideProgress()
                             calendarItemAdapter.setCalendarItems(it.response as ArrayList<CalendarItem>)
+                        }
+
+                        is AppState.Failure<*> -> {
+                            hideProgress()
+                        }
+
+                        else -> {}
+                    }
+                }
+            }
+
+            lifecycleScope.launchWhenCreated {
+                events.collect {
+                    when (it) {
+                        is AppState.Loading -> {
+                            showProgress()
+                        }
+
+                        is AppState.Success<*> -> {
+                            hideProgress()
+                            calendarAdapter.setEventsToday(it.response as ArrayList<Event>)
                         }
 
                         is AppState.Failure<*> -> {
@@ -132,6 +158,15 @@ class CalendarFragment : Fragment() {
             }
         }
         binding.calendarItemRecyclerView.adapter = calendarItemAdapter
+    }
+
+    private fun initEvents() {
+        calendarAdapter = CalendarAdapter(arrayListOf()).apply {
+            eventClick = { event ->
+                //
+            }
+        }
+        binding.calendarRecyclerView.adapter = calendarAdapter
     }
 
     companion object {

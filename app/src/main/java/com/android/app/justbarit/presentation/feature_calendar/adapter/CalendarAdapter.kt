@@ -1,13 +1,14 @@
-package com.android.app.justbarit.presentation.feature_home.adapter
+package com.android.app.justbarit.presentation.feature_calendar.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.app.justbarit.databinding.ItemEventTodayBinding
+import com.android.app.justbarit.domain.model.Event
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 
-class EventTodayAdapter constructor(categories: ArrayList<String>) :
-    RecyclerView.Adapter<EventTodayAdapter.EventTodayViewHolder>() {
+class CalendarAdapter constructor(categories: ArrayList<Event>) :
+    RecyclerView.Adapter<CalendarAdapter.EventTodayViewHolder>() {
 
     private var eventsList = categories
 
@@ -18,7 +19,7 @@ class EventTodayAdapter constructor(categories: ArrayList<String>) :
     }
 
     override fun onBindViewHolder(holder: EventTodayViewHolder, position: Int) {
-        holder.bind(event = eventsList[position], position)
+        holder.bind(event = eventsList[position])
     }
 
     override fun getItemCount(): Int {
@@ -27,28 +28,24 @@ class EventTodayAdapter constructor(categories: ArrayList<String>) :
 
     class EventTodayViewHolder(private val binding: ItemEventTodayBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(event: String, position: Int) {
-            binding.eventNameTextView.text = event
+        fun bind(event: Event) {
             binding.apply {
-               /* eventArrowLeftLayout.clickToAction {
-                    nextEvent(position, Direction.Left)
+                eventNameTextView.text = event.eventName
+                eventCardView.clickToAction {
+                    eventClick(event)
                 }
-
-                eventArrowRightLayout.clickToAction {
-                    nextEvent(position, Direction.Right)
-                }*/
             }
         }
     }
 
-    fun setEventsToday(newEvents: ArrayList<String>) {
+    fun setEventsToday(newEvents: ArrayList<Event>) {
         eventsList = newEvents
         notifyDataSetChanged()
     }
 
 }
 
-var nextEvent: (Int, Direction) -> Unit = { _: Int, _: Direction ->
+var eventClick: (Event) -> Unit = {
 
 }
 
