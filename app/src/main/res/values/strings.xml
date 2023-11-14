@@ -13,4 +13,8 @@
     <string name="see_details">See details</string>
     <string name="free_entry">Free Entry</string>
     <string name="upcoming_fixtures">Upcoming Fixtures</string>
+    <string name="event_list">Event list</string>
+    <string name="bar_restaurant_0_8km_from_city_center">Bar Restaurant - 0.8km from city center</string>
+    <string name="vs">Vs.</string>
+    <string name="sound_on">Sound On</string>
 </resources>

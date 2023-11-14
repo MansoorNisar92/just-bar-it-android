@@ -19,7 +19,9 @@ import com.android.app.justbarit.presentation.common.customviews.SwipeGestureLis
 import com.android.app.justbarit.presentation.common.ext.bitmapFromVector
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
+import com.android.app.justbarit.presentation.common.ext.navigate
 import com.android.app.justbarit.presentation.common.ext.showProgress
+import com.android.app.justbarit.presentation.common.ext.showSnackBar
 import com.android.app.justbarit.presentation.feature_home.adapter.CategoryAdapter
 import com.android.app.justbarit.presentation.feature_home.adapter.categoryClick
 import com.android.app.justbarit.presentation.feature_home.viewmodel.HomeViewModel
@@ -151,10 +153,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun showEvent(index: Int, isNext: Boolean = true) {
+        val event = getEventAtIndex(index)
         binding.addEventTodayLinearLayout.removeAllViews()
         val eventItem = EventTodayItem(requireContext())
-        eventItem.addEvent(getEventAtIndex(index))
+        eventItem.addEvent(event)
         binding.addEventTodayLinearLayout.addView(eventItem)
+        eventItem.clickToAction {
+            navigate(R.id.calendarDetailsFragment)
+        }
         eventItem.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
                 eventItem.viewTreeObserver.removeOnPreDrawListener(this)

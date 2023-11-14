@@ -16,4 +16,6 @@
     <color name="eventTodaySeeDetails">#F8CC46</color>
     <color name="freeEntryColor">#4285F4</color>
     <color name="halfRedColor">#EC826E</color>
+    <color name="bookingDetailsColor">#67C871</color>
+    <color name="soundOnColor">#94A4F9</color>
 </resources>
