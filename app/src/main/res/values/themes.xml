@@ -47,4 +47,13 @@
         <item name="android:minHeight">30dp</item>
         <item name="android:maxHeight">30dp</item>
     </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Material3.DayNight.BottomSheetDialog">
+        <item name="android:windowAnimationStyle">@style/SlideUpSlideDownAnimation</item>
+    </style>
+
+    <style name="SlideUpSlideDownAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_bottom_to_top_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_top_to_bottom_out</item>
+    </style>
 </resources>

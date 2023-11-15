@@ -23,6 +23,7 @@ import com.android.app.justbarit.presentation.common.ext.showSnackBar
 import com.android.app.justbarit.presentation.dashboard.DashboardScreen
 import com.android.app.justbarit.presentation.feature_calendar.adapter.EventAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.ReviewAdapter
+import com.android.app.justbarit.presentation.feature_calendar.adapter.bookingDetails
 import com.android.app.justbarit.presentation.feature_calendar.viewmodel.CalendarDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,7 +57,12 @@ class CalendarDetailsFragment : Fragment() {
     }
 
     private fun initEvents() {
-        eventAdapter = EventAdapter(arrayListOf(), requireContext())
+        eventAdapter = EventAdapter(arrayListOf(), requireContext()).apply {
+            bookingDetails = {
+                val bottomSheetFragment = ReservationBottomSheetDialog()
+                bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
+            }
+        }
         binding.eventListRecyclerView.adapter = eventAdapter
     }
 

@@ -78,24 +78,3 @@ fun View.propagationAnimation() {
     val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.propgration_animation)
     startAnimation(animation)
 }
-
-fun RecyclerView.smoothScrollToPositionWithUpdate(adapter: RecyclerView.Adapter<*>, targetPosition: Int) {
-    val layoutManager = this.layoutManager as? LinearLayoutManager
-    layoutManager?.let {
-        val smoothScroller = object : LinearSmoothScroller(this.context) {
-            override fun getVerticalSnapPreference(): Int {
-                return SNAP_TO_START
-            }
-
-            override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics): Float {
-                return 0.5f // Adjust the scrolling speed as needed
-            }
-        }
-
-        smoothScroller.targetPosition = targetPosition
-
-        // Update the item position after starting the smooth scroll
-        adapter.notifyDataSetChanged()
-        layoutManager.startSmoothScroll(smoothScroller)
-    }
-}

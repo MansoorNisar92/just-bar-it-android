@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.app.justbarit.databinding.ItemEventListBinding
 import com.android.app.justbarit.domain.model.EventDetails
+import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 
 class EventAdapter constructor(
@@ -46,6 +47,10 @@ class EventAdapter constructor(
                 includedTeamsLayout.includedAwayTeam.awayTeamImageView.loadImageFromAssets(
                     eventDetail.awayTeam.teamBadge
                 )
+
+                bookingDetailsLayout.clickToAction {
+                    bookingDetails(eventDetail)
+                }
             }
         }
     }
@@ -55,3 +60,5 @@ class EventAdapter constructor(
         notifyDataSetChanged()
     }
 }
+
+var bookingDetails:(EventDetails) -> Unit = {}
