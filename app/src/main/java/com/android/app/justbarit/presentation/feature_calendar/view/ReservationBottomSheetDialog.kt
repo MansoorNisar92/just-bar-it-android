@@ -1,5 +1,6 @@
 package com.android.app.justbarit.presentation.feature_calendar.view
 
+import android.icu.util.LocaleData
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -43,8 +46,8 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
     private fun init() {
         handDecreaseReservationButton(true)
         attachListeners()
-        updateDisplayedMonth()
-        initDays(calendar)
+        updateDisplayedMonth(viewModel.getCurrentMonth())
+        initDays(viewModel.getCurrentMonth())
         initTime()
     }
 
@@ -54,7 +57,7 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
         binding.includedTimeLayout.calendarTimeRecyclerView.adapter = timeAdapter
     }
 
-    private fun initDays(calendar: Calendar) {
+    private fun initDays(calendar: LocalDate) {
         val yourDataForThisMonth = generateDataForMonth(calendar) // Replace with your logic
         calendarAdapter = CalendarAdapter(yourDataForThisMonth)
         binding.includedDateLayout.calendarDayRecyclerView.adapter = calendarAdapter
@@ -64,7 +67,7 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
         return viewModel.fetchTime()
     }
 
-    private fun generateDataForMonth(month: Calendar): List<Pair<String, String>> {
+    private fun generateDataForMonth(month: LocalDate): List<Pair<String, String>> {
         return viewModel.fetchDataForMonth(month)
     }
 
@@ -161,36 +164,22 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
         behavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
-    private var calendar = Calendar.getInstance()
 
     private fun navigateToPreviousMonth() {
-        val currentMonth = calendar.get(Calendar.MONTH)
-        val currentYear = calendar.get(Calendar.YEAR)
-
-        if (currentMonth == Calendar.JANUARY) {
-            calendar.set(Calendar.YEAR, currentYear - 1)
-            calendar.set(Calendar.MONTH, Calendar.DECEMBER)
-        } else {
-            calendar.set(Calendar.MONTH, currentMonth - 1)
-        }
-
-        updateDisplayedMonth()
-        initDays(calendar)
+        viewModel.updateSelectedMonth(viewModel.getSelectedMonth().minusMonths(1))
+        updateDisplayedMonth(viewModel.getSelectedMonth())
+        initDays(viewModel.getSelectedMonth())
     }
 
     private fun navigateToNextMonth() {
-        val currentMonth = calendar.get(Calendar.MONTH)
-        val currentYear = calendar.get(Calendar.YEAR)
-
-        calendar.set(Calendar.MONTH, currentMonth)
-        calendar.set(Calendar.YEAR, currentYear)
-        updateDisplayedMonth()
-        initDays(calendar) // Update RecyclerView for the new month
+        viewModel.updateSelectedMonth(viewModel.getSelectedMonth().plusMonths(1))
+        updateDisplayedMonth(viewModel.getSelectedMonth())
+        initDays(viewModel.getSelectedMonth())
     }
 
-    private fun updateDisplayedMonth() {
-        val monthYearFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
-        val formattedMonthYear = monthYearFormat.format(calendar.time)
+    private fun updateDisplayedMonth(date: LocalDate) {
+        val monthYearFormat = DateTimeFormatter.ofPattern("MMMM yyyy", Locale.getDefault())
+        val formattedMonthYear = date.format(monthYearFormat)
         binding.includedDateLayout.monthAndYearTextView.text = formattedMonthYear
     }
 
