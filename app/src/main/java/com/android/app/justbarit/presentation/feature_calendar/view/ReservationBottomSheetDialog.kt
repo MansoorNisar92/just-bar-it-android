@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.android.app.justbarit.databinding.DialogReservationBottomSheetBinding
 import com.android.app.justbarit.presentation.common.customviews.calendar.CalendarAdapter
 import com.android.app.justbarit.presentation.common.customviews.calendar.TimeAdapter
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.propagationAnimation
+import com.android.app.justbarit.presentation.feature_calendar.viewmodel.ReservationBottomSheetViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -20,6 +22,7 @@ import java.util.Locale
 @AndroidEntryPoint
 class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogReservationBottomSheetBinding
+    private val viewModel: ReservationBottomSheetViewModel by viewModels()
     private lateinit var calendarAdapter: CalendarAdapter
     private lateinit var timeAdapter: TimeAdapter
     private var bottomSheetInternal: View? = null
@@ -58,35 +61,11 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun generateTime(): List<String> {
-        val militaryHoursList = mutableListOf<String>()
-
-        for (hour in 0..23) {
-            val hourString = if (hour < 10) "0$hour" else "$hour"
-            val time = "$hourString:00"
-            militaryHoursList.add(time)
-        }
-
-        return militaryHoursList
+        return viewModel.fetchTime()
     }
 
     private fun generateDataForMonth(month: Calendar): List<Pair<String, String>> {
-        val daysInMonth = month.getActualMaximum(Calendar.DAY_OF_MONTH)
-        val monthData = mutableListOf<Pair<String, String>>()
-
-        // Set calendar to the first day of the given month
-        month.set(Calendar.DAY_OF_MONTH, 1)
-
-        // Generate data for each day of the month
-        for (i in 1..daysInMonth) {
-            val dayOfWeek =
-                month.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault())
-            val dayOfMonth = month.get(Calendar.DAY_OF_MONTH).toString()
-            val dayPair = Pair(dayOfWeek, dayOfMonth)
-            monthData.add(dayPair)
-            month.add(Calendar.DAY_OF_MONTH, 1) // Move to the next day
-        }
-
-        return monthData
+        return viewModel.fetchDataForMonth(month)
     }
 
     private fun attachListeners() {
@@ -180,21 +159,6 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
     private fun dismissBottomSheet() {
         val behavior = BottomSheetBehavior.from(bottomSheetInternal!!)
         behavior.state = BottomSheetBehavior.STATE_HIDDEN
-    }
-
-    private fun getCalendarItems(): List<Pair<String, String>> {
-        // Replace this with logic to generate or fetch day and date pairs
-        val calendarItems = mutableListOf<Pair<String, String>>()
-        val calendar = Calendar.getInstance()
-
-        for (i in 1..30) { // Example: 30 days
-            val dayOfWeek = SimpleDateFormat("EEE", Locale.getDefault()).format(calendar.time)
-            val date = calendar.get(Calendar.DAY_OF_MONTH).toString()
-            calendarItems.add(Pair(dayOfWeek, date))
-            calendar.add(Calendar.DAY_OF_MONTH, 1)
-        }
-
-        return calendarItems
     }
 
     private var calendar = Calendar.getInstance()
