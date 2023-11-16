@@ -5,23 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.app.justbarit.databinding.DialogReservationBottomSheetBinding
+import com.android.app.justbarit.presentation.common.customviews.calendar.CalendarAdapter
+import com.android.app.justbarit.presentation.common.customviews.calendar.TimeAdapter
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.propagationAnimation
-import com.android.app.justbarit.presentation.common.ext.toDp
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 @AndroidEntryPoint
 class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogReservationBottomSheetBinding
+    private lateinit var calendarAdapter: CalendarAdapter
+    private lateinit var timeAdapter: TimeAdapter
+    private var bottomSheetInternal: View? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DialogReservationBottomSheetBinding.inflate(layoutInflater, container, false)
-
         return binding.root
     }
 
@@ -34,16 +40,63 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
     private fun init() {
         handDecreaseReservationButton(true)
         attachListeners()
+        updateDisplayedMonth()
+        initDays(calendar)
+        initTime()
+    }
+
+    private fun initTime() {
+        val timeList = generateTime()
+        timeAdapter = TimeAdapter(timeList)
+        binding.includedTimeLayout.calendarTimeRecyclerView.adapter = timeAdapter
+    }
+
+    private fun initDays(calendar: Calendar) {
+        val yourDataForThisMonth = generateDataForMonth(calendar) // Replace with your logic
+        calendarAdapter = CalendarAdapter(yourDataForThisMonth)
+        binding.includedDateLayout.calendarDayRecyclerView.adapter = calendarAdapter
+    }
+
+    private fun generateTime(): List<String> {
+        val militaryHoursList = mutableListOf<String>()
+
+        for (hour in 0..23) {
+            val hourString = if (hour < 10) "0$hour" else "$hour"
+            val time = "$hourString:00"
+            militaryHoursList.add(time)
+        }
+
+        return militaryHoursList
+    }
+
+    private fun generateDataForMonth(month: Calendar): List<Pair<String, String>> {
+        val daysInMonth = month.getActualMaximum(Calendar.DAY_OF_MONTH)
+        val monthData = mutableListOf<Pair<String, String>>()
+
+        // Set calendar to the first day of the given month
+        month.set(Calendar.DAY_OF_MONTH, 1)
+
+        // Generate data for each day of the month
+        for (i in 1..daysInMonth) {
+            val dayOfWeek =
+                month.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault())
+            val dayOfMonth = month.get(Calendar.DAY_OF_MONTH).toString()
+            val dayPair = Pair(dayOfWeek, dayOfMonth)
+            monthData.add(dayPair)
+            month.add(Calendar.DAY_OF_MONTH, 1) // Move to the next day
+        }
+
+        return monthData
     }
 
     private fun attachListeners() {
         binding.apply {
             finalizeReservation.clickToAction {
-                dismiss()
+                dismissBottomSheet()
             }
 
             closeBottomSheet.clickToAction {
-                dismiss()
+                dismissBottomSheet()
             }
 
             includedReservationLayout.reservationDecreaseImageView.clickToAction {
@@ -52,6 +105,14 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
 
             includedReservationLayout.reservationIncreaseImageView.clickToAction {
                 increaseReservation()
+            }
+
+            includedDateLayout.calendarLeftButton.clickToAction {
+                navigateToPreviousMonth()
+            }
+
+            includedDateLayout.calendarRightButton.clickToAction {
+                navigateToNextMonth()
             }
         }
     }
@@ -78,7 +139,8 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
         } else {
             handDecreaseReservationButton(false)
         }
-        binding.includedReservationLayout.reservationCounterTextView.text = currentReservationCount.toString()
+        binding.includedReservationLayout.reservationCounterTextView.text =
+            currentReservationCount.toString()
         binding.includedReservationLayout.reservationCounterTextView.propagationAnimation()
     }
 
@@ -105,7 +167,7 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
         // Offset the starting position of the bottom sheet
         dialog?.setOnShowListener {
             val d = dialog as BottomSheetDialog
-            val bottomSheetInternal =
+            bottomSheetInternal =
                 d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             val behavior = BottomSheetBehavior.from(bottomSheetInternal!!)
 
@@ -114,5 +176,63 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
         }
     }
 
+    // Method to dismiss the BottomSheet
+    private fun dismissBottomSheet() {
+        val behavior = BottomSheetBehavior.from(bottomSheetInternal!!)
+        behavior.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    private fun getCalendarItems(): List<Pair<String, String>> {
+        // Replace this with logic to generate or fetch day and date pairs
+        val calendarItems = mutableListOf<Pair<String, String>>()
+        val calendar = Calendar.getInstance()
+
+        for (i in 1..30) { // Example: 30 days
+            val dayOfWeek = SimpleDateFormat("EEE", Locale.getDefault()).format(calendar.time)
+            val date = calendar.get(Calendar.DAY_OF_MONTH).toString()
+            calendarItems.add(Pair(dayOfWeek, date))
+            calendar.add(Calendar.DAY_OF_MONTH, 1)
+        }
+
+        return calendarItems
+    }
+
+    private var calendar = Calendar.getInstance()
+
+    private fun navigateToPreviousMonth() {
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentYear = calendar.get(Calendar.YEAR)
+
+        if (currentMonth == Calendar.JANUARY) {
+            calendar.set(Calendar.YEAR, currentYear - 1)
+            calendar.set(Calendar.MONTH, Calendar.DECEMBER)
+        } else {
+            calendar.set(Calendar.MONTH, currentMonth - 1)
+        }
+
+        updateDisplayedMonth()
+        initDays(calendar)
+    }
+
+    private fun navigateToNextMonth() {
+        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentYear = calendar.get(Calendar.YEAR)
+
+        calendar.set(Calendar.MONTH, currentMonth)
+        calendar.set(Calendar.YEAR, currentYear)
+        updateDisplayedMonth()
+        initDays(calendar) // Update RecyclerView for the new month
+    }
+
+    private fun updateDisplayedMonth() {
+        val monthYearFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        val formattedMonthYear = monthYearFormat.format(calendar.time)
+        binding.includedDateLayout.monthAndYearTextView.text = formattedMonthYear
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        dismissBottomSheet()
+    }
 
 }
