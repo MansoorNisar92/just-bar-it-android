@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.android.app.justbarit.databinding.DialogReservationBottomSheetBinding
+import com.android.app.justbarit.domain.model.CalendarDate
 import com.android.app.justbarit.domain.model.Time
 import com.android.app.justbarit.presentation.common.customviews.calendar.CalendarAdapter
 import com.android.app.justbarit.presentation.common.customviews.calendar.TimeAdapter
+import com.android.app.justbarit.presentation.common.customviews.calendar.calendarDayClick
 import com.android.app.justbarit.presentation.common.customviews.calendar.timeClick
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.propagationAnimation
@@ -62,8 +64,13 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun initDays(calendar: LocalDate) {
-        val yourDataForThisMonth = generateDataForMonth(calendar) // Replace with your logic
-        calendarAdapter = CalendarAdapter(yourDataForThisMonth)
+        val yourDataForThisMonth = generateDataForMonth(calendar)
+        calendarAdapter = CalendarAdapter(yourDataForThisMonth).apply {
+            calendarDayClick = {
+                it.selectedDate = true
+                updateDate(it)
+            }
+        }
         binding.includedDateLayout.calendarDayRecyclerView.adapter = calendarAdapter
     }
 
@@ -71,7 +78,7 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
         return viewModel.fetchTime()
     }
 
-    private fun generateDataForMonth(month: LocalDate): List<Pair<String, String>> {
+    private fun generateDataForMonth(month: LocalDate): List<CalendarDate> {
         return viewModel.fetchDataForMonth(month)
     }
 

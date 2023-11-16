@@ -1,6 +1,7 @@
 package com.android.app.justbarit.presentation.feature_calendar.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.android.app.justbarit.domain.model.CalendarDate
 import com.android.app.justbarit.domain.model.Time
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDate
@@ -21,7 +22,7 @@ class ReservationBottomSheetViewModel @Inject constructor() : ViewModel() {
         selectedMonth = newSelectedMonth
     }
 
-    fun fetchDataForMonth(month: LocalDate): List<Pair<String, String>> {
+    fun fetchDataForMonth(month: LocalDate): List<CalendarDate> {
         return generateDataForMonth(month)
     }
 
@@ -41,21 +42,17 @@ class ReservationBottomSheetViewModel @Inject constructor() : ViewModel() {
         return militaryHoursList
     }
 
-    private fun generateDataForMonth(month: LocalDate): List<Pair<String, String>> {
+    private fun generateDataForMonth(month: LocalDate): List<CalendarDate> {
         val daysInMonth = month.month.length(month.isLeapYear)
-        val monthData = mutableListOf<Pair<String, String>>()
-
-        // Set LocalDate to the first day of the given month
+        val monthData = mutableListOf<CalendarDate>()
         val firstDayOfMonth = month.withDayOfMonth(1)
-
-        // Generate data for each day of the month
         var currentDay = firstDayOfMonth
         for (i in 1..daysInMonth) {
             val dayOfWeek =
                 currentDay.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
             val dayOfMonth = currentDay.dayOfMonth.toString()
             val dayPair = Pair(dayOfWeek, dayOfMonth)
-            monthData.add(dayPair)
+            monthData.add(CalendarDate(dayPair, false))
             currentDay = currentDay.plusDays(1) // Move to the next day
         }
 
