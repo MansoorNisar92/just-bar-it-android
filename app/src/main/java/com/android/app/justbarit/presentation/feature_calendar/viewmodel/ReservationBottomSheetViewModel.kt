@@ -1,6 +1,7 @@
 package com.android.app.justbarit.presentation.feature_calendar.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.android.app.justbarit.domain.model.Time
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -24,16 +25,16 @@ class ReservationBottomSheetViewModel @Inject constructor() : ViewModel() {
         return generateDataForMonth(month)
     }
 
-    fun fetchTime(): List<String> {
+    fun fetchTime(): List<Time> {
         return generateTime()
     }
 
-    private fun generateTime(): List<String> {
-        val militaryHoursList = mutableListOf<String>()
+    private fun generateTime(): List<Time> {
+        val militaryHoursList = mutableListOf<Time>()
 
         for (hour in 0..23) {
             val hourString = if (hour < 10) "0$hour" else "$hour"
-            val time = "$hourString:00"
+            val time = Time("$hourString:00", false)
             militaryHoursList.add(time)
         }
 

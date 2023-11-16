@@ -1,14 +1,15 @@
 package com.android.app.justbarit.presentation.feature_calendar.view
 
-import android.icu.util.LocaleData
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.android.app.justbarit.databinding.DialogReservationBottomSheetBinding
+import com.android.app.justbarit.domain.model.Time
 import com.android.app.justbarit.presentation.common.customviews.calendar.CalendarAdapter
 import com.android.app.justbarit.presentation.common.customviews.calendar.TimeAdapter
+import com.android.app.justbarit.presentation.common.customviews.calendar.timeClick
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.propagationAnimation
 import com.android.app.justbarit.presentation.feature_calendar.viewmodel.ReservationBottomSheetViewModel
@@ -16,10 +17,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Calendar
 import java.util.Locale
 
 @AndroidEntryPoint
@@ -53,7 +52,12 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
 
     private fun initTime() {
         val timeList = generateTime()
-        timeAdapter = TimeAdapter(timeList)
+        timeAdapter = TimeAdapter(timeList).apply {
+            timeClick = {
+                it.selectedTime = true
+                updateTime(it)
+            }
+        }
         binding.includedTimeLayout.calendarTimeRecyclerView.adapter = timeAdapter
     }
 
@@ -63,7 +67,7 @@ class ReservationBottomSheetDialog : BottomSheetDialogFragment() {
         binding.includedDateLayout.calendarDayRecyclerView.adapter = calendarAdapter
     }
 
-    private fun generateTime(): List<String> {
+    private fun generateTime(): List<Time> {
         return viewModel.fetchTime()
     }
 
