@@ -132,16 +132,6 @@ class DashboardScreen : JustBarItBaseActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_graph)
         val navController = navHostFragment?.findNavController()
 
-        val entryCountBefore = supportFragmentManager.backStackEntryCount
-        val popped = navController?.popBackStack()
-        val entryCountAfter = supportFragmentManager.backStackEntryCount
-
-        Log.d("BackStack", "BackStack Entry Count Before: $entryCountBefore")
-        Log.d("BackStack", "BackStack Popped: $popped")
-        Log.d("BackStack", "BackStack Entry Count After: $entryCountAfter")
-
-
-        // Handle back button press using NavController
         if (navController?.popBackStack() != true) {
             super.onBackPressed()
         }
@@ -179,5 +169,22 @@ class DashboardScreen : JustBarItBaseActivity() {
         super.onDestroy()
         navController().removeOnDestinationChangedListener(destinationChangeListener!!)
 
+    }
+
+    fun showBottomNavigation(){
+        renderNavigation()
+    }
+
+    fun hideBottomNavigation(){
+        hideNavigation()
+    }
+    private fun renderNavigation(){
+        binding.includedBottomNavigationLayout.bottomNavigation.visibility = View.VISIBLE
+        binding.searchIconCardView.visibility = View.VISIBLE
+    }
+
+    private fun hideNavigation(){
+        binding.includedBottomNavigationLayout.bottomNavigation.visibility = View.GONE
+        binding.searchIconCardView.visibility = View.GONE
     }
 }

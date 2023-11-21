@@ -48,9 +48,3 @@ class CalendarAdapter constructor(categories: ArrayList<Event>) :
 var eventClick: (Event) -> Unit = {
 
 }
-
-
-sealed class Direction {
-    data object Left : Direction()
-    data object Right : Direction()
-}

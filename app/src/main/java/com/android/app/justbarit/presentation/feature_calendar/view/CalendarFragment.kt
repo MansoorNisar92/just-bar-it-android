@@ -10,12 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
+import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.FragmentCalendarBinding
 import com.android.app.justbarit.domain.model.CalendarItem
 import com.android.app.justbarit.domain.model.Event
 import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
+import com.android.app.justbarit.presentation.common.ext.navigate
 import com.android.app.justbarit.presentation.common.ext.showProgress
 import com.android.app.justbarit.presentation.feature_calendar.adapter.CalendarAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.CalendarItemAdapter
@@ -163,7 +165,7 @@ class CalendarFragment : Fragment() {
     private fun initEvents() {
         calendarAdapter = CalendarAdapter(arrayListOf()).apply {
             eventClick = { event ->
-                //
+                navigate(R.id.calendarDetailsFragment)
             }
         }
         binding.calendarRecyclerView.adapter = calendarAdapter

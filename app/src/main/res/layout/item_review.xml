@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/eventCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:clipToPadding="false"
+        android:elevation="@dimen/_3sdp"
+        app:cardCornerRadius="@dimen/_15sdp"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/nav_bar_color">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewerNameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Mansoor Nisar"
+                android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/lexend_bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/reviewTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/reviewerNameTextView"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                android:textSize="@dimen/_10sdp"
+                android:maxLines="4"
+                android:ellipsize="end"
+                android:fontFamily="@font/lexend_regular"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_8sdp"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:visibility="visible"
+                android:id="@+id/reviewerRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                style="@style/CustomRatingBar"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                android:rating="4"
+                android:numStars="5"
+                android:stepSize="1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
