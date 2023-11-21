@@ -19,7 +19,7 @@
         android:theme="@style/Theme.JustBarIt"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.splash.SplashScreen"
+            android:name=".presentation.splash.view.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -7,5 +7,5 @@ import com.android.app.justbarit.data.local.entity.BarEntity
 
 @Database(entities = [BarEntity::class], version = 1)
 abstract class JustBarItDatabase : RoomDatabase() {
-    abstract fun countryDao(): BarDao
+    abstract fun barsDao(): BarDao
 }

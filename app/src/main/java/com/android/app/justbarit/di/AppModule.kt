@@ -1,12 +1,9 @@
 package com.android.app.justbarit.di
 
-import android.content.Context
-import androidx.room.Room
-import com.android.app.justbarit.data.local.database.JustBarItDatabase
+import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -15,12 +12,8 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): JustBarItDatabase {
-        return Room.databaseBuilder(
-            context,
-            JustBarItDatabase::class.java,
-            "countries_database"
-        ).build()
+    fun provideFirebaseDatabase(): FirebaseDatabase {
+        return FirebaseDatabase.getInstance()
     }
 
 }
