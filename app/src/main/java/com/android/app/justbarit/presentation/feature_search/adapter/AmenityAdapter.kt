@@ -1,6 +1,7 @@
 package com.android.app.justbarit.presentation.feature_search.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -66,7 +67,7 @@ fun AppCompatImageView.getImageBasedOnAmenityType(amenity: Amenity) {
             }
 
             AmenityType.LiveMusic -> {
-                resourceId = R.drawable.game_night
+                resourceId = R.drawable.icon_karaoke_blue
             }
 
             AmenityType.PetFriendly -> {
@@ -90,5 +91,7 @@ fun AppCompatImageView.getImageBasedOnAmenityType(amenity: Amenity) {
 
 
         setBackgroundResource(resourceId)
+    }else{
+        visibility = View.GONE
     }
 }
