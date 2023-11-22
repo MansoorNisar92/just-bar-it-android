@@ -46,7 +46,7 @@ class CalendarViewModel @Inject constructor() : ViewModel() {
 
     private fun getHardCalendarItems(): ArrayList<CalendarItem> {
         return arrayListOf(
-            CalendarItem("All Fixtures", CalendarItemType.AllFixtures, selected = true),
+            CalendarItem("All Events", CalendarItemType.AllFixtures, selected = true),
             CalendarItem("Today", CalendarItemType.Today),
             CalendarItem("Tomorrow", CalendarItemType.Tomorrow),
             CalendarItem("Friday", CalendarItemType.Friday),

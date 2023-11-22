@@ -78,3 +78,6 @@ fun View.propagationAnimation() {
     val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.propgration_animation)
     startAnimation(animation)
 }
+
+val Boolean?.default
+    get() = this ?: false

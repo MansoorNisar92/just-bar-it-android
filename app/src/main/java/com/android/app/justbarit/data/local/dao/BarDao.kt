@@ -11,6 +11,12 @@ interface BarDao {
     @Query("SELECT * FROM bar")
     suspend fun getBars(): List<BarEntity>
 
+    @Query("SELECT EXISTS(SELECT 1 FROM bar limit 1) AS exist_status")
+    suspend fun doBarsExists(): Boolean
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(countries: List<BarEntity>)
+    suspend fun insertAll(bars: List<BarEntity>)
+
+    @Query("DELETE FROM bar")
+    suspend fun deleteAllBars()
 }

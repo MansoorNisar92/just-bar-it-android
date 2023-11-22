@@ -6,5 +6,5 @@
   <path
       android:pathData="M15.802,16.263m-14.506,0a14.506,14.506 0,1 1,29.011 0a14.506,14.506 0,1 1,-29.011 0"
       android:strokeWidth="2"
-      android:fillColor="@color/search_edit_background_color" />
+      android:fillColor="@color/white" />
 </vector>

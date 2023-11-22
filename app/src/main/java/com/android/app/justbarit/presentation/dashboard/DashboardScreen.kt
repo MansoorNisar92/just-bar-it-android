@@ -33,6 +33,7 @@ class DashboardScreen : JustBarItBaseActivity() {
         setContentView(binding.root)
         setNavGraph()
         attachListeners()
+        updateSearchIconCircle()
         binding.includedBottomNavigationLayout.bottomNavigation.apply {
             setOnItemSelectedListener {
                 onBottomNavItemClicked(it)

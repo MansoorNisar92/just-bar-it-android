@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.dashboard.DashboardScreen">
+        tools:context=".presentation.dashboard.view.DashboardScreen">
 
         <FrameLayout
             android:id="@+id/container"
