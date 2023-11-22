@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.ItemBarsBinding
+import com.android.app.justbarit.domain.model.AmenityType
 import com.android.app.justbarit.domain.model.Bar
+import com.android.app.justbarit.presentation.common.ext.default
 import com.android.app.justbarit.presentation.common.ext.getRatingInDesc
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 import kotlin.math.roundToInt
 
-class BarAdapter constructor(bars: ArrayList<Bar>,
-                             private val amenityAdapter: AmenityAdapter) :
+class BarAdapter constructor(bars: ArrayList<Bar>) :
     RecyclerView.Adapter<BarAdapter.BarViewHolder>() {
 
     private var barsList = bars
@@ -24,7 +25,7 @@ class BarAdapter constructor(bars: ArrayList<Bar>,
     }
 
     override fun onBindViewHolder(holder: BarViewHolder, position: Int) {
-        holder.bind(bar = filteredItemList[position], amenityAdapter)
+        holder.bind(bar = filteredItemList[position])
     }
 
     override fun getItemCount(): Int {
@@ -33,7 +34,7 @@ class BarAdapter constructor(bars: ArrayList<Bar>,
 
     class BarViewHolder(private val binding: ItemBarsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(bar: Bar, amenityAdapter: AmenityAdapter) {
+        fun bind(bar: Bar) {
             binding.apply {
                 barCoverImageView.loadImageFromAssets(R.drawable.bar_cover_dummy)
                 barNameTextView.text = bar.barName
@@ -60,8 +61,23 @@ class BarAdapter constructor(bars: ArrayList<Bar>,
                 }
 
                 freeEntryTextView.visibility = hasFreeEntry
-                amenitiesRecyclerView.adapter = amenityAdapter
-                amenityAdapter.setAmenities(bar.amenities)
+                val amenityImageViewMap = mapOf(
+                    AmenityType.Wifi to includedAmenities.wifiImageView,
+                    AmenityType.Disco to includedAmenities.danceImageView,
+                    AmenityType.Drinks to includedAmenities.drinksImageView,
+                    AmenityType.Food to includedAmenities.foodImageView,
+                    AmenityType.GameNight to includedAmenities.gameNightImageView,
+                    AmenityType.LiveMusic to includedAmenities.liveMusicImageView,
+                    AmenityType.PetFriendly to includedAmenities.petFriendlyImageView,
+                    AmenityType.SmokingArea to includedAmenities.smokingImageView,
+                    AmenityType.Sports to includedAmenities.sportsImageView,
+                    AmenityType.TerraceRoofTop to includedAmenities.outsideAreaImageView
+                )
+
+                bar.amenities.forEach { amenity ->
+                    val imageView = amenityImageViewMap[amenity.amenityType]
+                    imageView?.visibility = if (amenity.amenityProvided.default) View.VISIBLE else View.GONE
+                }
             }
         }
     }
