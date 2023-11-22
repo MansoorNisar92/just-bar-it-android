@@ -12,9 +12,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/just_bar_it_logo"
+        android:icon="@drawable/app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/just_bar_it_logo"
+        android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.JustBarIt"
         tools:targetApi="31">
