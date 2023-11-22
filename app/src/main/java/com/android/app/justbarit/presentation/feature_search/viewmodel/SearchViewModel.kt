@@ -2,16 +2,12 @@ package com.android.app.justbarit.presentation.feature_search.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.app.justbarit.R
 import com.android.app.justbarit.domain.model.Bar
-import com.android.app.justbarit.domain.model.Category
-import com.android.app.justbarit.domain.model.CategoryType
 import com.android.app.justbarit.domain.model.convertRemoteBarToLocalBarsList
 import com.android.app.justbarit.domain.usecases.GetBarsFromLocalDatabaseUseCase
 import com.android.app.justbarit.presentation.AppState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

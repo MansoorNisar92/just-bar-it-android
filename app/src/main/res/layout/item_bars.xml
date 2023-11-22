@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/eventCardView"
@@ -143,16 +144,29 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     app:layout_constraintStart_toStartOf="@id/barDistanceTextView"
-                    app:layout_constraintTop_toBottomOf="@id/barDistanceTextView">
+                    app:layout_constraintTop_toBottomOf="@id/barDistanceTextView"
+                    app:layout_constraintEnd_toStartOf="@id/seeDetailsLabelTextView">
 
-                    <include
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/amenitiesRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/amenities_layout"/>
+                    <!--<include
                         android:id="@+id/includedAmenities"
-                        layout="@layout/amenities_layout" />
+                        layout="@layout/amenities_layout" />-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/seeDetailsLabelTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp"

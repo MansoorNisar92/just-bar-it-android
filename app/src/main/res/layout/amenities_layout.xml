@@ -6,14 +6,14 @@
     android:id="@+id/amenitiesLayout">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/wifiImageView"
+        android:id="@+id/amenityImageView"
         android:layout_width="@dimen/_15sdp"
         android:layout_height="@dimen/_15sdp"
-        android:src="@drawable/wifi_icon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="@dimen/_15sdp"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <!--<androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/bedImageView"
         android:layout_width="@dimen/_15sdp"
         android:layout_height="@dimen/_15sdp"
@@ -48,5 +48,32 @@
         android:src="@drawable/copa"
         app:layout_constraintStart_toEndOf="@+id/danceImageView"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/outsideAreaImageView"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:src="@drawable/outside_area"
+        app:layout_constraintStart_toEndOf="@+id/drinksImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/petFriendlyImageView"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:src="@drawable/pet_friendly"
+        app:layout_constraintStart_toEndOf="@+id/outsideAreaImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/smokingImageView"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:src="@drawable/smoking"
+        app:layout_constraintStart_toEndOf="@+id/petFriendlyImageView"
+        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

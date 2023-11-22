@@ -7,17 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.ItemBarsBinding
 import com.android.app.justbarit.domain.model.Bar
-import com.android.app.justbarit.domain.model.Category
 import com.android.app.justbarit.presentation.common.ext.getRatingInDesc
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 import kotlin.math.roundToInt
 
-class BarAdapter constructor(bars: ArrayList<Bar>) :
+class BarAdapter constructor(bars: ArrayList<Bar>,
+                             private val amenityAdapter: AmenityAdapter) :
     RecyclerView.Adapter<BarAdapter.BarViewHolder>() {
 
     private var barsList = bars
     private var filteredItemList = barsList
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BarViewHolder {
         val binding =
             ItemBarsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,7 +24,7 @@ class BarAdapter constructor(bars: ArrayList<Bar>) :
     }
 
     override fun onBindViewHolder(holder: BarViewHolder, position: Int) {
-        holder.bind(bar = filteredItemList[position])
+        holder.bind(bar = filteredItemList[position], amenityAdapter)
     }
 
     override fun getItemCount(): Int {
@@ -34,7 +33,7 @@ class BarAdapter constructor(bars: ArrayList<Bar>) :
 
     class BarViewHolder(private val binding: ItemBarsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(bar: Bar) {
+        fun bind(bar: Bar, amenityAdapter: AmenityAdapter) {
             binding.apply {
                 barCoverImageView.loadImageFromAssets(R.drawable.bar_cover_dummy)
                 barNameTextView.text = bar.barName
@@ -61,11 +60,8 @@ class BarAdapter constructor(bars: ArrayList<Bar>) :
                 }
 
                 freeEntryTextView.visibility = hasFreeEntry
-                includedAmenities.wifiImageView.alpha = hasAmenity(bar.hasWifi)
-                includedAmenities.bedImageView.alpha = hasAmenity(bar.hasBedRoom)
-                includedAmenities.foodImageView.alpha = hasAmenity(bar.hasDineIn)
-                includedAmenities.drinksImageView.alpha = hasAmenity(bar.hasDrink)
-                includedAmenities.danceImageView.alpha = hasAmenity(bar.hasDance)
+                amenitiesRecyclerView.adapter = amenityAdapter
+                amenityAdapter.setAmenities(bar.amenities)
             }
         }
     }

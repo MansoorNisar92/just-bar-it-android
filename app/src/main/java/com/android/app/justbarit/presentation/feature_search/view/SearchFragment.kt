@@ -15,6 +15,7 @@ import com.android.app.justbarit.domain.model.Bar
 import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.common.ext.hideProgress
 import com.android.app.justbarit.presentation.common.ext.showProgress
+import com.android.app.justbarit.presentation.feature_search.adapter.AmenityAdapter
 import com.android.app.justbarit.presentation.feature_search.adapter.BarAdapter
 import com.android.app.justbarit.presentation.feature_search.adapter.barClick
 import com.android.app.justbarit.presentation.feature_search.viewmodel.SearchViewModel
@@ -57,7 +58,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun initBars() {
-        barAdapter = BarAdapter(arrayListOf()).apply {
+        barAdapter = BarAdapter(arrayListOf(), AmenityAdapter(arrayListOf())).apply {
             barClick = {
 
             }
