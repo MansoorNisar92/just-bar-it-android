@@ -67,14 +67,16 @@ class CalendarViewModel @Inject constructor() : ViewModel() {
                 date = "Saturday at 22:00",
                 location = "Liberty Hall Theatre",
                 price = "From €27.50",
-                eventImage = R.drawable.home_event_three
+                eventImage = R.drawable.home_event_three,
+                canChat = true
             ),
             EventDetails(
                 "Swiftogeddon - The Tylor Swift Club Night",
                 date = "Fri,8 Dec 22:30",
                 location = "The Grand Social",
                 price = "From €8.82",
-                eventImage = R.drawable.home_event_one
+                eventImage = R.drawable.home_event_one,
+                going = "50 are going"
             )
         )
     }

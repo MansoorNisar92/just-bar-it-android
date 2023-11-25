@@ -23,9 +23,11 @@ import com.android.app.justbarit.presentation.common.ext.showProgress
 import com.android.app.justbarit.presentation.feature_calendar.adapter.CalendarAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.CalendarItemAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.EventAdapter
+import com.android.app.justbarit.presentation.feature_calendar.adapter.UpcomingEventAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.calendarItemClick
 import com.android.app.justbarit.presentation.feature_calendar.adapter.eventClick
 import com.android.app.justbarit.presentation.feature_calendar.adapter.evetDetails
+import com.android.app.justbarit.presentation.feature_calendar.adapter.upComingEventDetails
 import com.android.app.justbarit.presentation.feature_calendar.viewmodel.CalendarViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,7 +37,7 @@ class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
     private val viewModel: CalendarViewModel by viewModels()
     private lateinit var calendarItemAdapter: CalendarItemAdapter
-    private lateinit var eventAdapter: EventAdapter
+    private lateinit var upcomingEventAdapter: UpcomingEventAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -86,7 +88,7 @@ class CalendarFragment : Fragment() {
 
                         is AppState.Success<*> -> {
                             hideProgress()
-                            eventAdapter.setEventItems(it.response as ArrayList<EventDetails>)
+                            upcomingEventAdapter.setEventItems(it.response as ArrayList<EventDetails>)
                         }
 
                         is AppState.Failure<*> -> {
@@ -166,12 +168,12 @@ class CalendarFragment : Fragment() {
     }
 
     private fun initEvents() {
-        eventAdapter = EventAdapter(arrayListOf(), requireContext()).apply {
-            evetDetails = { event ->
+        upcomingEventAdapter = UpcomingEventAdapter(arrayListOf(), requireContext()).apply {
+            upComingEventDetails = { event ->
                 navigate(R.id.calendarDetailsFragment)
             }
         }
-        binding.calendarRecyclerView.adapter = eventAdapter
+        binding.calendarRecyclerView.adapter = upcomingEventAdapter
     }
 
     companion object {
