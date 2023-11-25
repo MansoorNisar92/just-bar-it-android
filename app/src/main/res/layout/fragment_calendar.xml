@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:background="@color/top_bar_color"
+        android:background="@drawable/top_bar_gradient"
         app:layout_constraintBottom_toTopOf="@id/calendarRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
