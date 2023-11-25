@@ -4,27 +4,24 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.app.justbarit.databinding.ItemEventListBinding
-import com.android.app.justbarit.databinding.ItemEventListV2Binding
+import com.android.app.justbarit.databinding.ItemEventListV3Binding
 import com.android.app.justbarit.domain.model.EventDetails
-import com.android.app.justbarit.presentation.common.ext.clickToAction
-import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 
-class EventAdapter constructor(
+class HomeEventAdapter constructor(
     eventDetails: ArrayList<EventDetails>,
     val context: Context
 ) :
-    RecyclerView.Adapter<EventAdapter.EventAdapterViewHolder>() {
+    RecyclerView.Adapter<HomeEventAdapter.HomeEventAdapterViewHolder>() {
 
     private var eventDetailsList = eventDetails
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventAdapterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeEventAdapterViewHolder {
         val binding =
-            ItemEventListV2Binding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return EventAdapterViewHolder(binding)
+            ItemEventListV3Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return HomeEventAdapterViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: EventAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeEventAdapterViewHolder, position: Int) {
         holder.bind(eventDetail = eventDetailsList[position], context)
     }
 
@@ -32,7 +29,7 @@ class EventAdapter constructor(
         return eventDetailsList.size
     }
 
-    class EventAdapterViewHolder(private val binding: ItemEventListV2Binding) :
+    class HomeEventAdapterViewHolder(private val binding: ItemEventListV3Binding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(eventDetail: EventDetails, context: Context) {
             binding.apply {
@@ -61,5 +58,3 @@ class EventAdapter constructor(
         notifyDataSetChanged()
     }
 }
-
-var bookingDetails:(EventDetails) -> Unit = {}

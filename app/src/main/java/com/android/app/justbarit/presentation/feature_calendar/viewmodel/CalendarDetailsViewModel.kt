@@ -2,15 +2,8 @@ package com.android.app.justbarit.presentation.feature_calendar.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.app.justbarit.R
-import com.android.app.justbarit.domain.model.CalendarItem
-import com.android.app.justbarit.domain.model.CalendarItemType
-import com.android.app.justbarit.domain.model.Category
-import com.android.app.justbarit.domain.model.CategoryType
-import com.android.app.justbarit.domain.model.Event
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.domain.model.Review
-import com.android.app.justbarit.domain.model.Team
 import com.android.app.justbarit.presentation.AppState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -32,7 +25,7 @@ class CalendarDetailsViewModel @Inject constructor() : ViewModel() {
     fun getListOfEvents() {
         viewModelScope.launch {
             _events.emit(AppState.Loading)
-            delay(2000)
+            delay(1000)
             val data = getHardEventsToday()
             _events.emit(AppState.Success(data))
         }
@@ -50,18 +43,7 @@ class CalendarDetailsViewModel @Inject constructor() : ViewModel() {
     private fun getHardEventsToday(): ArrayList<EventDetails> {
         return arrayListOf(
             EventDetails(
-                "Carabao Cup",
-                "11th Nov",
-                "17:00",
-                Team("Newcastle", R.drawable.new_castle),
-                Team("Man. City", R.drawable.man_city)
-            ),
-            EventDetails(
-                "Carabao Cup",
-                "20th Nov",
-                "17:00",
-                Team("Man. City", R.drawable.man_city),
-                Team("Newcastle", R.drawable.new_castle)
+                "Carabao Cup"
             )
         )
     }

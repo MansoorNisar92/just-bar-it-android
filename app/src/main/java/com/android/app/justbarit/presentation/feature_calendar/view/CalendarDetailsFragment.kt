@@ -57,12 +57,7 @@ class CalendarDetailsFragment : Fragment() {
     }
 
     private fun initEvents() {
-        eventAdapter = EventAdapter(arrayListOf(), requireContext()).apply {
-            bookingDetails = {
-                val bottomSheetFragment = ReservationBottomSheetDialog()
-                bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
-            }
-        }
+        eventAdapter = EventAdapter(arrayListOf(), requireContext())
         binding.eventListRecyclerView.adapter = eventAdapter
     }
 

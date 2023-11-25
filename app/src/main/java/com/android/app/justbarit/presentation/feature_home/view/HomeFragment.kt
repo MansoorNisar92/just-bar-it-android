@@ -1,11 +1,9 @@
 package com.android.app.justbarit.presentation.feature_home.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -13,15 +11,12 @@ import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.FragmentHomeBinding
 import com.android.app.justbarit.domain.model.Category
 import com.android.app.justbarit.domain.model.Event
+import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.presentation.AppState
-import com.android.app.justbarit.presentation.common.customviews.EventTodayItem
-import com.android.app.justbarit.presentation.common.customviews.SwipeGestureListener
 import com.android.app.justbarit.presentation.common.ext.bitmapFromVector
-import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
-import com.android.app.justbarit.presentation.common.ext.navigate
 import com.android.app.justbarit.presentation.common.ext.showProgress
-import com.android.app.justbarit.presentation.common.ext.showSnackBar
+import com.android.app.justbarit.presentation.feature_calendar.adapter.HomeEventAdapter
 import com.android.app.justbarit.presentation.feature_home.adapter.CategoryAdapter
 import com.android.app.justbarit.presentation.feature_home.adapter.categoryClick
 import com.android.app.justbarit.presentation.feature_home.viewmodel.HomeViewModel
@@ -40,9 +35,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var categoryAdapter: CategoryAdapter
-    private var currentEventIndex = 0
-
-    private var eventsList = arrayListOf<Event>()
+    private lateinit var homeEventAdapter: HomeEventAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,6 +59,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private fun initView() {
         initCategories()
+        initHomeEvents()
     }
 
     private fun initCategories() {
@@ -78,20 +72,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         binding.categoryRecyclerView.adapter = categoryAdapter
     }
 
-    private fun initTodayEvents(events: ArrayList<Event>) {
-        eventsList = events
-        showEvent(currentEventIndex)
-
-        val swipeGestureListener = SwipeGestureListener { isNext ->
-            if (isNext) {
-                showNextEvent()
-            } else {
-                showPreviousEvent()
-            }
-        }
-
-// Attach the SwipeGestureListener to the addEventTodayLinearLayout for touch events
-        binding.addEventTodayLinearLayout.setOnTouchListener(swipeGestureListener)
+    private fun initHomeEvents() {
+        homeEventAdapter = HomeEventAdapter(arrayListOf(), requireContext())
+        binding.homeEventListRecyclerView.adapter = homeEventAdapter
     }
 
     private fun observe() {
@@ -126,7 +109,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
                         is AppState.Success<*> -> {
                             hideProgress()
-                            initTodayEvents(it.response as ArrayList<Event>)
+                            homeEventAdapter.setEventItems(it.response as ArrayList<EventDetails>)
                         }
 
                         is AppState.Failure<*> -> {
@@ -142,52 +125,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private fun attachListeners() {
         binding.apply {
-            eventArrowLeftLayout.clickToAction {
-                showPreviousEvent()
-            }
-
-            eventArrowRightLayout.clickToAction {
-                showNextEvent()
-            }
+            //
         }
-    }
-
-    private fun showEvent(index: Int, isNext: Boolean = true) {
-        val event = getEventAtIndex(index)
-        binding.addEventTodayLinearLayout.removeAllViews()
-        val eventItem = EventTodayItem(requireContext())
-        eventItem.addEvent(event)
-        binding.addEventTodayLinearLayout.addView(eventItem)
-        eventItem.clickToAction {
-            navigate(R.id.calendarDetailsFragment)
-        }
-        eventItem.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-            override fun onPreDraw(): Boolean {
-                eventItem.viewTreeObserver.removeOnPreDrawListener(this)
-                eventItem.translationX = if (isNext) eventItem.width.toFloat() else -eventItem.width.toFloat()
-                eventItem.animate().translationX(0f).setDuration(700).start()
-                return true
-            }
-        })
-    }
-
-
-    private fun showNextEvent() {
-        currentEventIndex = (currentEventIndex + 1) % totalEvents()
-        showEvent(currentEventIndex, isNext = true)
-    }
-
-    private fun showPreviousEvent() {
-        currentEventIndex = (currentEventIndex - 1 + totalEvents()) % totalEvents()
-        showEvent(currentEventIndex, isNext = false)
-    }
-
-    private fun totalEvents(): Int {
-        return eventsList.size
-    }
-
-    private fun getEventAtIndex(index: Int): Event {
-        return eventsList[index]
     }
 
     companion object {
@@ -199,12 +138,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 }
             }
     }
+
     override fun onMapReady(googleMap: GoogleMap) {
         val mMap = googleMap
 
         val currentLocation = LatLng(33.5651107, 73.0169135)
 
-        val newCustomMarker: BitmapDescriptor = R.drawable.ic_pin_location.bitmapFromVector(requireContext())
+        val newCustomMarker: BitmapDescriptor =
+            R.drawable.ic_pin_location.bitmapFromVector(requireContext())
         val markerOptions = MarkerOptions()
             .position(currentLocation)
             .draggable(true)
