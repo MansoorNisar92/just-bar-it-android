@@ -172,7 +172,7 @@
                 app:layout_constraintTop_toBottomOf="@id/eventListTextView"
                 tools:itemCount="2"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_event_list_v2" />
+                tools:listitem="@layout/item_event_calendar_details" />
 
 
             <androidx.appcompat.widget.AppCompatImageView

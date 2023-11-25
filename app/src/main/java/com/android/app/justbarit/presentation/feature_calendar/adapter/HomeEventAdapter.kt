@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.app.justbarit.databinding.ItemEventListV3Binding
+import com.android.app.justbarit.databinding.ItemHomeEventBinding
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
@@ -19,7 +19,7 @@ class HomeEventAdapter constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeEventAdapterViewHolder {
         val binding =
-            ItemEventListV3Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemHomeEventBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HomeEventAdapterViewHolder(binding)
     }
 
@@ -31,7 +31,7 @@ class HomeEventAdapter constructor(
         return eventDetailsList.size
     }
 
-    class HomeEventAdapterViewHolder(private val binding: ItemEventListV3Binding) :
+    class HomeEventAdapterViewHolder(private val binding: ItemHomeEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(eventDetail: EventDetails, context: Context) {
             binding.apply {

@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.app.justbarit.databinding.ItemEventListV2Binding
+import com.android.app.justbarit.databinding.ItemEventCalendarDetailsBinding
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
@@ -19,7 +19,7 @@ class EventAdapter constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventAdapterViewHolder {
         val binding =
-            ItemEventListV2Binding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemEventCalendarDetailsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return EventAdapterViewHolder(binding)
     }
 
@@ -31,7 +31,7 @@ class EventAdapter constructor(
         return eventDetailsList.size
     }
 
-    class EventAdapterViewHolder(private val binding: ItemEventListV2Binding) :
+    class EventAdapterViewHolder(private val binding: ItemEventCalendarDetailsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(eventDetail: EventDetails, context: Context) {
             binding.apply {
