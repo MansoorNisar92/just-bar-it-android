@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.app.justbarit.databinding.ItemEventListV3Binding
 import com.android.app.justbarit.domain.model.EventDetails
+import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 
 class HomeEventAdapter constructor(
     eventDetails: ArrayList<EventDetails>,
@@ -33,22 +34,11 @@ class HomeEventAdapter constructor(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(eventDetail: EventDetails, context: Context) {
             binding.apply {
-                /*eventNameTextView.text = eventDetail.eventName
-                eventDateTextView.text = eventDetail.eventDate
-                eventTimeTextView.text = eventDetail.evenTime
-                includedTeamsLayout.includedHomeTeam.homeTeamName.text =
-                    eventDetail.homeTeam.teamName
-                includedTeamsLayout.includedHomeTeam.homeTeamImageView.loadImageFromAssets(
-                    eventDetail.homeTeam.teamBadge
-                )
-                includedTeamsLayout.includedAwayTeam.awayTeam.text = eventDetail.awayTeam.teamName
-                includedTeamsLayout.includedAwayTeam.awayTeamImageView.loadImageFromAssets(
-                    eventDetail.awayTeam.teamBadge
-                )
-
-                bookingDetailsLayout.clickToAction {
-                    bookingDetails(eventDetail)
-                }*/
+                eventImageView.loadImageFromAssets(eventDetail.eventImage)
+                evenTitleTextView.text = eventDetail.title
+                eventTime.text = eventDetail.date
+                eventHostedByNameTextView.text = eventDetail.location
+                ticketStartsFromTextView.text = eventDetail.price
             }
         }
     }

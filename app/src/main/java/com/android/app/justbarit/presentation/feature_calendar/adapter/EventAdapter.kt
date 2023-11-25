@@ -36,22 +36,11 @@ class EventAdapter constructor(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(eventDetail: EventDetails, context: Context) {
             binding.apply {
-                /*eventNameTextView.text = eventDetail.eventName
-                eventDateTextView.text = eventDetail.eventDate
-                eventTimeTextView.text = eventDetail.evenTime
-                includedTeamsLayout.includedHomeTeam.homeTeamName.text =
-                    eventDetail.homeTeam.teamName
-                includedTeamsLayout.includedHomeTeam.homeTeamImageView.loadImageFromAssets(
-                    eventDetail.homeTeam.teamBadge
-                )
-                includedTeamsLayout.includedAwayTeam.awayTeam.text = eventDetail.awayTeam.teamName
-                includedTeamsLayout.includedAwayTeam.awayTeamImageView.loadImageFromAssets(
-                    eventDetail.awayTeam.teamBadge
-                )
-
-                bookingDetailsLayout.clickToAction {
-                    bookingDetails(eventDetail)
-                }*/
+                eventImageView.loadImageFromAssets(eventDetail.eventImage)
+                evenTitleTextView.text = eventDetail.title
+                eventTime.text = eventDetail.date
+                eventHostedByNameTextView.text = eventDetail.location
+                ticketStartsFromTextView.text = eventDetail.price
             }
         }
     }
@@ -62,4 +51,4 @@ class EventAdapter constructor(
     }
 }
 
-var bookingDetails:(EventDetails) -> Unit = {}
+var bookingDetails: (EventDetails) -> Unit = {}

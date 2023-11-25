@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:fontFamily="@font/lexend_bold"
+            android:fontFamily="@font/nunito_bold"
             android:gravity="center"
             android:text="@string/upcoming_fixtures"
             android:textAllCaps="true"

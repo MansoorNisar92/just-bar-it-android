@@ -2,6 +2,7 @@ package com.android.app.justbarit.presentation.feature_calendar.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.app.justbarit.R
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.domain.model.Review
 import com.android.app.justbarit.presentation.AppState
@@ -43,7 +44,11 @@ class CalendarDetailsViewModel @Inject constructor() : ViewModel() {
     private fun getHardEventsToday(): ArrayList<EventDetails> {
         return arrayListOf(
             EventDetails(
-                "Carabao Cup"
+                "Football Weekly Live tour: Dublin (evening 2)",
+                date = "Today at 19:30",
+                location = "The goat Bar & Grill",
+                price = "From €24.73",
+                eventImage = R.drawable.event_image
             )
         )
     }

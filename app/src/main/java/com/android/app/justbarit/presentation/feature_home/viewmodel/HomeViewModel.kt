@@ -55,10 +55,18 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     private fun getHardEventsToday(): ArrayList<EventDetails> {
         return arrayListOf(
             EventDetails(
-                "Carabao Cup"
+                "Swiftogeddon - The Tylor Swift Club Night",
+                date = "Fri,8 Dec 22:30",
+                location = "The Grand Social",
+                price = "From €8.82",
+                eventImage = R.drawable.home_event_one
             ),
             EventDetails(
-                "Carabao Cup"
+                "The Gang's All Here Extra: Live at Liberty Hall",
+                date = "Fri,8 Dec 19:00",
+                location = "Liberty Hall Theatre",
+                price = "From €31.00",
+                eventImage = R.drawable.home_event_two
             )
         )
     }

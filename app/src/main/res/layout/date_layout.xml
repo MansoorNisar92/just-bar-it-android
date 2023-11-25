@@ -33,7 +33,7 @@
             android:layout_width="@dimen/_130sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_13sdp"
-            android:fontFamily="@font/lexend_regular"
+            android:fontFamily="@font/nunito_regular"
             android:gravity="center"
             android:text="December 2023"
             android:textColor="@color/black"

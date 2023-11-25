@@ -5,7 +5,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/eventCardView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_160sdp"
+        android:layout_height="@dimen/_165sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_5sdp"
@@ -32,7 +32,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/home_event_one" />
+                />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/evenTitleTextView"
@@ -41,20 +41,24 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/nunito_semi_bold"
                 android:text="Swiftogeddon - The Tylor Swift Club Night"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/eventImageView" />
 
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/evening2TextView"
+                android:id="@+id/eventTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:text="(evening 2)"
+                android:fontFamily="@font/nunito_regular"
+                android:text="Today at 19:30"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_9sdp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,24 +66,13 @@
                 app:layout_constraintTop_toBottomOf="@id/evenTitleTextView" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/eventTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:text="Today at 19:30"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_9sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/evening2TextView" />
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/eventHostedByNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/nunito_regular"
                 android:text="The goat Bar &amp; Grill"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_9sdp"
@@ -93,12 +86,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:fontFamily="@font/nunito_bold"
                 android:text=" From €24.73"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_9sdp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/eventHostedByNameTextView" />

@@ -5,7 +5,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/eventCardView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_235sdp"
+        android:layout_height="@dimen/_225sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_20sdp"
@@ -22,7 +22,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/uploadIconLayout"
@@ -68,8 +68,7 @@
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/event_image" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/evenTitleTextView"
@@ -79,24 +78,12 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:textSize="@dimen/_13sdp"
-                android:text="Football Weekly Live tour: Dublin"
+                android:fontFamily="@font/nunito_semi_bold"
+                android:text="Football Weekly Live tour: Dublin (evening 2)"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/eventImageView" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/evening2TextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:text="(evening 2)"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_11sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/evenTitleTextView" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/eventTime"
@@ -104,12 +91,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="@font/nunito_regular"
                 android:text="Today at 19:30"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/evening2TextView" />
+                app:layout_constraintTop_toBottomOf="@id/evenTitleTextView" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/eventHostedByNameTextView"
@@ -117,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="@font/nunito_regular"
                 android:text="The goat Bar &amp; Grill"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp"
@@ -130,6 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="@font/nunito_bold"
                 android:text="From €24.73"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp"

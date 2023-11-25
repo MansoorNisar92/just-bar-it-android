@@ -10,7 +10,7 @@
         android:id="@+id/calendarTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/lexend_regular"
+        android:fontFamily="@font/nunito_regular"
         android:text="19:00"
         android:textColor="@android:color/black"
         android:textSize="18sp"
