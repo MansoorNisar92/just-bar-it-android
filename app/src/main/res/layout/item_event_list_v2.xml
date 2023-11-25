@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/eventCardView"
+        android:id="@+id/eventDetailsCardView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_225sdp"
         android:layout_marginStart="@dimen/_20sdp"

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.app.justbarit.databinding.ItemEventListV3Binding
 import com.android.app.justbarit.domain.model.EventDetails
+import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 
 class HomeEventAdapter constructor(
@@ -39,6 +40,9 @@ class HomeEventAdapter constructor(
                 eventTime.text = eventDetail.date
                 eventHostedByNameTextView.text = eventDetail.location
                 ticketStartsFromTextView.text = eventDetail.price
+                eventCardView.clickToAction {
+                    homeEventClick(eventDetail)
+                }
             }
         }
     }
@@ -48,3 +52,5 @@ class HomeEventAdapter constructor(
         notifyDataSetChanged()
     }
 }
+
+var homeEventClick:(EventDetails) -> Unit  = {}

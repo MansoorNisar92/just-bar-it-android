@@ -23,7 +23,6 @@ import com.android.app.justbarit.presentation.common.ext.showSnackBar
 import com.android.app.justbarit.presentation.dashboard.DashboardScreen
 import com.android.app.justbarit.presentation.feature_calendar.adapter.EventAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.ReviewAdapter
-import com.android.app.justbarit.presentation.feature_calendar.adapter.bookingDetails
 import com.android.app.justbarit.presentation.feature_calendar.viewmodel.CalendarDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

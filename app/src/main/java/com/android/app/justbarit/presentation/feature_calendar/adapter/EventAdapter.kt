@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.app.justbarit.databinding.ItemEventListBinding
 import com.android.app.justbarit.databinding.ItemEventListV2Binding
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.presentation.common.ext.clickToAction
@@ -41,6 +40,9 @@ class EventAdapter constructor(
                 eventTime.text = eventDetail.date
                 eventHostedByNameTextView.text = eventDetail.location
                 ticketStartsFromTextView.text = eventDetail.price
+                eventDetailsCardView.clickToAction {
+                    evetDetails(eventDetail)
+                }
             }
         }
     }
@@ -51,4 +53,4 @@ class EventAdapter constructor(
     }
 }
 
-var bookingDetails: (EventDetails) -> Unit = {}
+var evetDetails: (EventDetails) -> Unit = {}

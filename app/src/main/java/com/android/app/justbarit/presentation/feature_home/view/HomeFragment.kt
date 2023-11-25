@@ -15,8 +15,10 @@ import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.common.ext.bitmapFromVector
 import com.android.app.justbarit.presentation.common.ext.hideProgress
+import com.android.app.justbarit.presentation.common.ext.navigate
 import com.android.app.justbarit.presentation.common.ext.showProgress
 import com.android.app.justbarit.presentation.feature_calendar.adapter.HomeEventAdapter
+import com.android.app.justbarit.presentation.feature_calendar.adapter.homeEventClick
 import com.android.app.justbarit.presentation.feature_home.adapter.CategoryAdapter
 import com.android.app.justbarit.presentation.feature_home.adapter.categoryClick
 import com.android.app.justbarit.presentation.feature_home.viewmodel.HomeViewModel
@@ -73,7 +75,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun initHomeEvents() {
-        homeEventAdapter = HomeEventAdapter(arrayListOf(), requireContext())
+        homeEventAdapter = HomeEventAdapter(arrayListOf(), requireContext()).apply {
+            homeEventClick = {
+                navigate(R.id.calendarDetailsFragment)
+            }
+        }
         binding.homeEventListRecyclerView.adapter = homeEventAdapter
     }
 
