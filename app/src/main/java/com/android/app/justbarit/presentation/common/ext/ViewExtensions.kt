@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
@@ -12,9 +11,6 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSmoothScroller
-import androidx.recyclerview.widget.RecyclerView
 import com.android.app.justbarit.R
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -76,6 +72,11 @@ fun View.scaleUpAnimation() {
 
 fun View.propagationAnimation() {
     val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.propgration_animation)
+    startAnimation(animation)
+}
+
+fun View.fallDownAnimation() {
+    val animation: Animation = AnimationUtils.loadAnimation(this.context, R.anim.item_animation_fall_down)
     startAnimation(animation)
 }
 

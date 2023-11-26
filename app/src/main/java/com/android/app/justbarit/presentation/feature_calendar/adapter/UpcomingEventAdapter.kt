@@ -58,6 +58,7 @@ class UpcomingEventAdapter constructor(
 
                 if (eventDetail.going != null) {
                     goingTextView.visibility = View.VISIBLE
+                    goingTextView.text = eventDetail.going
                 } else {
                     goingTextView.visibility = View.INVISIBLE
                 }

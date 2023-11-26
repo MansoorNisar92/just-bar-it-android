@@ -68,7 +68,7 @@ class CalendarViewModel @Inject constructor() : ViewModel() {
                 location = "Liberty Hall Theatre",
                 price = "From €27.50",
                 eventImage = R.drawable.home_event_three,
-                canChat = true
+                going = "120 are going"
             ),
             EventDetails(
                 "Swiftogeddon - The Tylor Swift Club Night",
@@ -77,6 +77,33 @@ class CalendarViewModel @Inject constructor() : ViewModel() {
                 price = "From €8.82",
                 eventImage = R.drawable.home_event_one,
                 going = "50 are going"
+            )
+        )
+    }
+
+    fun getAllEvents(): ArrayList<EventDetails> {
+        return getHardEventsToday()
+    }
+
+    fun getMyEvents(): ArrayList<EventDetails> {
+        return arrayListOf(
+            EventDetails(
+                "Monday shots and cocktails",
+                date = "Saturday at 13:00",
+                location = "Liberty Hall Theatre",
+                price = "From €57.50",
+                eventImage = R.drawable.bar_cover_dummy,
+                going = "120 are going",
+                canChat = true
+            ),
+            EventDetails(
+                "Football Weekly Live tour: Dublin (evening 2)",
+                date = "Today at 19:30",
+                location = "The goat Bar &; Grill",
+                price = "From €24.73",
+                eventImage = R.drawable.event_image,
+                going = "250 are going",
+                canChat = true
             )
         )
     }

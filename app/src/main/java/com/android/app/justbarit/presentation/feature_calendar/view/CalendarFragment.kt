@@ -5,6 +5,8 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -13,20 +15,16 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.FragmentCalendarBinding
 import com.android.app.justbarit.domain.model.CalendarItem
-import com.android.app.justbarit.domain.model.Event
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.common.ext.clickToAction
+import com.android.app.justbarit.presentation.common.ext.fallDownAnimation
 import com.android.app.justbarit.presentation.common.ext.hideProgress
 import com.android.app.justbarit.presentation.common.ext.navigate
 import com.android.app.justbarit.presentation.common.ext.showProgress
-import com.android.app.justbarit.presentation.feature_calendar.adapter.CalendarAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.CalendarItemAdapter
-import com.android.app.justbarit.presentation.feature_calendar.adapter.EventAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.UpcomingEventAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.calendarItemClick
-import com.android.app.justbarit.presentation.feature_calendar.adapter.eventClick
-import com.android.app.justbarit.presentation.feature_calendar.adapter.evetDetails
 import com.android.app.justbarit.presentation.feature_calendar.adapter.upComingEventDetails
 import com.android.app.justbarit.presentation.feature_calendar.viewmodel.CalendarViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -154,6 +152,18 @@ class CalendarFragment : Fragment() {
                     )
                 }
             }
+
+            allTextView.clickToAction {
+                updateAllTextViewBackground(selected = true)
+                updateGoingTextViewBackground()
+                upcomingEventAdapter.setEventItems(viewModel.getAllEvents())
+            }
+
+            goingToTextView.clickToAction {
+                updateGoingTextViewBackground(selected = true)
+                updateAllTextViewBackground()
+                upcomingEventAdapter.setEventItems(viewModel.getMyEvents())
+            }
         }
     }
 
@@ -174,6 +184,40 @@ class CalendarFragment : Fragment() {
             }
         }
         binding.calendarRecyclerView.adapter = upcomingEventAdapter
+    }
+
+    private fun updateAllTextViewBackground(selected: Boolean = false) {
+        binding.allTextView.apply {
+            val textColor: Int
+            val backGround: Int
+            if (selected) {
+                textColor = R.color.white
+                backGround = R.drawable.tab_layout_all_selected_background
+            } else {
+                textColor = R.color.black
+                backGround = R.drawable.tab_layout_all_background
+            }
+            setTextColor(ContextCompat.getColor(requireContext(), textColor))
+            setBackgroundDrawable(AppCompatResources.getDrawable(requireContext(), backGround))
+            fallDownAnimation()
+        }
+    }
+
+    private fun updateGoingTextViewBackground(selected: Boolean = false) {
+        binding.goingToTextView.apply {
+            val textColor: Int
+            val backGround: Int
+            if (selected) {
+                textColor = R.color.white
+                backGround = R.drawable.tab_layout_going_selected_background
+            } else {
+                textColor = R.color.black
+                backGround = R.drawable.tab_layout_going_background
+            }
+            setTextColor(ContextCompat.getColor(requireContext(), textColor))
+            setBackgroundDrawable(AppCompatResources.getDrawable(requireContext(), backGround))
+            fallDownAnimation()
+        }
     }
 
     companion object {

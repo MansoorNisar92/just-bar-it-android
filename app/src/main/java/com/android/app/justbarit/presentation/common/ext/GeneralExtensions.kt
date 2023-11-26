@@ -1,6 +1,5 @@
 package com.android.app.justbarit.presentation.common.ext
 
-import android.content.Context
 
 fun getRatingInDesc(rating: Int): String {
     val ratingsMap = mapOf(
