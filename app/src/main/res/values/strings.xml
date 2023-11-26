@@ -18,4 +18,6 @@
     <string name="vs">Vs.</string>
     <string name="sound_on">Sound On</string>
     <string name="finalize_reservation">Finalize reservation</string>
+    <string name="edit"><u>Edit</u></string>
+    <string name="favourites">Favourites</string>
 </resources>
