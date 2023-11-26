@@ -24,4 +24,7 @@
     <color name="halfRedColor">#EC826E</color>
     <color name="bookingDetailsColor">#67C871</color>
     <color name="soundOnColor">#94A4F9</color>
+    <color name="salesEndSoonColor">#EEEBFB</color>
+    <color name="almostFullColor">#FEEEEA</color>
+    <color name="alertTextColor">#261343</color>
 </resources>

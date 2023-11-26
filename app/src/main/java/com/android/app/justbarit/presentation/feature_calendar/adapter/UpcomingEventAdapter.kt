@@ -62,6 +62,22 @@ class UpcomingEventAdapter constructor(
                 } else {
                     goingTextView.visibility = View.INVISIBLE
                 }
+
+                if (eventDetail.salesEndSoon.default || eventDetail.almostFull.default){
+                    legendsLayout.visibility = View.VISIBLE
+                    if (eventDetail.almostFull.default){
+                        almostFullTextView.visibility = View.VISIBLE
+                        salesEndSoonTextView.visibility = View.GONE
+                    }else if(eventDetail.salesEndSoon.default){
+                        salesEndSoonTextView.visibility = View.VISIBLE
+                        almostFullTextView.visibility = View.GONE
+                    }else {
+                        salesEndSoonTextView.visibility = View.GONE
+                        almostFullTextView.visibility = View.GONE
+                    }
+                }else{
+                    legendsLayout.visibility = View.GONE
+                }
                 eventDetailsCardView.clickToAction {
                     upComingEventDetails(eventDetail)
                 }

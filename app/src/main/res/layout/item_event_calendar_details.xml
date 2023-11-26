@@ -5,7 +5,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/eventDetailsCardView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_225sdp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_20sdp"
@@ -22,7 +22,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_8sdp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/uploadIconLayout"
@@ -78,6 +79,7 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:textSize="@dimen/_13sdp"
+                app:fontFamily="@font/nunito_semi_bold"
                 android:fontFamily="@font/nunito_semi_bold"
                 android:text="Football Weekly Live tour: Dublin (evening 2)"
                 android:textColor="@color/black"
@@ -89,6 +91,7 @@
                 android:id="@+id/eventTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:fontFamily="@font/nunito_regular"
@@ -103,6 +106,7 @@
                 android:id="@+id/eventHostedByNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:fontFamily="@font/nunito_regular"
@@ -117,6 +121,7 @@
                 android:id="@+id/ticketStartsFromTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:fontFamily="@font/nunito_bold"

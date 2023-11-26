@@ -68,7 +68,8 @@ class CalendarViewModel @Inject constructor() : ViewModel() {
                 location = "Liberty Hall Theatre",
                 price = "From €27.50",
                 eventImage = R.drawable.home_event_three,
-                going = "120 are going"
+                going = "120 are going",
+                almostFull = true
             ),
             EventDetails(
                 "Swiftogeddon - The Tylor Swift Club Night",
@@ -76,7 +77,8 @@ class CalendarViewModel @Inject constructor() : ViewModel() {
                 location = "The Grand Social",
                 price = "From €8.82",
                 eventImage = R.drawable.home_event_one,
-                going = "50 are going"
+                going = "50 are going",
+                salesEndSoon = true
             )
         )
     }

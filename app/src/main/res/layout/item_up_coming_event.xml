@@ -5,7 +5,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/eventDetailsCardView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_225sdp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_20sdp"
@@ -22,7 +22,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_8sdp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/uploadIconLayout"
@@ -71,12 +72,47 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/legendsLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/eventImageView">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/almostFullTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@drawable/almost_full_background"
+                    android:fontFamily="@font/nunito_bold"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Almost full"
+                    android:textColor="@color/alertTextColor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/salesEndSoonTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@drawable/sales_end_soon_background"
+                    android:fontFamily="@font/nunito_bold"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Sales end soon"
+                    android:textColor="@color/alertTextColor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/evenTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:fontFamily="@font/nunito_semi_bold"
                 android:text="Football Weekly Live tour: Dublin (evening 2)"
@@ -84,12 +120,13 @@
                 android:textSize="@dimen/_13sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/eventImageView" />
+                app:layout_constraintTop_toBottomOf="@id/legendsLayout" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/eventTime"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:fontFamily="@font/nunito_regular"
@@ -104,6 +141,7 @@
                 android:id="@+id/eventHostedByNameTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:fontFamily="@font/nunito_regular"
@@ -118,6 +156,7 @@
                 android:id="@+id/ticketStartsFromTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:fontFamily="@font/nunito_bold"
@@ -133,27 +172,27 @@
                 android:id="@+id/chatLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/chat_background"
-                android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/chat_background"
+                android:padding="@dimen/_3sdp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/goingTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="@dimen/_3sdp"
-                android:visibility="invisible">
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/seeDetailsLabelTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/_5sdp"
                     android:fontFamily="@font/nunito_bold"
                     android:text="Chat"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/seeDetailsArrow"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/seeDetailsArrow"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -163,7 +202,7 @@
                     android:src="@drawable/forward_arrow_black"
                     android:tint="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
