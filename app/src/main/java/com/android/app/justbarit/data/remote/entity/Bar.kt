@@ -18,7 +18,8 @@ data class Bar(
     var smokingArea: String?  = null,
     var sports: String?  = null,
     var terraceRooftop: String?  = null,
-    var web: String?  = null
+    var web: String?  = null,
+    var imageId:String? = null
 ) {
     constructor(map: Map<String, String>) : this() {
         map.forEach { entry ->
@@ -37,6 +38,7 @@ data class Bar(
                 "terraceRooftop" -> terraceRooftop = entry.value
                 "rating" -> rating = entry.value as Double
                 "web" -> web = entry.value
+                "imageId" -> imageId = entry.value
 
             }
         }
@@ -68,6 +70,7 @@ fun Bar.toBarEntity(): BarEntity {
         smokingArea = smokingArea,
         sports = sports,
         terraceRooftop = terraceRooftop,
-        web = web
+        web = web,
+        imageId = imageId
     )
 }

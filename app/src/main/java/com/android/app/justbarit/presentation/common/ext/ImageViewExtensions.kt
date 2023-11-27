@@ -11,3 +11,11 @@ fun AppCompatImageView.loadImageFromAssets(
 ) {
     Glide.with(this).load(resourceId).apply(RequestOptions()).placeholder(placeHolder).into(this)
 }
+
+fun AppCompatImageView.loadImage(
+    url: String?,
+    placeHolder: Int = R.drawable.ic_default_image_placeholder
+) {
+    Glide.with(this)
+        .load(url).apply(RequestOptions()).placeholder(placeHolder).into(this)
+}

@@ -8,8 +8,10 @@ import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.ItemBarsBinding
 import com.android.app.justbarit.domain.model.AmenityType
 import com.android.app.justbarit.domain.model.Bar
+import com.android.app.justbarit.presentation.common.Constants
 import com.android.app.justbarit.presentation.common.ext.default
 import com.android.app.justbarit.presentation.common.ext.getRatingInDesc
+import com.android.app.justbarit.presentation.common.ext.loadImage
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 import kotlin.math.roundToInt
 
@@ -36,7 +38,11 @@ class BarAdapter constructor(bars: ArrayList<Bar>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(bar: Bar) {
             binding.apply {
-                barCoverImageView.loadImageFromAssets(R.drawable.bar_cover_dummy)
+                if (bar.imageId!=null){
+                    barCoverImageView.loadImage("${Constants.imageBaseUrl}${bar.imageId}")
+                }else{
+                    barCoverImageView.loadImageFromAssets(R.drawable.ic_default_image_placeholder)
+                }
                 barNameTextView.text = bar.barName
                 barRatingTextView.text = bar.barRating.toString()
 

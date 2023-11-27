@@ -21,7 +21,8 @@ data class BarEntity(
     var smokingArea: String?,
     var sports: String?,
     var terraceRooftop: String?,
-    var web: String?
+    var web: String?,
+    var imageId:String?
 )
 
 fun List<BarEntity>.toBarModelList(): List<Bar> {
@@ -47,6 +48,7 @@ fun BarEntity.toBarModel(): Bar {
         smokingArea,
         sports,
         terraceRooftop,
-        web
+        web,
+        imageId = imageId
     )
 }

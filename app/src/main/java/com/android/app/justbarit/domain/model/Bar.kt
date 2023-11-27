@@ -16,7 +16,8 @@ data class Bar(
     var hasDance: Boolean = false,
     var hasFreeEntry: Boolean = false,
     var reviewCount: Int = 0,
-    var amenities: ArrayList<Amenity> = arrayListOf()
+    var amenities: ArrayList<Amenity> = arrayListOf(),
+    var imageId:String? = null
 )
 
 fun List<Bar>.convertRemoteBarToLocalBarsList(): List<com.android.app.justbarit.domain.model.Bar> {
@@ -31,7 +32,8 @@ fun Bar.toLocalBar(): com.android.app.justbarit.domain.model.Bar {
     return Bar(
         barName = name ?: "",
         barRating = rating ?: 0.0,
-        amenities = this.getAmenities()
+        amenities = this.getAmenities(),
+        imageId =  imageId
         )
 }
 

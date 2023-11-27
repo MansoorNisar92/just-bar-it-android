@@ -77,7 +77,6 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     
 
-    //implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
     implementation("com.google.firebase:firebase-database-ktx:20.3.0")
 
     testImplementation("junit:junit:4.13.2")
