@@ -1,0 +1,20 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Selected state -->
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/nav_bar_color" /> <!-- Blue line for selected item -->
+        </shape>
+    </item>
+    <!-- Unselected state -->
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/bottom_nav_icon_unselect_color" /> <!-- Grey line for unselected items -->
+        </shape>
+    </item>
+</selector>

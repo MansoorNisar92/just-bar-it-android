@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.annotation.IdRes
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
@@ -13,6 +14,8 @@ import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.ActivityDashboardBinding
 import com.android.app.justbarit.presentation.base.JustBarItBaseActivity
 import com.android.app.justbarit.presentation.common.ext.scaleUpAnimation
+import com.skydoves.androidbottombar.BottomMenuItem
+import com.skydoves.androidbottombar.forms.iconForm
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -39,6 +42,77 @@ class DashboardScreen : JustBarItBaseActivity() {
         }
 
         navController().addOnDestinationChangedListener(destinationChangeListener!!)
+
+        val list = mutableListOf<BottomMenuItem>()
+
+        // we can create the form using kotlin dsl.
+        val iconHome = iconForm(this) {
+            setIcon(R.drawable.home_icon_selected)
+            setIconColorRes(R.color.bottom_nav_icon_unselect_color) // sets the [Drawable] of the icon using resource.
+            setIconSize(24) // sets the size of the icon.
+        }
+
+        val iconCalendar = iconForm(this) {
+            setIcon(R.drawable.calendar_icon_selected)
+            setIconColorRes(R.color.bottom_nav_icon_unselect_color) // sets the [Drawable] of the icon using resource.
+            setIconSize(24) // sets the size of the icon.
+        }
+
+        val iconSearch = iconForm(this) {
+            setIcon(R.drawable.search_icon)
+            setIconColorRes(R.color.bottom_nav_icon_unselect_color) // sets the [Drawable] of the icon using resource.
+            setIconSize(24) // sets the size of the icon.
+        }
+
+        val iconStar = iconForm(this) {
+            setIcon(R.drawable.star_icon_selected)
+            setIconColorRes(R.color.bottom_nav_icon_unselect_color) // sets the [Drawable] of the icon using resource.
+            setIconSize(24) // sets the size of the icon.
+        }
+
+        val iconProfile = iconForm(this) {
+            setIcon(R.drawable.profile_icon_selected)
+            setIconColorRes(R.color.bottom_nav_icon_unselect_color) // sets the [Drawable] of the icon using resource.
+            setIconSize(24) // sets the size of the icon.
+        }
+
+
+
+        val home = BottomMenuItem(this)
+            .setIconForm(iconHome)
+            .setIcon(R.drawable.home_icon)
+            .setIconActiveColor(ContextCompat.getColor(this,R.color.nav_bar_color))
+            .build()
+
+        val calendar = BottomMenuItem(this)
+            .setIconForm(iconCalendar)
+            .setIcon(R.drawable.calendar_icon)
+            .setIconActiveColor(ContextCompat.getColor(this,R.color.nav_bar_color))
+            .build()
+
+        val search = BottomMenuItem(this)
+            .setIconForm(iconSearch)
+            .setIcon(R.drawable.search_icon_bottom_nav)
+            .setIconActiveColor(ContextCompat.getColor(this,R.color.nav_bar_color))
+            .build()
+
+        val star = BottomMenuItem(this)
+            .setIconForm(iconStar)
+            .setIcon(R.drawable.star_icon)
+            .setIconActiveColor(ContextCompat.getColor(this,R.color.nav_bar_color))
+            .build()
+
+        val profile = BottomMenuItem(this)
+            .setIconForm(iconProfile)
+            .setIcon(R.drawable.profile_icon)
+            .setIconActiveColor(ContextCompat.getColor(this,R.color.nav_bar_color))
+            .build()
+        list.add(home)
+        list.add(calendar)
+        list.add(search)
+        list.add(star)
+        list.add(profile)
+        binding.testBottomBar.addBottomMenuItems(list)
     }
 
 

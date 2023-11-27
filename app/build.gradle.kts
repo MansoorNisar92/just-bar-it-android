@@ -78,6 +78,7 @@ dependencies {
     
 
     implementation("com.google.firebase:firebase-database-ktx:20.3.0")
+    implementation("com.github.skydoves:androidbottombar:1.0.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
