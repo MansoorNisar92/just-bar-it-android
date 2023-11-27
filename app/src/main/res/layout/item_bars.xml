@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/eventCardView"
+        android:id="@+id/barCardView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_245sdp"
         android:layout_marginStart="@dimen/_20sdp"

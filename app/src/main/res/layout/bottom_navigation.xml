@@ -7,6 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:background="@color/nav_bar_color"
+            app:layout_constraintEnd_toEndOf="@+id/bottomNavigation"
+            app:layout_constraintStart_toStartOf="@+id/bottomNavigation"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"/>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             style="@style/CustomCardViewStyle"

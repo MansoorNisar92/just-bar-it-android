@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,9 +15,11 @@ import com.android.app.justbarit.databinding.FragmentCalendarDetailsBinding
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.domain.model.Review
 import com.android.app.justbarit.presentation.AppState
+import com.android.app.justbarit.presentation.common.SharedViewModel
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
+import com.android.app.justbarit.presentation.common.ext.loadImageWithImageId
 import com.android.app.justbarit.presentation.common.ext.popBackStack
 import com.android.app.justbarit.presentation.common.ext.showProgress
 import com.android.app.justbarit.presentation.common.ext.showSnackBar
@@ -31,6 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CalendarDetailsFragment : Fragment() {
     private lateinit var binding: FragmentCalendarDetailsBinding
     private val viewModel: CalendarDetailsViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var eventAdapter: EventAdapter
     private lateinit var reviewAdapter: ReviewAdapter
     private var givenRating: Boolean = false
@@ -45,7 +49,8 @@ class CalendarDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.eventCoverImageView.loadImageFromAssets(R.drawable.bar_cover_dummy)
+        //binding.eventCoverImageView.loadImageFromAssets(R.drawable.bar_cover_dummy)
+        populateBarDataIfPossible()
         initEvents()
         initReviews()
         attachListeners()
@@ -53,6 +58,15 @@ class CalendarDetailsFragment : Fragment() {
 
         viewModel.getListOfEvents()
         viewModel.getListOfReviews()
+    }
+
+    private fun populateBarDataIfPossible() {
+        if (sharedViewModel.getSelectedBar() != null) {
+            sharedViewModel.getSelectedBar()?.apply {
+                binding.eventCoverImageView.loadImageWithImageId(imageId)
+                binding.barNameTextView.text = barName
+            }
+        }
     }
 
     private fun initEvents() {
@@ -118,29 +132,39 @@ class CalendarDetailsFragment : Fragment() {
             }
 
             reviewLeftArrow.clickToAction {
-                val firstVisibleItemPosition = (binding.reviewRecyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                val firstVisibleItemPosition =
+                    (binding.reviewRecyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 if (firstVisibleItemPosition > 0) {
                     binding.reviewRecyclerView.smoothScrollToPosition(firstVisibleItemPosition - 1)
                 }
             }
 
             reviewRightArrow.clickToAction {
-                val lastVisibleItemPosition = (binding.reviewRecyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                val lastVisibleItemPosition =
+                    (binding.reviewRecyclerView.layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
                 if (lastVisibleItemPosition < binding.reviewRecyclerView.adapter?.itemCount ?: 0 - 1) {
                     binding.reviewRecyclerView.smoothScrollToPosition(lastVisibleItemPosition + 1)
                 }
             }
 
             giveRatingImageView.clickToAction {
-                if (givenRating.not()){
+                if (givenRating.not()) {
                     givenRating = true
-                    giveRatingImageView.setImageDrawable(AppCompatResources.getDrawable(requireContext(),
-                        R.drawable.star_filled))
+                    giveRatingImageView.setImageDrawable(
+                        AppCompatResources.getDrawable(
+                            requireContext(),
+                            R.drawable.star_filled
+                        )
+                    )
                     showSnackBar("Bar added a favourite")
-                }else{
+                } else {
 
-                    giveRatingImageView.setImageDrawable(AppCompatResources.getDrawable(requireContext(),
-                        R.drawable.star_icon_black))
+                    giveRatingImageView.setImageDrawable(
+                        AppCompatResources.getDrawable(
+                            requireContext(),
+                            R.drawable.star_icon_black
+                        )
+                    )
                     givenRating = false
                     showSnackBar("Bar removed from favourites")
                 }

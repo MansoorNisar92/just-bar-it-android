@@ -27,7 +27,8 @@
     <color name="salesEndSoonColor">#EEEBFB</color>
     <color name="almostFullColor">#FEEEEA</color>
     <color name="alertTextColor">#261343</color>
-    <color name="bottom_nav_icon_unselect_color">#9A9595</color>
+    <color name="bottom_nav_icon_unselect_color">#999999</color>
+    <color name="bottom_nav_icon_select_color">#1F2388</color>
 <!--
     <color name="bottom_nav_icon_unselect_color">#BDB9B9</color>
 -->

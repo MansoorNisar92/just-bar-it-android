@@ -33,7 +33,7 @@ class DashboardScreen : JustBarItBaseActivity() {
         setContentView(binding.root)
         setNavGraph()
         attachListeners()
-        updateSearchIconCircle()
+        //updateSearchIconCircle()
         binding.includedBottomNavigationLayout.bottomNavigation.apply {
             setOnItemSelectedListener {
                 onBottomNavItemClicked(it)
@@ -50,9 +50,9 @@ class DashboardScreen : JustBarItBaseActivity() {
 
     private fun attachListeners() {
         binding.apply {
-            searchButton.clickToAction {
+            /*searchButton.clickToAction {
                 adjustViewAppearanceBeforeNavigateSearch()
-            }
+            }*/
         }
     }
 
@@ -74,7 +74,7 @@ class DashboardScreen : JustBarItBaseActivity() {
         val iconView =
             binding.includedBottomNavigationLayout.bottomNavigation.findViewById<View>(item.itemId)
         iconView.scaleUpAnimation()
-        updateSearchIconCircle()
+        //updateSearchIconCircle()
         when (item.itemId) {
             R.id.action_home -> {
                 navigate(R.id.homeFragment)
@@ -90,6 +90,9 @@ class DashboardScreen : JustBarItBaseActivity() {
 
             R.id.action_profile -> {
                 navigate(R.id.profileFragment)
+            }
+            R.id.action_search -> {
+                navigate(R.id.searchFragment)
             }
         }
     }
@@ -107,7 +110,7 @@ class DashboardScreen : JustBarItBaseActivity() {
         .setPopUpTo(destination, true)
         .build()
 
-    private fun adjustViewAppearanceBeforeNavigateSearch() {
+   /* private fun adjustViewAppearanceBeforeNavigateSearch() {
         binding.apply {
             includedBottomNavigationLayout.bottomNavigation.menu.findItem(R.id.action_fake).isChecked =
                 true
@@ -118,15 +121,15 @@ class DashboardScreen : JustBarItBaseActivity() {
             )
         }
         navigate(R.id.searchFragment)
-    }
+    }*/
 
-    private fun updateSearchIconCircle(
+    /*private fun updateSearchIconCircle(
         background: Int = R.drawable.bottom_nav_search_icon_white_background,
         icon: Int = R.drawable.search_icon
     ) {
         binding.searchIconCardView.setBackgroundResource(background)
         binding.searchButton.setImageDrawable(AppCompatResources.getDrawable(this, icon))
-    }
+    }*/
 
     override fun onBackPressed() {
         // Assuming you have a NavHostFragment in your layout with ID nav_host_fragment
@@ -181,11 +184,9 @@ class DashboardScreen : JustBarItBaseActivity() {
     }
     private fun renderNavigation(){
         binding.includedBottomNavigationLayout.bottomNavigation.visibility = View.VISIBLE
-        binding.searchIconCardView.visibility = View.VISIBLE
     }
 
     private fun hideNavigation(){
         binding.includedBottomNavigationLayout.bottomNavigation.visibility = View.GONE
-        binding.searchIconCardView.visibility = View.GONE
     }
 }

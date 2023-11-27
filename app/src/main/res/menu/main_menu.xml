@@ -12,8 +12,9 @@
         android:title="Events" />
 
     <item
-        android:id="@+id/action_fake"
-        android:title="Fake" />
+        android:id="@+id/action_search"
+        android:icon="@drawable/search_selector"
+        android:title="Search" />
 
     <item
         android:id="@+id/action_star"

@@ -2,5 +2,5 @@
     android:shape="rectangle">
     <gradient
         android:endColor="@color/nav_bar_color"
-        android:startColor="@color/search_edit_background_color" /> <!-- #871910 color -->
+        android:startColor="@color/nav_bar_color" />
 </shape>
