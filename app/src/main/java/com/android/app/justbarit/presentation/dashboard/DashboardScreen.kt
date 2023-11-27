@@ -1,13 +1,9 @@
 package com.android.app.justbarit.presentation.dashboard
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.annotation.IdRes
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
@@ -16,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.ActivityDashboardBinding
 import com.android.app.justbarit.presentation.base.JustBarItBaseActivity
-import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.scaleUpAnimation
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,8 +27,6 @@ class DashboardScreen : JustBarItBaseActivity() {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setNavGraph()
-        attachListeners()
-        //updateSearchIconCircle()
         binding.includedBottomNavigationLayout.bottomNavigation.apply {
             setOnItemSelectedListener {
                 onBottomNavItemClicked(it)
@@ -48,13 +41,6 @@ class DashboardScreen : JustBarItBaseActivity() {
         navController().addOnDestinationChangedListener(destinationChangeListener!!)
     }
 
-    private fun attachListeners() {
-        binding.apply {
-            /*searchButton.clickToAction {
-                adjustViewAppearanceBeforeNavigateSearch()
-            }*/
-        }
-    }
 
     private fun setNavGraph() {
         navController().apply {
@@ -110,26 +96,6 @@ class DashboardScreen : JustBarItBaseActivity() {
         .setPopUpTo(destination, true)
         .build()
 
-   /* private fun adjustViewAppearanceBeforeNavigateSearch() {
-        binding.apply {
-            includedBottomNavigationLayout.bottomNavigation.menu.findItem(R.id.action_fake).isChecked =
-                true
-            searchIconCardView.scaleUpAnimation()
-            updateSearchIconCircle(
-                R.drawable.bottom_nav_search_icon_background_selected,
-                R.drawable.search_icon_white
-            )
-        }
-        navigate(R.id.searchFragment)
-    }*/
-
-    /*private fun updateSearchIconCircle(
-        background: Int = R.drawable.bottom_nav_search_icon_white_background,
-        icon: Int = R.drawable.search_icon
-    ) {
-        binding.searchIconCardView.setBackgroundResource(background)
-        binding.searchButton.setImageDrawable(AppCompatResources.getDrawable(this, icon))
-    }*/
 
     override fun onBackPressed() {
         // Assuming you have a NavHostFragment in your layout with ID nav_host_fragment

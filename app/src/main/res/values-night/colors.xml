@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="transparent">#00000000</color>
     <color name="black">#FF000000</color>
@@ -6,11 +5,14 @@
     <color name="circled_search_icon_color">#FFFFFFFF</color>
     <color name="red">#FF2B00</color>
     <color name="blue">#2E3CFF</color>
-    <color name="top_bar_color">#2E3CFF</color>
-    <color name="nav_bar_color">#2E3CFF</color>
+    <color name="top_bar_color">#22258B</color>
+    <color name="nav_bar_color">#22258B</color>
     <color name="bottom_navigation_tab_color">#FF9800</color>
     <color name="rippleColor">#1A000000</color>
-    <color name="search_edit_background_color">#22258B</color>
+    <color name="search_edit_background_color">#0A0C47</color>
+    <!--
+        <color name="search_edit_background_color">#22258B</color>
+    -->
     <!--
         <color name="search_edit_background_color">#A73F2C</color>
     -->
@@ -21,4 +23,12 @@
     <color name="halfRedColor">#EC826E</color>
     <color name="bookingDetailsColor">#67C871</color>
     <color name="soundOnColor">#94A4F9</color>
+    <color name="salesEndSoonColor">#EEEBFB</color>
+    <color name="almostFullColor">#FEEEEA</color>
+    <color name="alertTextColor">#261343</color>
+    <color name="bottom_nav_icon_unselect_color">#999999</color>
+    <color name="bottom_nav_icon_select_color">#1F2388</color>
+    <!--
+        <color name="bottom_nav_icon_unselect_color">#BDB9B9</color>
+    -->
 </resources>

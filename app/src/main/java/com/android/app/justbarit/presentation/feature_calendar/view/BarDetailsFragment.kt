@@ -18,7 +18,6 @@ import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.common.SharedViewModel
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
-import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 import com.android.app.justbarit.presentation.common.ext.loadImageWithImageId
 import com.android.app.justbarit.presentation.common.ext.popBackStack
 import com.android.app.justbarit.presentation.common.ext.showProgress
@@ -26,14 +25,14 @@ import com.android.app.justbarit.presentation.common.ext.showSnackBar
 import com.android.app.justbarit.presentation.dashboard.DashboardScreen
 import com.android.app.justbarit.presentation.feature_calendar.adapter.EventAdapter
 import com.android.app.justbarit.presentation.feature_calendar.adapter.ReviewAdapter
-import com.android.app.justbarit.presentation.feature_calendar.viewmodel.CalendarDetailsViewModel
+import com.android.app.justbarit.presentation.feature_calendar.viewmodel.BarDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class CalendarDetailsFragment : Fragment() {
+class BarDetailsFragment : Fragment() {
     private lateinit var binding: FragmentCalendarDetailsBinding
-    private val viewModel: CalendarDetailsViewModel by viewModels()
+    private val viewModel: BarDetailsViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var eventAdapter: EventAdapter
     private lateinit var reviewAdapter: ReviewAdapter
@@ -65,6 +64,20 @@ class CalendarDetailsFragment : Fragment() {
             sharedViewModel.getSelectedBar()?.apply {
                 binding.eventCoverImageView.loadImageWithImageId(imageId)
                 binding.barNameTextView.text = barName
+                binding.barRatingTextView.text = barRating.toString()
+                val review = if (reviewCount > 0) {
+                    "(${reviewCount})"
+                } else {
+                    "(No Reviews)"
+                }
+                binding.barReviewCountTextView.text = review
+                var distanceStr = "Bar Restaurant - {DIS} from city center"
+                distanceStr = distanceStr.replace("{DIS}", distance.toString())
+                binding.barDistanceTextView.text = distanceStr
+                val des = StringBuilder("Meeting place for historic rebels, this brass-filled, lantern-lit pub ")
+                des.append(viewModel.prepareBarDescription(this))
+                binding.barDescTextView.text = des
+
             }
         }
     }
@@ -193,7 +206,7 @@ class CalendarDetailsFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            CalendarDetailsFragment().apply {
+            BarDetailsFragment().apply {
                 arguments = Bundle().apply {
 
                 }

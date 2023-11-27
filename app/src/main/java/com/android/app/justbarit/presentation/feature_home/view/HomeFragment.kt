@@ -77,7 +77,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private fun initHomeEvents() {
         homeEventAdapter = HomeEventAdapter(arrayListOf(), requireContext()).apply {
             homeEventClick = {
-                navigate(R.id.calendarDetailsFragment)
+                //navigate(R.id.calendarDetailsFragment)
             }
         }
         binding.homeEventListRecyclerView.adapter = homeEventAdapter
@@ -148,7 +148,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         val mMap = googleMap
 
-        val currentLocation = LatLng(33.5651107, 73.0169135)
+        val currentLocation = LatLng(53.34494,-6.2763738)
 
         val newCustomMarker: BitmapDescriptor =
             R.drawable.ic_pin_location.bitmapFromVector(requireContext())
@@ -157,7 +157,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             .draggable(true)
             .icon(newCustomMarker)
         // Add a marker in a specific location and move the camera
-        val location = LatLng(33.5651107, 73.0169135) // Example coordinates (San Francisco)
+        val location = LatLng(53.34494,-6.2763738)
         mMap.addMarker(markerOptions)
         //marker.showInfoWindow();
         val camera = CameraPosition.Builder()

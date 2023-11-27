@@ -30,11 +30,11 @@ class CategoryAdapter constructor(categories: ArrayList<Category>) :
         fun bind(category: Category) {
             binding.itemCategoryImageView.setImageResource(category.categoryRes)
             binding.itemCategoryTextView.text = category.categoryName
-            if (category.selected){
+            /*if (category.selected){
                 binding.itemCategoryLayout.setBackgroundResource(R.drawable.item_category_selected_background)
             }else{
-                binding.itemCategoryLayout.setBackgroundResource(R.drawable.item_category_background)
-            }
+            }*/
+            binding.itemCategoryLayout.setBackgroundResource(R.drawable.item_category_background)
             binding.itemCategoryLayout.clickToAction {
                 categoryClick(category)
             }

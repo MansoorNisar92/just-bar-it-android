@@ -18,7 +18,8 @@
             android:layout_weight="1"
             android:src="@drawable/wifi_icon"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/bedImageView"
@@ -27,7 +28,8 @@
             android:layout_weight="1"
             android:src="@drawable/bed"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/foodImageView"
@@ -36,7 +38,8 @@
             android:layout_weight="1"
             android:src="@drawable/food"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/danceImageView"
@@ -45,7 +48,8 @@
             android:layout_weight="1"
             android:src="@drawable/dance"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/drinksImageView"
@@ -54,7 +58,8 @@
             android:layout_weight="1"
             android:src="@drawable/copa"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/outsideAreaImageView"
@@ -63,7 +68,8 @@
             android:layout_weight="1"
             android:src="@drawable/outside_area"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/petFriendlyImageView"
@@ -72,7 +78,8 @@
             android:layout_weight="1"
             android:src="@drawable/pet_friendly"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/smokingImageView"
@@ -81,7 +88,8 @@
             android:layout_weight="1"
             android:src="@drawable/smoking"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/gameNightImageView"
@@ -90,7 +98,8 @@
             android:layout_weight="1"
             android:src="@drawable/game_night"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/liveMusicImageView"
@@ -99,7 +108,8 @@
             android:layout_weight="1"
             android:src="@drawable/icon_karaoke_blue"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/sportsImageView"
@@ -108,7 +118,8 @@
             android:layout_weight="1"
             android:src="@drawable/game_night"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"/>
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 </HorizontalScrollView>

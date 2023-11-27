@@ -39,7 +39,7 @@ fun Fragment.showSnackBar(
 ) =
     message?.let {
         view?.let {
-            val color = colorStateList(R.color.bottom_navigation_tab_color)
+            val color = colorStateList(R.color.nav_bar_color)
             val textColor = colorStateList(R.color.white)
             Snackbar.make(it, message, duration).apply {
                 setBackgroundTintList(color)

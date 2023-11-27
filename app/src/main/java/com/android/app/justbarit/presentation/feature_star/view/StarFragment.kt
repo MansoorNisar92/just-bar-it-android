@@ -43,7 +43,7 @@ class StarFragment : Fragment() {
     private fun initFavouritesEvents() {
         favouriteEventAdapter = HomeEventAdapter(arrayListOf(), requireContext()).apply {
             homeEventClick = {
-                navigate(R.id.calendarDetailsFragment)
+                //navigate(R.id.calendarDetailsFragment)
             }
         }
         binding.favouriteEventListRecyclerView.adapter = favouriteEventAdapter

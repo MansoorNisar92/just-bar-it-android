@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.feature_calendar.view.CalendarDetailsFragment">
+    tools:context=".presentation.feature_calendar.view.BarDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/navigateBackFromEventDetailsPage"
@@ -131,6 +131,20 @@
                 app:layout_constraintStart_toStartOf="@id/starIconImageView"
                 app:layout_constraintTop_toBottomOf="@id/starIconImageView" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/barDescTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/nunito_regular"
+                android:text="Pet friendly"
+                android:textSize="@dimen/_7sdp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/barDistanceTextView"
+                app:layout_constraintTop_toBottomOf="@id/barDistanceTextView" />
+
             <View
                 android:id="@+id/borderLine"
                 android:layout_width="match_parent"
@@ -140,8 +154,8 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/eventTodayCardColor"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/barDistanceTextView"
-                app:layout_constraintTop_toBottomOf="@+id/barDistanceTextView" />
+                app:layout_constraintStart_toStartOf="@id/barDescTextView"
+                app:layout_constraintTop_toBottomOf="@+id/barDescTextView" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/eventListTextView"

@@ -1,7 +1,7 @@
 package com.android.app.justbarit.domain.model
 
 data class Amenity(
-    var amenityProvided: Boolean?,
+    var amenityProvided: Boolean? = false,
     var amenityType: AmenityType
 )
 

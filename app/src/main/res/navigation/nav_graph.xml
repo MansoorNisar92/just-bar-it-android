@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/calendarDetailsFragment"
-        android:name="com.android.app.justbarit.presentation.feature_calendar.view.CalendarDetailsFragment"
+        android:name="com.android.app.justbarit.presentation.feature_calendar.view.BarDetailsFragment"
         android:label="CalendarDetailsFragment"
         tools:layout="@layout/fragment_calendar_details" />
 

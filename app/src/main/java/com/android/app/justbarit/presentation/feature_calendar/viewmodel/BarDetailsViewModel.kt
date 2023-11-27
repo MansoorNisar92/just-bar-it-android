@@ -3,9 +3,12 @@ package com.android.app.justbarit.presentation.feature_calendar.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.app.justbarit.R
+import com.android.app.justbarit.domain.model.AmenityType
+import com.android.app.justbarit.domain.model.Bar
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.domain.model.Review
 import com.android.app.justbarit.presentation.AppState
+import com.android.app.justbarit.presentation.common.ext.default
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CalendarDetailsViewModel @Inject constructor() : ViewModel() {
+class BarDetailsViewModel @Inject constructor() : ViewModel() {
     private val _events = MutableStateFlow<AppState>(AppState.Default)
     val events: Flow<AppState> get() = _events.asStateFlow()
 
@@ -61,5 +64,35 @@ class CalendarDetailsViewModel @Inject constructor() : ViewModel() {
             Review("Krystal", "Did not like the decor", 1.0f),
             Review("Solomon", "Drinks are good, too much noise", 2.0f),
         )
+    }
+
+    fun prepareBarDescription(bar: Bar): String {
+        var desc = StringBuilder()
+        bar.amenities.forEach {
+            if (it.amenityProvided.default) {
+                desc.append(hasAmenities(it.amenityType)).append(" - ")
+            }
+        }
+        var text = desc.toString().trimEnd()
+        if (text.endsWith("-")) {
+            text = text.dropLast(1).trimEnd()
+        }
+        return text
+    }
+
+    private fun hasAmenities(type: AmenityType): String {
+        val amenityMap = mapOf(
+            AmenityType.Wifi to "Wifi available",
+            AmenityType.Disco to "Has Disco",
+            AmenityType.Drinks to "Offer Drinks",
+            AmenityType.Food to "Has Food",
+            AmenityType.GameNight to "Game night",
+            AmenityType.LiveMusic to "Live music",
+            AmenityType.PetFriendly to "Pet friendly",
+            AmenityType.SmokingArea to "Smoking area",
+            AmenityType.Sports to "Sports",
+            AmenityType.TerraceRoofTop to "rooftop bar"
+        )
+        return amenityMap[type] ?: "Nothing"
     }
 }
