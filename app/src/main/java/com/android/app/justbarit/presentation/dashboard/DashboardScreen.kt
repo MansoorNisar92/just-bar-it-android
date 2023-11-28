@@ -57,8 +57,7 @@ class DashboardScreen : JustBarItBaseActivity() {
     }
 
     private fun navController(): NavController {
-        val navHost =
-            supportFragmentManager.findFragmentById(R.id.navHostFragmentView) as NavHostFragment
+        val navHost = supportFragmentManager.findFragmentById(R.id.navHostFragmentView) as NavHostFragment
         return navHost.navController
     }
 

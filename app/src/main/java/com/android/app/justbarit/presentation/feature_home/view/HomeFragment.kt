@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.FragmentHomeBinding
+import com.android.app.justbarit.domain.model.Bar
 import com.android.app.justbarit.domain.model.Category
 import com.android.app.justbarit.domain.model.Event
 import com.android.app.justbarit.domain.model.EventDetails
@@ -25,9 +26,11 @@ import com.android.app.justbarit.presentation.feature_home.viewmodel.HomeViewMod
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +41,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var categoryAdapter: CategoryAdapter
     private lateinit var homeEventAdapter: HomeEventAdapter
+    private var googleMap: GoogleMap? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,6 +66,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private fun initView() {
         initCategories()
         initHomeEvents()
+        viewModel.getCoordinates()
     }
 
     private fun initCategories() {
@@ -126,6 +131,27 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     }
                 }
             }
+
+            lifecycleScope.launchWhenCreated {
+                bars.collect {
+                    when (it) {
+                        is AppState.Loading -> {
+                            showProgress()
+                        }
+
+                        is AppState.Success<*> -> {
+                            hideProgress()
+                            extractCoordinatesAndDrawOnTheMap(it.response as ArrayList<Bar>)
+                        }
+
+                        is AppState.Failure<*> -> {
+                            hideProgress()
+                        }
+
+                        else -> {}
+                    }
+                }
+            }
         }
     }
 
@@ -145,28 +171,33 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        val mMap = googleMap
+    override fun onMapReady(mMap: GoogleMap) {
+        googleMap = mMap
+        googleMap?.mapType = GoogleMap.MAP_TYPE_TERRAIN
+    }
 
-        val currentLocation = LatLng(53.34494,-6.2763738)
+    private fun extractCoordinatesAndDrawOnTheMap(bars: ArrayList<Bar>) {
+        val newCustomMarker: BitmapDescriptor = R.drawable.ic_pin_location.bitmapFromVector(requireContext())
+        val coordinates = viewModel.extractCoordinates(bars)
 
-        val newCustomMarker: BitmapDescriptor =
-            R.drawable.ic_pin_location.bitmapFromVector(requireContext())
-        val markerOptions = MarkerOptions()
-            .position(currentLocation)
-            .draggable(true)
-            .icon(newCustomMarker)
-        // Add a marker in a specific location and move the camera
-        val location = LatLng(53.34494,-6.2763738)
-        mMap.addMarker(markerOptions)
-        //marker.showInfoWindow();
-        val camera = CameraPosition.Builder()
-            .target(currentLocation)
-            .zoom(14f) // limit -> 21
-            .bearing(0f) // 0 - 365º
-            //.tilt(30)           // limit -> 90
-            .build()
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camera))
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+        googleMap?.let { map ->
+            coordinates.forEach { (lat, lng) ->
+                val latLng = LatLng(lat, lng)
+                val markerOptions = MarkerOptions()
+                    .position(latLng)
+                    .draggable(false)
+                    .icon(newCustomMarker)
+
+                map.addMarker(markerOptions)
+            }
+            val builder = LatLngBounds.Builder()
+            coordinates.forEach { (lat, lng) ->
+                builder.include(LatLng(lat, lng))
+            }
+            val bounds = builder.build()
+            val padding = 50 // Padding in pixels
+            val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
+            map.animateCamera(cameraUpdate)
+        }
     }
 }

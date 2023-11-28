@@ -6,7 +6,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
     <application
         android:name=".JustBarItApplication"
         android:allowBackup="true"
@@ -19,6 +21,11 @@
         android:theme="@style/Theme.JustBarIt"
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAlCqvpgBX7O0jpr53oWUzQfoLtascz79Y" />
+
         <activity
             android:name=".presentation.splash.view.SplashScreen"
             android:exported="true">
@@ -31,10 +38,5 @@
 
         <activity android:name=".presentation.dashboard.DashboardScreen" android:exported="false"
             android:windowSoftInputMode="adjustPan"/>
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_api_key" />
     </application>
-
 </manifest>

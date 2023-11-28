@@ -3,12 +3,17 @@ package com.android.app.justbarit.presentation.feature_home.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.app.justbarit.R
+import com.android.app.justbarit.domain.model.Bar
 import com.android.app.justbarit.domain.model.Category
 import com.android.app.justbarit.domain.model.CategoryType
 import com.android.app.justbarit.domain.model.Event
 import com.android.app.justbarit.domain.model.EventDetails
+import com.android.app.justbarit.domain.model.convertRemoteBarToLocalBarsList
+import com.android.app.justbarit.domain.usecases.GetBarsFromLocalDatabaseUseCase
 import com.android.app.justbarit.presentation.AppState
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,12 +22,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(private val getBarsFromLocalDatabaseUseCase: GetBarsFromLocalDatabaseUseCase) : ViewModel() {
     private val _categories = MutableStateFlow<AppState>(AppState.Default)
     val categories: Flow<AppState> get() = _categories.asStateFlow()
 
     private val _eventsToday = MutableStateFlow<AppState>(AppState.Default)
     val eventsToday: Flow<AppState> get() = _eventsToday.asStateFlow()
+
+    private val _bars = MutableStateFlow<AppState>(AppState.Default)
+    val bars: Flow<AppState> get() = _bars.asStateFlow()
 
     fun getListOfCategories() {
         viewModelScope.launch {
@@ -69,5 +77,34 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                 eventImage = R.drawable.home_event_two
             )
         )
+    }
+
+
+    fun getCoordinates(){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val barsList = getBarsFromLocalDatabaseUseCase.invoke().convertRemoteBarToLocalBarsList()
+                _bars.emit(AppState.Success(barsList))
+            } catch (e: Exception) {
+                _bars.emit(AppState.Failure(e.message))
+            }
+        }
+
+    }
+
+    fun extractCoordinates(bars: ArrayList<Bar>): List<Pair<Double,Double>> {
+        val coordinates = arrayListOf<String?>()
+        bars.forEach {
+            coordinates.add(it.latLng)
+        }
+        return coordinates.mapNotNull { extractLatLng(it ?: "") }
+    }
+
+    private fun extractLatLng(str: String): Pair<Double, Double>? {
+        val regex = Regex("""\(([-+]?\d+\.\d+) ([-+]?\d+\.\d+)\)""")
+        val matchResult = regex.find(str)
+        return matchResult?.destructured?.let { (lat, lng) ->
+            lat.toDouble() to lng.toDouble()
+        }
     }
 }
