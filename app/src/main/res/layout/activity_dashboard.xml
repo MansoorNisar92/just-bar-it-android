@@ -26,25 +26,7 @@
                 app:navGraph="@navigation/nav_graph" />
         </FrameLayout>
 
-        <com.skydoves.androidbottombar.AndroidBottomBarView
-            android:id="@+id/testBottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
-            app:bottomBar_duration="300"
-            app:bottomBar_flavor="icon"
-            app:bottomBar_indicator_color="@color/nav_bar_color"
-            app:bottomBar_indicator_height="4dp"
-            app:bottomBar_indicator_padding="6dp"
-            app:bottomBar_indicator_radius="12dp"
-            app:bottomBar_indicator_visible="true"
-            app:bottomBar_menuAnimation="normal"
-            app:bottomBar_selectedIndex="0"
-            android:layout_marginTop="@dimen/_100sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/black"/>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomNavigationLayout"

@@ -7,16 +7,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <!-- <com.google.android.material.bottomnavigation.BottomNavigationView
+             android:id="@+id/bottomNavigation"
+             style="@style/CustomCardViewStyle"
+             android:layout_width="0dp"
+             android:layout_height="@dimen/_50sdp"
+             android:background="@drawable/bottom_bar_gradient"
+             app:itemIconTint="@drawable/bottom_navigation_selector_tint"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:menu="@menu/main_menu" />-->
+
+        <com.android.app.justbarit.presentation.common.customviews.bottomnavigation.AndroidBottomBarView
             android:id="@+id/bottomNavigation"
-            style="@style/CustomCardViewStyle"
             android:layout_width="0dp"
             android:layout_height="@dimen/_50sdp"
-            android:background="@drawable/bottom_bar_gradient"
-            app:itemIconTint="@drawable/bottom_navigation_selector_tint"
+            android:background="@color/white"
+            app:bottomBar_duration="300"
+            app:bottomBar_flavor="icon"
+            app:bottomBar_indicator_color="@color/nav_bar_color"
+            app:bottomBar_indicator_height="4dp"
+            app:bottomBar_indicator_padding="6dp"
+            app:bottomBar_indicator_radius="12dp"
+            app:bottomBar_indicator_visible="true"
+            app:bottomBar_menuAnimation="normal"
+            app:bottomBar_selectedIndex="0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/main_menu" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

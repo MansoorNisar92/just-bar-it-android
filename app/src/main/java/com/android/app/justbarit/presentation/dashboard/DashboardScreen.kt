@@ -1,10 +1,9 @@
 package com.android.app.justbarit.presentation.dashboard
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.annotation.IdRes
-import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
@@ -13,106 +12,39 @@ import androidx.navigation.fragment.findNavController
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.ActivityDashboardBinding
 import com.android.app.justbarit.presentation.base.JustBarItBaseActivity
-import com.android.app.justbarit.presentation.common.ext.scaleUpAnimation
-import com.skydoves.androidbottombar.BottomMenuItem
-import com.skydoves.androidbottombar.forms.iconForm
+import com.android.app.justbarit.presentation.common.customviews.bottomnavigation.OnMenuItemSelectedListener
+import com.android.app.justbarit.presentation.dashboard.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class DashboardScreen : JustBarItBaseActivity() {
     private lateinit var binding: ActivityDashboardBinding
+    private val viewModel: DashboardViewModel by viewModels()
     private var isNavigatingFromNav = false
     private var destinationChangeListener: NavController.OnDestinationChangedListener? = null
-
+    private var currentSelectedItem = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setNavGraph()
-        binding.includedBottomNavigationLayout.bottomNavigation.apply {
-            setOnItemSelectedListener {
-                onBottomNavItemClicked(it)
-                true
+        binding.includedBottomNavigationLayout.bottomNavigation.addBottomMenuItems(
+            viewModel.navigationItems(
+                this
+            )
+        )
+        binding.includedBottomNavigationLayout.bottomNavigation.onMenuItemSelectedListener =
+            OnMenuItemSelectedListener { index, _, _ ->
+                onBottomNavItemClicked(index)
             }
-        }
 
-        destinationChangeListener = NavController.OnDestinationChangedListener { _, destination, _ ->
-            handleDestinationChanged(destination)
-        }
+        destinationChangeListener =
+            NavController.OnDestinationChangedListener { _, destination, _ ->
+                handleDestinationChanged(destination)
+            }
 
         navController().addOnDestinationChangedListener(destinationChangeListener!!)
-
-        val list = mutableListOf<BottomMenuItem>()
-
-        // we can create the form using kotlin dsl.
-        val iconHome = iconForm(this) {
-            setIcon(R.drawable.home_icon_selected)
-            setIconColorRes(R.color.bottom_nav_icon_unselect_color) // sets the [Drawable] of the icon using resource.
-            setIconSize(24) // sets the size of the icon.
-        }
-
-        val iconCalendar = iconForm(this) {
-            setIcon(R.drawable.calendar_icon_selected)
-            setIconColorRes(R.color.bottom_nav_icon_unselect_color) // sets the [Drawable] of the icon using resource.
-            setIconSize(24) // sets the size of the icon.
-        }
-
-        val iconSearch = iconForm(this) {
-            setIcon(R.drawable.search_icon)
-            setIconColorRes(R.color.bottom_nav_icon_unselect_color) // sets the [Drawable] of the icon using resource.
-            setIconSize(24) // sets the size of the icon.
-        }
-
-        val iconStar = iconForm(this) {
-            setIcon(R.drawable.star_icon_selected)
-            setIconColorRes(R.color.bottom_nav_icon_unselect_color) // sets the [Drawable] of the icon using resource.
-            setIconSize(24) // sets the size of the icon.
-        }
-
-        val iconProfile = iconForm(this) {
-            setIcon(R.drawable.profile_icon_selected)
-            setIconColorRes(R.color.bottom_nav_icon_unselect_color) // sets the [Drawable] of the icon using resource.
-            setIconSize(24) // sets the size of the icon.
-        }
-
-
-
-        val home = BottomMenuItem(this)
-            .setIconForm(iconHome)
-            .setIcon(R.drawable.home_icon)
-            .setIconActiveColor(ContextCompat.getColor(this,R.color.nav_bar_color))
-            .build()
-
-        val calendar = BottomMenuItem(this)
-            .setIconForm(iconCalendar)
-            .setIcon(R.drawable.calendar_icon)
-            .setIconActiveColor(ContextCompat.getColor(this,R.color.nav_bar_color))
-            .build()
-
-        val search = BottomMenuItem(this)
-            .setIconForm(iconSearch)
-            .setIcon(R.drawable.search_icon_bottom_nav)
-            .setIconActiveColor(ContextCompat.getColor(this,R.color.nav_bar_color))
-            .build()
-
-        val star = BottomMenuItem(this)
-            .setIconForm(iconStar)
-            .setIcon(R.drawable.star_icon)
-            .setIconActiveColor(ContextCompat.getColor(this,R.color.nav_bar_color))
-            .build()
-
-        val profile = BottomMenuItem(this)
-            .setIconForm(iconProfile)
-            .setIcon(R.drawable.profile_icon)
-            .setIconActiveColor(ContextCompat.getColor(this,R.color.nav_bar_color))
-            .build()
-        list.add(home)
-        list.add(calendar)
-        list.add(search)
-        list.add(star)
-        list.add(profile)
-        binding.testBottomBar.addBottomMenuItems(list)
     }
 
 
@@ -130,29 +62,26 @@ class DashboardScreen : JustBarItBaseActivity() {
         return navHost.navController
     }
 
-    private fun onBottomNavItemClicked(item: MenuItem) {
-        val iconView =
-            binding.includedBottomNavigationLayout.bottomNavigation.findViewById<View>(item.itemId)
-        iconView.scaleUpAnimation()
-        //updateSearchIconCircle()
-        when (item.itemId) {
-            R.id.action_home -> {
+    private fun onBottomNavItemClicked(item: Int) {
+        when (item) {
+            0 -> {
                 navigate(R.id.homeFragment)
             }
 
-            R.id.action_calendar -> {
+            1 -> {
                 navigate(R.id.calendarFragment)
             }
 
-            R.id.action_star -> {
+            2 -> {
+                navigate(R.id.searchFragment)
+            }
+
+            3 -> {
                 navigate(R.id.starFragment)
             }
 
-            R.id.action_profile -> {
+            4 -> {
                 navigate(R.id.profileFragment)
-            }
-            R.id.action_search -> {
-                navigate(R.id.searchFragment)
             }
         }
     }
@@ -172,37 +101,39 @@ class DashboardScreen : JustBarItBaseActivity() {
 
 
     override fun onBackPressed() {
-        // Assuming you have a NavHostFragment in your layout with ID nav_host_fragment
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_graph)
         val navController = navHostFragment?.findNavController()
 
         if (navController?.popBackStack() != true) {
             super.onBackPressed()
         }
+        binding.includedBottomNavigationLayout.bottomNavigation.reRenderBottomNavigation(
+            currentSelectedItem
+        )
     }
+
     private fun handleDestinationChanged(destination: NavDestination) {
         if (!isNavigatingFromNav) {
             isNavigatingFromNav = true
             when (destination.id) {
                 R.id.homeFragment -> {
-                    if (binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId != R.id.action_home) {
-                        binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId = R.id.action_home
-                    }
+                    currentSelectedItem = 0
                 }
+
                 R.id.calendarFragment -> {
-                    if (binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId != R.id.action_calendar) {
-                        binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId = R.id.action_calendar
-                    }
+                    currentSelectedItem = 1
                 }
+
+                R.id.searchFragment -> {
+                    currentSelectedItem = 2
+                }
+
                 R.id.starFragment -> {
-                    if (binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId != R.id.action_star) {
-                        binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId = R.id.action_star
-                    }
+                    currentSelectedItem = 3
                 }
+
                 R.id.profileFragment -> {
-                    if (binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId != R.id.action_profile) {
-                        binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId = R.id.action_profile
-                    }
+                    currentSelectedItem = 4
                 }
             }
             isNavigatingFromNav = false
@@ -215,18 +146,19 @@ class DashboardScreen : JustBarItBaseActivity() {
 
     }
 
-    fun showBottomNavigation(){
+    fun showBottomNavigation() {
         renderNavigation()
     }
 
-    fun hideBottomNavigation(){
+    fun hideBottomNavigation() {
         hideNavigation()
     }
-    private fun renderNavigation(){
+
+    private fun renderNavigation() {
         binding.includedBottomNavigationLayout.bottomNavigation.visibility = View.VISIBLE
     }
 
-    private fun hideNavigation(){
+    private fun hideNavigation() {
         binding.includedBottomNavigationLayout.bottomNavigation.visibility = View.GONE
     }
 }
