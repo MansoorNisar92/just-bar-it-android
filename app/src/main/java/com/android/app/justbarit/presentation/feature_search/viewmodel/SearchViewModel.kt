@@ -32,16 +32,4 @@ class SearchViewModel @Inject constructor(private val getBarsFromLocalDatabaseUs
         }
 
     }
-
-    private fun getHardCodeBars(): ArrayList<Bar> {
-        return arrayListOf(
-            Bar(barName = "The Brazen Head", barRating = 10.0, distance = 10.0, hasDineIn = true, hasBedRoom = true, hasDrink = true, hasWifi = true, hasDance = true, hasFreeEntry = true, reviewCount = 1000),
-            Bar(barName = "The Temple Bar Pub", barRating = 6.0, distance = 4.0, hasDineIn = true, hasWifi = true, hasFreeEntry = true),
-            Bar(barName = "Bar Rua", barRating = 5.0, distance = 4.0, hasWifi = true, hasDrink = true),
-            Bar(barName = "The Long Hall", barRating = 7.0, distance = 2.0,  hasWifi = true, hasDance = true),
-            Bar(barName = "Porterhouse Temple Bar", barRating = 8.0, distance = 5.0, hasDineIn = true, hasDrink = true, reviewCount = 40),
-            Bar(barName = "O'Donoghues Bar", barRating = 4.0, distance = 1.0, hasFreeEntry = true, hasDance = true, reviewCount = 100),
-            Bar(barName = "P. Duggan's", barRating = 6.0, distance = 3.0, hasDineIn = true, hasWifi = true, hasBedRoom = true, hasDance = true, hasFreeEntry = true, reviewCount = 5000),
-        )
-    }
 }

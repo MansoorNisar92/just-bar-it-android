@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/_10sdp"
     android:animateLayoutChanges="true"
-    tools:context=".presentation.feature_home.view.HomeFragment">
+    tools:context=".presentation.feature_search.view.SearchFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/searchBarLayout"
