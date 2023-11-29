@@ -32,6 +32,12 @@ class HomeViewModel @Inject constructor(private val getBarsFromLocalDatabaseUseC
     private val _bars = MutableStateFlow<AppState>(AppState.Default)
     val bars: Flow<AppState> get() = _bars.asStateFlow()
 
+    private var _coordinates = listOf<Pair<Double,Double>>()
+    private var coordinates = _coordinates
+    init {
+        getCoordinates()
+    }
+
     fun getListOfCategories() {
         viewModelScope.launch {
             _categories.emit(AppState.Loading)
@@ -80,11 +86,12 @@ class HomeViewModel @Inject constructor(private val getBarsFromLocalDatabaseUseC
     }
 
 
-    fun getCoordinates(){
+    private fun getCoordinates(){
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val barsList = getBarsFromLocalDatabaseUseCase.invoke().convertRemoteBarToLocalBarsList()
-                _bars.emit(AppState.Success(barsList))
+                _coordinates = extractCoordinates(barsList)
+                _bars.emit(AppState.Success(_coordinates))
             } catch (e: Exception) {
                 _bars.emit(AppState.Failure(e.message))
             }
@@ -92,7 +99,7 @@ class HomeViewModel @Inject constructor(private val getBarsFromLocalDatabaseUseC
 
     }
 
-    fun extractCoordinates(bars: ArrayList<Bar>): List<Pair<Double,Double>> {
+    private fun extractCoordinates(bars: List<Bar>): List<Pair<Double,Double>> {
         val coordinates = arrayListOf<String?>()
         bars.forEach {
             coordinates.add(it.latLng)
@@ -107,4 +114,6 @@ class HomeViewModel @Inject constructor(private val getBarsFromLocalDatabaseUseC
             lat.toDouble() to lng.toDouble()
         }
     }
+
+    fun fetchCoordinates() = coordinates
 }

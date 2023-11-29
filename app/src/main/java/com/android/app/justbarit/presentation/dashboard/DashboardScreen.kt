@@ -44,21 +44,24 @@ class DashboardScreen : JustBarItBaseActivity() {
                 handleDestinationChanged(destination)
             }
 
-        navController().addOnDestinationChangedListener(destinationChangeListener!!)
+        navController()?.addOnDestinationChangedListener(destinationChangeListener!!)
     }
 
 
     private fun setNavGraph() {
-        navController().apply {
+        navController()?.apply {
             graph = navInflater.inflate(R.navigation.nav_graph).apply {
                 setStartDestination(R.id.homeFragment)
             }
         }
     }
 
-    private fun navController(): NavController {
-        val navHost = supportFragmentManager.findFragmentById(R.id.navHostFragmentView) as NavHostFragment
-        return navHost.navController
+    private fun navController(): NavController? {
+        if (supportFragmentManager.findFragmentById(R.id.navHostFragmentView) != null){
+            val navHost = supportFragmentManager.findFragmentById(R.id.navHostFragmentView) as NavHostFragment
+            return navHost.navController
+        }
+        return null
     }
 
     private fun onBottomNavItemClicked(item: Int) {
@@ -87,7 +90,7 @@ class DashboardScreen : JustBarItBaseActivity() {
 
     private fun navigate(@IdRes id: Int) {
         val navOptions = navOptions(id)
-        navController().navigate(id, null, navOptions = navOptions)
+        navController()?.navigate(id, null, navOptions = navOptions)
     }
 
     private fun navOptions(destination: Int) = NavOptions.Builder()
@@ -141,7 +144,7 @@ class DashboardScreen : JustBarItBaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        navController().removeOnDestinationChangedListener(destinationChangeListener!!)
+        navController()?.removeOnDestinationChangedListener(destinationChangeListener!!)
 
     }
 

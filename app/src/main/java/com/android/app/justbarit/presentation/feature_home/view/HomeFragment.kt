@@ -66,7 +66,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private fun initView() {
         initCategories()
         initHomeEvents()
-        viewModel.getCoordinates()
+        //viewModel.getCoordinates()
     }
 
     private fun initCategories() {
@@ -141,7 +141,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
                         is AppState.Success<*> -> {
                             hideProgress()
-                            extractCoordinatesAndDrawOnTheMap(it.response as ArrayList<Bar>)
+                            extractCoordinatesAndDrawOnTheMap(it.response as ArrayList<Pair<Double, Double>>)
                         }
 
                         is AppState.Failure<*> -> {
@@ -174,30 +174,33 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(mMap: GoogleMap) {
         googleMap = mMap
         googleMap?.mapType = GoogleMap.MAP_TYPE_TERRAIN
+        extractCoordinatesAndDrawOnTheMap(viewModel.fetchCoordinates())
     }
 
-    private fun extractCoordinatesAndDrawOnTheMap(bars: ArrayList<Bar>) {
-        val newCustomMarker: BitmapDescriptor = R.drawable.ic_pin_location.bitmapFromVector(requireContext())
-        val coordinates = viewModel.extractCoordinates(bars)
+    private fun extractCoordinatesAndDrawOnTheMap(coordinates: List<Pair<Double, Double>>) {
+        val newCustomMarker: BitmapDescriptor =
+            R.drawable.ic_pin_location.bitmapFromVector(requireContext())
 
         googleMap?.let { map ->
-            coordinates.forEach { (lat, lng) ->
-                val latLng = LatLng(lat, lng)
-                val markerOptions = MarkerOptions()
-                    .position(latLng)
-                    .draggable(false)
-                    .icon(newCustomMarker)
+            if (coordinates.isNotEmpty()) {
+                coordinates.forEach { (lat, lng) ->
+                    val latLng = LatLng(lat, lng)
+                    val markerOptions = MarkerOptions()
+                        .position(latLng)
+                        .draggable(false)
+                        .icon(newCustomMarker)
 
-                map.addMarker(markerOptions)
+                    map.addMarker(markerOptions)
+                }
+                val builder = LatLngBounds.Builder()
+                coordinates.forEach { (lat, lng) ->
+                    builder.include(LatLng(lat, lng))
+                }
+                val bounds = builder.build()
+                val padding = 50
+                val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
+                map.animateCamera(cameraUpdate)
             }
-            val builder = LatLngBounds.Builder()
-            coordinates.forEach { (lat, lng) ->
-                builder.include(LatLng(lat, lng))
-            }
-            val bounds = builder.build()
-            val padding = 50 // Padding in pixels
-            val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
-            map.animateCamera(cameraUpdate)
         }
     }
 }
