@@ -82,10 +82,10 @@ class BarDetailsViewModel @Inject constructor() : ViewModel() {
 
     private fun hasAmenities(type: AmenityType): String {
         val amenityMap = mapOf(
-            AmenityType.Wifi to "Wifi available",
-            AmenityType.Disco to "Has Disco",
-            AmenityType.Drinks to "Offer Drinks",
-            AmenityType.Food to "Has Food",
+            AmenityType.Wifi to "Wifi",
+            AmenityType.Disco to "Disco",
+            AmenityType.Drinks to "Drinks",
+            AmenityType.Food to "Food",
             AmenityType.GameNight to "Game night",
             AmenityType.LiveMusic to "Live music",
             AmenityType.PetFriendly to "Pet friendly",
