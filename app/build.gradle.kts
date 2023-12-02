@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     id("org.jetbrains.kotlin.kapt")
-    id("com.google.gms.google-services")
 }
 
 android {
@@ -75,9 +74,7 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
-    
-
-    implementation("com.google.firebase:firebase-database-ktx:20.3.0")
+    implementation("com.google.code.gson:gson:2.9.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

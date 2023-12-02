@@ -3,11 +3,10 @@ package com.android.app.justbarit.presentation.splash.view
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.android.app.justbarit.data.remote.entity.Meta
+import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.ActivitySplashBinding
 import com.android.app.justbarit.presentation.AppState
 import com.android.app.justbarit.presentation.base.JustBarItBaseActivity
-import com.android.app.justbarit.presentation.common.ext.default
 import com.android.app.justbarit.presentation.common.ext.navigate
 import com.android.app.justbarit.presentation.dashboard.DashboardScreen
 import com.android.app.justbarit.presentation.splash.viewmodel.SplashViewModel
@@ -23,7 +22,7 @@ class SplashScreen : JustBarItBaseActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         observe()
-        splashViewModel.shouldFetchFromRemote()
+        splashViewModel.fetchBars(this, R.raw.justbarit_android_data)
     }
 
     private fun observe() {
@@ -44,32 +43,8 @@ class SplashScreen : JustBarItBaseActivity() {
                 }
             }
 
-            lifecycleScope.launchWhenCreated {
-                meta.collect {
-                    when (it) {
-                        is AppState.Success<*> -> {
-                            decideShouldShowDatOrShutdown(it.response as Meta)
-                        }
-
-                        is AppState.Failure<*> -> {
-                            //
-                        }
-
-                        else -> {}
-                    }
-                }
-            }
         }
     }
-
-    private fun decideShouldShowDatOrShutdown(meta: Meta) {
-        if (meta.flushDB.default){
-            splashViewModel.flushDatabaseAndStall()
-        }else{
-            splashViewModel.fetchBarsFromRemote()
-        }
-    }
-
     private fun navigateToDashBoard() {
         navigate<DashboardScreen>()
         finish()
