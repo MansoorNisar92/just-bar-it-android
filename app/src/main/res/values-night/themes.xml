@@ -1,7 +1,7 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.JustBarIt" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/nav_bar_color</item>
+        <item name="android:statusBarColor">@color/top_bar_color</item>
 
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
@@ -19,8 +19,19 @@
         <item name="itemActiveIndicatorStyle">@style/itemActiveIndicatorStyle</item>
     </style>
 
-    <style name="itemActiveIndicatorStyle" parent="Widget.Material3.NavigationRailView.ActiveIndicator">
+    <style name="itemActiveIndicatorStyle" parent="xxxxxx">
         <item name="android:color">@color/bottom_navigation_tab_color</item>
+        <item name="android:animation">@anim/scale_up</item>
+    </style>
+
+    <style name="xxxxxx" parent="Widget.Material3.NavigationRailView.ActiveIndicator">
+        <item name="android:width">@dimen/_25sdp</item>
+        <item name="android:height">@dimen/_25sdp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.M3.Comp.NavigationRail.ActiveIndicator.Shape</item>
+    </style>
+
+    <style name="itemActiveIndicatorStyleTransparent" parent="Widget.Material3.NavigationRailView.ActiveIndicator">
+        <item name="android:color">@android:color/transparent</item>
         <item name="android:animation">@anim/scale_up</item>
     </style>
 
@@ -30,6 +41,20 @@
         <item name="cornerSizeTopLeft">@dimen/_20sdp</item>
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
 
+    <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
+        <item name="android:minHeight">30dp</item>
+        <item name="android:maxHeight">30dp</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Material3.DayNight.BottomSheetDialog">
+        <item name="android:windowAnimationStyle">@style/SlideUpSlideDownAnimation</item>
+    </style>
+
+    <style name="SlideUpSlideDownAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_bottom_to_top_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_top_to_bottom_out</item>
     </style>
 </resources>

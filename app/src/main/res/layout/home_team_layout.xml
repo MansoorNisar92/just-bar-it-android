@@ -11,7 +11,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/lexend_bold"
+            android:fontFamily="@font/nunito_bold"
             android:maxLines="1"
             android:text="Newcastle"
             android:textColor="@color/black"

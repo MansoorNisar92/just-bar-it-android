@@ -1,14 +1,14 @@
 package com.android.app.justbarit.domain.model
 
 data class EventDetails(
-    var eventName: String,
-    var eventDate: String,
-    var evenTime: String,
-    var homeTeam: Team,
-    var awayTeam: Team
-)
-
-data class Team(
-    var teamName: String,
-    var teamBadge: Int
+    var title: String? = null,
+    var date: String? = null,
+    var location: String? = null,
+    var going: String? = null,
+    var price: String? = null,
+    var eventImage: Int? = 0,
+    var canChat: Boolean? = false,
+    var markedFavourite: Boolean? = false,
+    var almostFull: Boolean? = false,
+    var salesEndSoon: Boolean? = false
 )

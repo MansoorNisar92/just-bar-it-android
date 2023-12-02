@@ -1,13 +1,9 @@
 package com.android.app.justbarit.presentation.dashboard
 
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
+import androidx.activity.viewModels
 import androidx.annotation.IdRes
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
@@ -16,79 +12,77 @@ import androidx.navigation.fragment.findNavController
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.ActivityDashboardBinding
 import com.android.app.justbarit.presentation.base.JustBarItBaseActivity
-import com.android.app.justbarit.presentation.common.ext.clickToAction
-import com.android.app.justbarit.presentation.common.ext.scaleUpAnimation
+import com.android.app.justbarit.presentation.common.customviews.bottomnavigation.OnMenuItemSelectedListener
+import com.android.app.justbarit.presentation.dashboard.viewmodel.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class DashboardScreen : JustBarItBaseActivity() {
     private lateinit var binding: ActivityDashboardBinding
+    private val viewModel: DashboardViewModel by viewModels()
     private var isNavigatingFromNav = false
     private var destinationChangeListener: NavController.OnDestinationChangedListener? = null
-
+    private var currentSelectedItem = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setNavGraph()
-        attachListeners()
-        updateSearchIconCircle()
-        binding.includedBottomNavigationLayout.bottomNavigation.apply {
-            setOnItemSelectedListener {
-                onBottomNavItemClicked(it)
-                true
+        binding.includedBottomNavigationLayout.bottomNavigation.addBottomMenuItems(
+            viewModel.navigationItems(
+                this
+            )
+        )
+        binding.includedBottomNavigationLayout.bottomNavigation.onMenuItemSelectedListener =
+            OnMenuItemSelectedListener { index, _, _ ->
+                onBottomNavItemClicked(index)
             }
-        }
 
-        destinationChangeListener = NavController.OnDestinationChangedListener { _, destination, _ ->
-            handleDestinationChanged(destination)
-        }
+        destinationChangeListener =
+            NavController.OnDestinationChangedListener { _, destination, _ ->
+                handleDestinationChanged(destination)
+            }
 
-        navController().addOnDestinationChangedListener(destinationChangeListener!!)
+        navController()?.addOnDestinationChangedListener(destinationChangeListener!!)
     }
 
-    private fun attachListeners() {
-        binding.apply {
-            searchButton.clickToAction {
-                adjustViewAppearanceBeforeNavigateSearch()
-            }
-        }
-    }
 
     private fun setNavGraph() {
-        navController().apply {
+        navController()?.apply {
             graph = navInflater.inflate(R.navigation.nav_graph).apply {
                 setStartDestination(R.id.homeFragment)
             }
         }
     }
 
-    private fun navController(): NavController {
-        val navHost =
-            supportFragmentManager.findFragmentById(R.id.navHostFragmentView) as NavHostFragment
-        return navHost.navController
+    private fun navController(): NavController? {
+        if (supportFragmentManager.findFragmentById(R.id.navHostFragmentView) != null){
+            val navHost = supportFragmentManager.findFragmentById(R.id.navHostFragmentView) as NavHostFragment
+            return navHost.navController
+        }
+        return null
     }
 
-    private fun onBottomNavItemClicked(item: MenuItem) {
-        val iconView =
-            binding.includedBottomNavigationLayout.bottomNavigation.findViewById<View>(item.itemId)
-        iconView.scaleUpAnimation()
-        updateSearchIconCircle()
-        when (item.itemId) {
-            R.id.action_home -> {
+    private fun onBottomNavItemClicked(item: Int) {
+        when (item) {
+            0 -> {
                 navigate(R.id.homeFragment)
             }
 
-            R.id.action_calendar -> {
+            1 -> {
                 navigate(R.id.calendarFragment)
             }
 
-            R.id.action_star -> {
+            2 -> {
+                navigate(R.id.searchFragment)
+            }
+
+            3 -> {
                 navigate(R.id.starFragment)
             }
 
-            R.id.action_profile -> {
+            4 -> {
                 navigate(R.id.profileFragment)
             }
         }
@@ -96,7 +90,7 @@ class DashboardScreen : JustBarItBaseActivity() {
 
     private fun navigate(@IdRes id: Int) {
         val navOptions = navOptions(id)
-        navController().navigate(id, null, navOptions = navOptions)
+        navController()?.navigate(id, null, navOptions = navOptions)
     }
 
     private fun navOptions(destination: Int) = NavOptions.Builder()
@@ -107,59 +101,41 @@ class DashboardScreen : JustBarItBaseActivity() {
         .setPopUpTo(destination, true)
         .build()
 
-    private fun adjustViewAppearanceBeforeNavigateSearch() {
-        binding.apply {
-            includedBottomNavigationLayout.bottomNavigation.menu.findItem(R.id.action_fake).isChecked =
-                true
-            searchIconCardView.scaleUpAnimation()
-            updateSearchIconCircle(
-                R.drawable.bottom_nav_search_icon_background_selected,
-                R.drawable.search_icon_white
-            )
-        }
-        navigate(R.id.searchFragment)
-    }
-
-    private fun updateSearchIconCircle(
-        background: Int = R.drawable.bottom_nav_search_icon_white_background,
-        icon: Int = R.drawable.search_icon
-    ) {
-        binding.searchIconCardView.setBackgroundResource(background)
-        binding.searchButton.setImageDrawable(AppCompatResources.getDrawable(this, icon))
-    }
 
     override fun onBackPressed() {
-        // Assuming you have a NavHostFragment in your layout with ID nav_host_fragment
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_graph)
         val navController = navHostFragment?.findNavController()
 
         if (navController?.popBackStack() != true) {
             super.onBackPressed()
         }
+        binding.includedBottomNavigationLayout.bottomNavigation.reRenderBottomNavigation(
+            currentSelectedItem
+        )
     }
+
     private fun handleDestinationChanged(destination: NavDestination) {
         if (!isNavigatingFromNav) {
             isNavigatingFromNav = true
             when (destination.id) {
                 R.id.homeFragment -> {
-                    if (binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId != R.id.action_home) {
-                        binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId = R.id.action_home
-                    }
+                    currentSelectedItem = 0
                 }
+
                 R.id.calendarFragment -> {
-                    if (binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId != R.id.action_calendar) {
-                        binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId = R.id.action_calendar
-                    }
+                    currentSelectedItem = 1
                 }
+
+                R.id.searchFragment -> {
+                    currentSelectedItem = 2
+                }
+
                 R.id.starFragment -> {
-                    if (binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId != R.id.action_star) {
-                        binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId = R.id.action_star
-                    }
+                    currentSelectedItem = 3
                 }
+
                 R.id.profileFragment -> {
-                    if (binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId != R.id.action_profile) {
-                        binding?.includedBottomNavigationLayout?.bottomNavigation?.selectedItemId = R.id.action_profile
-                    }
+                    currentSelectedItem = 4
                 }
             }
             isNavigatingFromNav = false
@@ -168,24 +144,23 @@ class DashboardScreen : JustBarItBaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        navController().removeOnDestinationChangedListener(destinationChangeListener!!)
+        navController()?.removeOnDestinationChangedListener(destinationChangeListener!!)
 
     }
 
-    fun showBottomNavigation(){
+    fun showBottomNavigation() {
         renderNavigation()
     }
 
-    fun hideBottomNavigation(){
+    fun hideBottomNavigation() {
         hideNavigation()
     }
-    private fun renderNavigation(){
+
+    private fun renderNavigation() {
         binding.includedBottomNavigationLayout.bottomNavigation.visibility = View.VISIBLE
-        binding.searchIconCardView.visibility = View.VISIBLE
     }
 
-    private fun hideNavigation(){
+    private fun hideNavigation() {
         binding.includedBottomNavigationLayout.bottomNavigation.visibility = View.GONE
-        binding.searchIconCardView.visibility = View.GONE
     }
 }

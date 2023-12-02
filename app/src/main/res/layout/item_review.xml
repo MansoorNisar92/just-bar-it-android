@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="Mansoor Nisar"
                 android:textSize="@dimen/_13sdp"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/nunito_bold"
                 android:textColor="@color/white"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"/>
@@ -49,7 +49,7 @@
                 android:textSize="@dimen/_10sdp"
                 android:maxLines="4"
                 android:ellipsize="end"
-                android:fontFamily="@font/lexend_regular"
+                android:fontFamily="@font/nunito_regular"
                 android:textColor="@color/white"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginStart="@dimen/_10sdp"

@@ -74,9 +74,9 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.14.2")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 
+    implementation("de.hdodenhof:circleimageview:3.1.0")
     
 
-    //implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
     implementation("com.google.firebase:firebase-database-ktx:20.3.0")
 
     testImplementation("junit:junit:4.13.2")

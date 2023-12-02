@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.feature_calendar.view.CalendarDetailsFragment">
+    tools:context=".presentation.feature_calendar.view.BarDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/navigateBackFromEventDetailsPage"
@@ -48,7 +48,7 @@
                 android:id="@+id/giveRatingImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_8sdp"
                 android:src="@drawable/star_icon_black" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -66,7 +66,8 @@
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:ellipsize="end"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/nunito_bold"
+                android:textStyle="bold"
                 android:maxLines="1"
                 android:text="The Brazen Head"
                 android:textSize="@dimen/_16sdp"
@@ -87,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_2sdp"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/nunito_bold"
                 android:text="9.2"
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintStart_toEndOf="@id/starIconImageView"
@@ -99,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_4sdp"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:fontFamily="@font/lexend_regular"
+                android:fontFamily="@font/nunito_regular"
                 android:text="Excellent"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintStart_toEndOf="@id/barRatingTextView"
@@ -111,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_4sdp"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:fontFamily="@font/lexend_regular"
+                android:fontFamily="@font/nunito_regular"
                 android:text="(2298)"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintStart_toEndOf="@id/barRatingDescTextView"
@@ -124,11 +125,25 @@
                 android:layout_marginStart="@dimen/_4sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:alpha=".5"
-                android:fontFamily="@font/lexend_regular"
+                android:fontFamily="@font/nunito_regular"
                 android:text="@string/bar_restaurant_0_8km_from_city_center"
                 android:textSize="@dimen/_8sdp"
                 app:layout_constraintStart_toStartOf="@id/starIconImageView"
                 app:layout_constraintTop_toBottomOf="@id/starIconImageView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/barDescTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/nunito_regular"
+                android:text="Pet friendly"
+                android:textSize="@dimen/_7sdp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/barDistanceTextView"
+                app:layout_constraintTop_toBottomOf="@id/barDistanceTextView" />
 
             <View
                 android:id="@+id/borderLine"
@@ -139,8 +154,8 @@
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/eventTodayCardColor"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/barDistanceTextView"
-                app:layout_constraintTop_toBottomOf="@+id/barDistanceTextView" />
+                app:layout_constraintStart_toStartOf="@id/barDescTextView"
+                app:layout_constraintTop_toBottomOf="@+id/barDescTextView" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/eventListTextView"
@@ -150,7 +165,7 @@
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:ellipsize="end"
-                android:fontFamily="@font/lexend_bold"
+                android:fontFamily="@font/nunito_bold"
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="@string/event_list"
@@ -171,7 +186,7 @@
                 app:layout_constraintTop_toBottomOf="@id/eventListTextView"
                 tools:itemCount="2"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_event_list" />
+                tools:listitem="@layout/item_event_calendar_details" />
 
 
             <androidx.appcompat.widget.AppCompatImageView

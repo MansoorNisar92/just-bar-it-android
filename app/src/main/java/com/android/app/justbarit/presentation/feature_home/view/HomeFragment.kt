@@ -1,36 +1,36 @@
 package com.android.app.justbarit.presentation.feature_home.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.FragmentHomeBinding
+import com.android.app.justbarit.domain.model.Bar
 import com.android.app.justbarit.domain.model.Category
 import com.android.app.justbarit.domain.model.Event
+import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.presentation.AppState
-import com.android.app.justbarit.presentation.common.customviews.EventTodayItem
-import com.android.app.justbarit.presentation.common.customviews.SwipeGestureListener
 import com.android.app.justbarit.presentation.common.ext.bitmapFromVector
-import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.hideProgress
 import com.android.app.justbarit.presentation.common.ext.navigate
 import com.android.app.justbarit.presentation.common.ext.showProgress
-import com.android.app.justbarit.presentation.common.ext.showSnackBar
+import com.android.app.justbarit.presentation.feature_calendar.adapter.HomeEventAdapter
+import com.android.app.justbarit.presentation.feature_calendar.adapter.homeEventClick
 import com.android.app.justbarit.presentation.feature_home.adapter.CategoryAdapter
 import com.android.app.justbarit.presentation.feature_home.adapter.categoryClick
 import com.android.app.justbarit.presentation.feature_home.viewmodel.HomeViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,9 +40,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var categoryAdapter: CategoryAdapter
-    private var currentEventIndex = 0
-
-    private var eventsList = arrayListOf<Event>()
+    private lateinit var homeEventAdapter: HomeEventAdapter
+    private var googleMap: GoogleMap? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,6 +65,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private fun initView() {
         initCategories()
+        initHomeEvents()
+        //viewModel.getCoordinates()
     }
 
     private fun initCategories() {
@@ -78,20 +79,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         binding.categoryRecyclerView.adapter = categoryAdapter
     }
 
-    private fun initTodayEvents(events: ArrayList<Event>) {
-        eventsList = events
-        showEvent(currentEventIndex)
-
-        val swipeGestureListener = SwipeGestureListener { isNext ->
-            if (isNext) {
-                showNextEvent()
-            } else {
-                showPreviousEvent()
+    private fun initHomeEvents() {
+        homeEventAdapter = HomeEventAdapter(arrayListOf(), requireContext()).apply {
+            homeEventClick = {
+                //navigate(R.id.calendarDetailsFragment)
             }
         }
-
-// Attach the SwipeGestureListener to the addEventTodayLinearLayout for touch events
-        binding.addEventTodayLinearLayout.setOnTouchListener(swipeGestureListener)
+        binding.homeEventListRecyclerView.adapter = homeEventAdapter
     }
 
     private fun observe() {
@@ -126,7 +120,28 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
                         is AppState.Success<*> -> {
                             hideProgress()
-                            initTodayEvents(it.response as ArrayList<Event>)
+                            homeEventAdapter.setEventItems(it.response as ArrayList<EventDetails>)
+                        }
+
+                        is AppState.Failure<*> -> {
+                            hideProgress()
+                        }
+
+                        else -> {}
+                    }
+                }
+            }
+
+            lifecycleScope.launchWhenCreated {
+                bars.collect {
+                    when (it) {
+                        is AppState.Loading -> {
+                            showProgress()
+                        }
+
+                        is AppState.Success<*> -> {
+                            hideProgress()
+                            extractCoordinatesAndDrawOnTheMap(it.response as ArrayList<Pair<Double, Double>>)
                         }
 
                         is AppState.Failure<*> -> {
@@ -142,52 +157,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     private fun attachListeners() {
         binding.apply {
-            eventArrowLeftLayout.clickToAction {
-                showPreviousEvent()
-            }
-
-            eventArrowRightLayout.clickToAction {
-                showNextEvent()
-            }
+            //
         }
-    }
-
-    private fun showEvent(index: Int, isNext: Boolean = true) {
-        val event = getEventAtIndex(index)
-        binding.addEventTodayLinearLayout.removeAllViews()
-        val eventItem = EventTodayItem(requireContext())
-        eventItem.addEvent(event)
-        binding.addEventTodayLinearLayout.addView(eventItem)
-        eventItem.clickToAction {
-            navigate(R.id.calendarDetailsFragment)
-        }
-        eventItem.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-            override fun onPreDraw(): Boolean {
-                eventItem.viewTreeObserver.removeOnPreDrawListener(this)
-                eventItem.translationX = if (isNext) eventItem.width.toFloat() else -eventItem.width.toFloat()
-                eventItem.animate().translationX(0f).setDuration(700).start()
-                return true
-            }
-        })
-    }
-
-
-    private fun showNextEvent() {
-        currentEventIndex = (currentEventIndex + 1) % totalEvents()
-        showEvent(currentEventIndex, isNext = true)
-    }
-
-    private fun showPreviousEvent() {
-        currentEventIndex = (currentEventIndex - 1 + totalEvents()) % totalEvents()
-        showEvent(currentEventIndex, isNext = false)
-    }
-
-    private fun totalEvents(): Int {
-        return eventsList.size
-    }
-
-    private fun getEventAtIndex(index: Int): Event {
-        return eventsList[index]
     }
 
     companion object {
@@ -199,27 +170,37 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 }
             }
     }
-    override fun onMapReady(googleMap: GoogleMap) {
-        val mMap = googleMap
 
-        val currentLocation = LatLng(33.5651107, 73.0169135)
+    override fun onMapReady(mMap: GoogleMap) {
+        googleMap = mMap
+        googleMap?.mapType = GoogleMap.MAP_TYPE_TERRAIN
+        extractCoordinatesAndDrawOnTheMap(viewModel.fetchCoordinates())
+    }
 
-        val newCustomMarker: BitmapDescriptor = R.drawable.ic_pin_location.bitmapFromVector(requireContext())
-        val markerOptions = MarkerOptions()
-            .position(currentLocation)
-            .draggable(true)
-            .icon(newCustomMarker)
-        // Add a marker in a specific location and move the camera
-        val location = LatLng(33.5651107, 73.0169135) // Example coordinates (San Francisco)
-        mMap.addMarker(markerOptions)
-        //marker.showInfoWindow();
-        val camera = CameraPosition.Builder()
-            .target(currentLocation)
-            .zoom(14f) // limit -> 21
-            .bearing(0f) // 0 - 365º
-            //.tilt(30)           // limit -> 90
-            .build()
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(camera))
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+    private fun extractCoordinatesAndDrawOnTheMap(coordinates: List<Pair<Double, Double>>) {
+        val newCustomMarker: BitmapDescriptor =
+            R.drawable.ic_pin_location.bitmapFromVector(requireContext())
+
+        googleMap?.let { map ->
+            if (coordinates.isNotEmpty()) {
+                coordinates.forEach { (lat, lng) ->
+                    val latLng = LatLng(lat, lng)
+                    val markerOptions = MarkerOptions()
+                        .position(latLng)
+                        .draggable(false)
+                        .icon(newCustomMarker)
+
+                    map.addMarker(markerOptions)
+                }
+                val builder = LatLngBounds.Builder()
+                coordinates.forEach { (lat, lng) ->
+                    builder.include(LatLng(lat, lng))
+                }
+                val bounds = builder.build()
+                val padding = 50
+                val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
+                map.animateCamera(cameraUpdate)
+            }
+        }
     }
 }

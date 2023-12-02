@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.app.justbarit.databinding.ItemEventListBinding
+import com.android.app.justbarit.databinding.ItemEventCalendarDetailsBinding
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
@@ -19,7 +19,7 @@ class EventAdapter constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventAdapterViewHolder {
         val binding =
-            ItemEventListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemEventCalendarDetailsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return EventAdapterViewHolder(binding)
     }
 
@@ -31,25 +31,17 @@ class EventAdapter constructor(
         return eventDetailsList.size
     }
 
-    class EventAdapterViewHolder(private val binding: ItemEventListBinding) :
+    class EventAdapterViewHolder(private val binding: ItemEventCalendarDetailsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(eventDetail: EventDetails, context: Context) {
             binding.apply {
-                eventNameTextView.text = eventDetail.eventName
-                eventDateTextView.text = eventDetail.eventDate
-                eventTimeTextView.text = eventDetail.evenTime
-                includedTeamsLayout.includedHomeTeam.homeTeamName.text =
-                    eventDetail.homeTeam.teamName
-                includedTeamsLayout.includedHomeTeam.homeTeamImageView.loadImageFromAssets(
-                    eventDetail.homeTeam.teamBadge
-                )
-                includedTeamsLayout.includedAwayTeam.awayTeam.text = eventDetail.awayTeam.teamName
-                includedTeamsLayout.includedAwayTeam.awayTeamImageView.loadImageFromAssets(
-                    eventDetail.awayTeam.teamBadge
-                )
-
-                bookingDetailsLayout.clickToAction {
-                    bookingDetails(eventDetail)
+                eventImageView.loadImageFromAssets(eventDetail.eventImage)
+                evenTitleTextView.text = eventDetail.title
+                eventTime.text = eventDetail.date
+                eventHostedByNameTextView.text = eventDetail.location
+                ticketStartsFromTextView.text = eventDetail.price
+                eventDetailsCardView.clickToAction {
+                    evetDetails(eventDetail)
                 }
             }
         }
@@ -61,4 +53,4 @@ class EventAdapter constructor(
     }
 }
 
-var bookingDetails:(EventDetails) -> Unit = {}
+var evetDetails: (EventDetails) -> Unit = {}

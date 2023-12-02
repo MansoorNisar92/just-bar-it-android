@@ -2,6 +2,7 @@ package com.android.app.justbarit.domain.model
 
 import com.android.app.justbarit.data.remote.entity.Bar
 import com.android.app.justbarit.presentation.common.ext.default
+import com.android.app.justbarit.presentation.common.ext.toBooleanOrFalse
 
 data class Bar(
     var barName: String,
@@ -14,7 +15,10 @@ data class Bar(
     var hasBedRoom: Boolean = false,
     var hasDance: Boolean = false,
     var hasFreeEntry: Boolean = false,
-    var reviewCount: Int = 0
+    var reviewCount: Int = 0,
+    var amenities: ArrayList<Amenity> = arrayListOf(),
+    var imageId:String? = null,
+    var latLng:String? = null
 )
 
 fun List<Bar>.convertRemoteBarToLocalBarsList(): List<com.android.app.justbarit.domain.model.Bar> {
@@ -29,7 +33,24 @@ fun Bar.toLocalBar(): com.android.app.justbarit.domain.model.Bar {
     return Bar(
         barName = name ?: "",
         barRating = rating ?: 0.0,
-
+        amenities = this.getAmenities(),
+        imageId =  imageId,
+        latLng = latLng
         )
+}
+
+fun Bar.getAmenities(): ArrayList<Amenity> {
+    val list = arrayListOf<Amenity>()
+    list.add(Amenity(this.disco?.toBooleanOrFalse(), AmenityType.Disco))
+    list.add(Amenity(this.food?.toBooleanOrFalse(), AmenityType.Food))
+    list.add(Amenity(this.gameNight?.toBooleanOrFalse(), AmenityType.GameNight))
+    list.add(Amenity(this.liveMusic?.toBooleanOrFalse(), AmenityType.LiveMusic))
+    list.add(Amenity(this.petFriendly?.toBooleanOrFalse(), AmenityType.PetFriendly))
+    list.add(Amenity(this.smokingArea?.toBooleanOrFalse(), AmenityType.SmokingArea))
+    list.add(Amenity(this.sports?.toBooleanOrFalse(), AmenityType.Sports))
+    list.add(Amenity(this.terraceRooftop?.toBooleanOrFalse(), AmenityType.TerraceRoofTop))
+    list.add(Amenity(false, AmenityType.Wifi))
+    list.add(Amenity(false, AmenityType.Drinks))
+    return list
 }
 

@@ -1,6 +1,5 @@
 package com.android.app.justbarit.presentation.common.ext
 
-import android.content.Context
 
 fun getRatingInDesc(rating: Int): String {
     val ratingsMap = mapOf(
@@ -17,6 +16,6 @@ fun getRatingInDesc(rating: Int): String {
     )
     return ratingsMap[rating] ?: "N/A"
 }
-
-fun Number.toDp(context: Context) =
-    toInt().times(context.resources.getDimension(com.intuit.sdp.R.dimen._1sdp)).toInt()
+fun String?.toBooleanOrFalse(): Boolean {
+    return this.equals("TRUE", ignoreCase = true)
+}

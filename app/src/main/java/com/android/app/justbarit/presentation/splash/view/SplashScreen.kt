@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SplashScreen : JustBarItBaseActivity() {
     private lateinit var binding: ActivitySplashBinding
-    private val delay: Long = 6000 // 8 seconds
     private val splashViewModel: SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

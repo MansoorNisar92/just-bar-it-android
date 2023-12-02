@@ -3,11 +3,17 @@ package com.android.app.justbarit.presentation.feature_home.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.app.justbarit.R
+import com.android.app.justbarit.domain.model.Bar
 import com.android.app.justbarit.domain.model.Category
 import com.android.app.justbarit.domain.model.CategoryType
 import com.android.app.justbarit.domain.model.Event
+import com.android.app.justbarit.domain.model.EventDetails
+import com.android.app.justbarit.domain.model.convertRemoteBarToLocalBarsList
+import com.android.app.justbarit.domain.usecases.GetBarsFromLocalDatabaseUseCase
 import com.android.app.justbarit.presentation.AppState
+import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,12 +22,21 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(private val getBarsFromLocalDatabaseUseCase: GetBarsFromLocalDatabaseUseCase) : ViewModel() {
     private val _categories = MutableStateFlow<AppState>(AppState.Default)
     val categories: Flow<AppState> get() = _categories.asStateFlow()
 
     private val _eventsToday = MutableStateFlow<AppState>(AppState.Default)
     val eventsToday: Flow<AppState> get() = _eventsToday.asStateFlow()
+
+    private val _bars = MutableStateFlow<AppState>(AppState.Default)
+    val bars: Flow<AppState> get() = _bars.asStateFlow()
+
+    private var _coordinates = listOf<Pair<Double,Double>>()
+    private var coordinates = _coordinates
+    init {
+        getCoordinates()
+    }
 
     fun getListOfCategories() {
         viewModelScope.launch {
@@ -51,13 +66,54 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     }
 
 
-    private fun getHardEventsToday(): ArrayList<Event> {
+    private fun getHardEventsToday(): ArrayList<EventDetails> {
         return arrayListOf(
-            Event("Friday Night - Fire", "This is event Desc", "11th Nov", "17:00"),
-            Event("O’REILLYS - CHEAP MONDAY", "This is event Desc 2", "12th Nov", "13:00"),
-            Event("Let's roll it - Dude", "This is event Desc 3", "01st Dec", "23:00"),
-            Event("Smoking Lounge and Treat", "This is event Desc 4", "10th Dec", "20:00"),
-            Event("Crashing Tonight - Blast", "This is event Desc 5", "31st Dec", "23:30"),
+            EventDetails(
+                "Swiftogeddon - The Tylor Swift Club Night",
+                date = "Fri,8 Dec 22:30",
+                location = "The Grand Social",
+                price = "From €8.82",
+                eventImage = R.drawable.home_event_one
+            ),
+            EventDetails(
+                "The Gang's All Here Extra: Live at Liberty Hall",
+                date = "Fri,8 Dec 19:00",
+                location = "Liberty Hall Theatre",
+                price = "From €31.00",
+                eventImage = R.drawable.home_event_two
+            )
         )
     }
+
+
+    private fun getCoordinates(){
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val barsList = getBarsFromLocalDatabaseUseCase.invoke().convertRemoteBarToLocalBarsList()
+                _coordinates = extractCoordinates(barsList)
+                _bars.emit(AppState.Success(_coordinates))
+            } catch (e: Exception) {
+                _bars.emit(AppState.Failure(e.message))
+            }
+        }
+
+    }
+
+    private fun extractCoordinates(bars: List<Bar>): List<Pair<Double,Double>> {
+        val coordinates = arrayListOf<String?>()
+        bars.forEach {
+            coordinates.add(it.latLng)
+        }
+        return coordinates.mapNotNull { extractLatLng(it ?: "") }
+    }
+
+    private fun extractLatLng(str: String): Pair<Double, Double>? {
+        val regex = Regex("""\(([-+]?\d+\.\d+) ([-+]?\d+\.\d+)\)""")
+        val matchResult = regex.find(str)
+        return matchResult?.destructured?.let { (lat, lng) ->
+            lat.toDouble() to lng.toDouble()
+        }
+    }
+
+    fun fetchCoordinates() = coordinates
 }

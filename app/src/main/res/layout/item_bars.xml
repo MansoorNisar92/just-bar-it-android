@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/eventCardView"
+        android:id="@+id/barCardView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_245sdp"
         android:layout_marginStart="@dimen/_20sdp"
@@ -30,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/free_entry_background"
-                android:fontFamily="@font/lexend_semi_bold"
+                android:fontFamily="@font/nunito_semi_bold"
                 android:text="@string/free_entry"
                 android:textColor="@color/white"
                 android:layout_marginTop="@dimen/_25sdp"
@@ -75,7 +76,7 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:ellipsize="end"
-                    android:fontFamily="@font/lexend_bold"
+                    android:fontFamily="@font/nunito_bold"
                     android:maxLines="1"
                     android:text="The Brazen Head"
                     android:textSize="@dimen/_16sdp"
@@ -96,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
-                    android:fontFamily="@font/lexend_bold"
+                    android:fontFamily="@font/nunito_bold"
                     android:text="9.2"
                     android:textSize="@dimen/_11sdp"
                     app:layout_constraintStart_toEndOf="@id/starIconImageView"
@@ -108,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:fontFamily="@font/lexend_regular"
+                    android:fontFamily="@font/nunito_regular"
                     android:text="Excellent"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintStart_toEndOf="@id/barRatingTextView"
@@ -120,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:fontFamily="@font/lexend_regular"
+                    android:fontFamily="@font/nunito_regular"
                     android:text="(2298)"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintStart_toEndOf="@id/barRatingDescTextView"
@@ -130,10 +131,9 @@
                     android:id="@+id/barDistanceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:alpha=".5"
-                    android:fontFamily="@font/lexend_regular"
+                    android:fontFamily="@font/nunito_regular"
                     android:text="Bar Restaurant - 0.8km from city center"
                     android:textSize="@dimen/_8sdp"
                     app:layout_constraintStart_toStartOf="@id/starIconImageView"
@@ -143,8 +143,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     app:layout_constraintStart_toStartOf="@id/barDistanceTextView"
-                    app:layout_constraintTop_toBottomOf="@id/barDistanceTextView">
+                    app:layout_constraintTop_toBottomOf="@id/barDistanceTextView"
+                    app:layout_constraintEnd_toStartOf="@id/seeDetailsLabelTextView">
 
                     <include
                         android:id="@+id/includedAmenities"
@@ -153,10 +155,11 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/seeDetailsLabelTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp"
-                    android:fontFamily="@font/lexend_regular"
+                    android:fontFamily="@font/nunito_regular"
                     android:text="@string/see_details"
                     android:textSize="@dimen/_9sdp"
                     app:layout_constraintEnd_toStartOf="@+id/seeDetailsArrow"

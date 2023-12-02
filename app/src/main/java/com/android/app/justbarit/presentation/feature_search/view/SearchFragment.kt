@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.android.app.justbarit.R
 import com.android.app.justbarit.databinding.FragmentSearchBinding
 import com.android.app.justbarit.domain.model.Bar
 import com.android.app.justbarit.presentation.AppState
+import com.android.app.justbarit.presentation.common.SharedViewModel
 import com.android.app.justbarit.presentation.common.ext.hideProgress
+import com.android.app.justbarit.presentation.common.ext.navigate
 import com.android.app.justbarit.presentation.common.ext.showProgress
 import com.android.app.justbarit.presentation.feature_search.adapter.BarAdapter
 import com.android.app.justbarit.presentation.feature_search.adapter.barClick
@@ -25,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
     private lateinit var barAdapter: BarAdapter
 
     override fun onCreateView(
@@ -59,7 +63,8 @@ class SearchFragment : Fragment() {
     private fun initBars() {
         barAdapter = BarAdapter(arrayListOf()).apply {
             barClick = {
-
+                sharedViewModel.setSelectedBar(it)
+                navigate(R.id.calendarDetailsFragment)
             }
         }
         binding.barRecyclerView.adapter = barAdapter
