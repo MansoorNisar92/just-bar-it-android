@@ -1,11 +1,9 @@
 package com.android.app.justbarit.presentation.feature_calendar.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.app.justbarit.databinding.ItemEventCalendarDetailsBinding
 import com.android.app.justbarit.databinding.ItemUpComingEventBinding
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.presentation.common.ext.clickToAction
@@ -13,8 +11,7 @@ import com.android.app.justbarit.presentation.common.ext.default
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 
 class UpcomingEventAdapter constructor(
-    eventDetails: ArrayList<EventDetails>,
-    val context: Context
+    eventDetails: ArrayList<EventDetails>
 ) :
     RecyclerView.Adapter<UpcomingEventAdapter.UpComingEventAdapterViewHolder>() {
 
@@ -34,7 +31,7 @@ class UpcomingEventAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: UpComingEventAdapterViewHolder, position: Int) {
-        holder.bind(eventDetail = eventDetailsList[position], context)
+        holder.bind(eventDetail = eventDetailsList[position])
     }
 
     override fun getItemCount(): Int {
@@ -43,7 +40,7 @@ class UpcomingEventAdapter constructor(
 
     class UpComingEventAdapterViewHolder(private val binding: ItemUpComingEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(eventDetail: EventDetails, context: Context) {
+        fun bind(eventDetail: EventDetails) {
             binding.apply {
                 eventImageView.loadImageFromAssets(eventDetail.eventImage)
                 evenTitleTextView.text = eventDetail.title

@@ -1,6 +1,5 @@
 package com.android.app.justbarit.presentation.feature_calendar.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +9,7 @@ import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 
 class EventAdapter constructor(
-    eventDetails: ArrayList<EventDetails>,
-    val context: Context
+    eventDetails: ArrayList<EventDetails>
 ) :
     RecyclerView.Adapter<EventAdapter.EventAdapterViewHolder>() {
 
@@ -24,7 +22,7 @@ class EventAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: EventAdapterViewHolder, position: Int) {
-        holder.bind(eventDetail = eventDetailsList[position], context)
+        holder.bind(eventDetail = eventDetailsList[position])
     }
 
     override fun getItemCount(): Int {
@@ -33,7 +31,7 @@ class EventAdapter constructor(
 
     class EventAdapterViewHolder(private val binding: ItemEventCalendarDetailsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(eventDetail: EventDetails, context: Context) {
+        fun bind(eventDetail: EventDetails) {
             binding.apply {
                 eventImageView.loadImageFromAssets(eventDetail.eventImage)
                 evenTitleTextView.text = eventDetail.title

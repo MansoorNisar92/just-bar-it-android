@@ -10,8 +10,7 @@ import com.android.app.justbarit.presentation.common.ext.clickToAction
 import com.android.app.justbarit.presentation.common.ext.loadImageFromAssets
 
 class HomeEventAdapter constructor(
-    eventDetails: ArrayList<EventDetails>,
-    val context: Context
+    eventDetails: ArrayList<EventDetails>
 ) :
     RecyclerView.Adapter<HomeEventAdapter.HomeEventAdapterViewHolder>() {
 
@@ -24,7 +23,7 @@ class HomeEventAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: HomeEventAdapterViewHolder, position: Int) {
-        holder.bind(eventDetail = eventDetailsList[position], context)
+        holder.bind(eventDetail = eventDetailsList[position])
     }
 
     override fun getItemCount(): Int {
@@ -33,7 +32,7 @@ class HomeEventAdapter constructor(
 
     class HomeEventAdapterViewHolder(private val binding: ItemHomeEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(eventDetail: EventDetails, context: Context) {
+        fun bind(eventDetail: EventDetails) {
             binding.apply {
                 eventImageView.loadImageFromAssets(eventDetail.eventImage)
                 evenTitleTextView.text = eventDetail.title

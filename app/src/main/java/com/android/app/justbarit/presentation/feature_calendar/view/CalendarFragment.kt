@@ -178,11 +178,7 @@ class CalendarFragment : Fragment() {
     }
 
     private fun initEvents() {
-        upcomingEventAdapter = UpcomingEventAdapter(arrayListOf(), requireContext()).apply {
-            upComingEventDetails = { event ->
-                //navigate(R.id.calendarDetailsFragment)
-            }
-        }
+        upcomingEventAdapter = UpcomingEventAdapter(arrayListOf())
         binding.calendarRecyclerView.adapter = upcomingEventAdapter
     }
 

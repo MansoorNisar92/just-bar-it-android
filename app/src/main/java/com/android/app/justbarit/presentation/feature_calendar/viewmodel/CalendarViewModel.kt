@@ -5,9 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.android.app.justbarit.R
 import com.android.app.justbarit.domain.model.CalendarItem
 import com.android.app.justbarit.domain.model.CalendarItemType
-import com.android.app.justbarit.domain.model.Category
-import com.android.app.justbarit.domain.model.CategoryType
-import com.android.app.justbarit.domain.model.Event
 import com.android.app.justbarit.domain.model.EventDetails
 import com.android.app.justbarit.presentation.AppState
 import dagger.hilt.android.lifecycle.HiltViewModel

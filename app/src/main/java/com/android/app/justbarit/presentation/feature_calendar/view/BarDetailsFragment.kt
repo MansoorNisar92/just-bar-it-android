@@ -83,12 +83,12 @@ class BarDetailsFragment : Fragment() {
     }
 
     private fun initEvents() {
-        eventAdapter = EventAdapter(arrayListOf(), requireContext())
+        eventAdapter = EventAdapter(arrayListOf())
         binding.eventListRecyclerView.adapter = eventAdapter
     }
 
     private fun initReviews() {
-        reviewAdapter = ReviewAdapter(arrayListOf(), requireContext())
+        reviewAdapter = ReviewAdapter(arrayListOf())
         binding.reviewRecyclerView.adapter = reviewAdapter
     }
 

@@ -1,6 +1,5 @@
 package com.android.app.justbarit.presentation.feature_calendar.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,8 +7,7 @@ import com.android.app.justbarit.databinding.ItemReviewBinding
 import com.android.app.justbarit.domain.model.Review
 
 class ReviewAdapter constructor(
-    reviews: ArrayList<Review>,
-    val context: Context
+    reviews: ArrayList<Review>
 ) :
     RecyclerView.Adapter<ReviewAdapter.ReviewAdapterViewHolder>() {
 
@@ -22,7 +20,7 @@ class ReviewAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: ReviewAdapterViewHolder, position: Int) {
-        holder.bind(review = reviewsList[position], context)
+        holder.bind(review = reviewsList[position])
     }
 
     override fun getItemCount(): Int {
@@ -31,7 +29,7 @@ class ReviewAdapter constructor(
 
     class ReviewAdapterViewHolder(private val binding: ItemReviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(review: Review, context: Context) {
+        fun bind(review: Review) {
             binding.apply {
                 reviewerNameTextView.text = review.reviewerName
                 reviewTextView.text = review.review

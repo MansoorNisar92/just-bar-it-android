@@ -80,11 +80,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun initHomeEvents() {
-        homeEventAdapter = HomeEventAdapter(arrayListOf(), requireContext()).apply {
-            homeEventClick = {
-                //navigate(R.id.calendarDetailsFragment)
-            }
-        }
+        homeEventAdapter = HomeEventAdapter(arrayListOf())
         binding.homeEventListRecyclerView.adapter = homeEventAdapter
     }
 
