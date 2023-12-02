@@ -28,7 +28,8 @@
 
         <activity
             android:name=".presentation.splash.view.SplashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,6 +38,7 @@
         </activity>
 
         <activity android:name=".presentation.dashboard.DashboardScreen" android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan"
+            android:configChanges="orientation|screenSize"/>
     </application>
 </manifest>
