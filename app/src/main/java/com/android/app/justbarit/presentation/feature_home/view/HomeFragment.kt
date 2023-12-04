@@ -137,7 +137,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
                         is AppState.Success<*> -> {
                             hideProgress()
-                            onMapReady(googleMap!!)
+                            extractCoordinatesAndDrawOnTheMap(it.response as ArrayList<Pair<Double, Double>>)
                         }
 
                         is AppState.Failure<*> -> {
@@ -168,7 +168,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(mMap: GoogleMap) {
-        mMap.clear()
         googleMap = mMap
         googleMap?.mapType = GoogleMap.MAP_TYPE_TERRAIN
         extractCoordinatesAndDrawOnTheMap(viewModel.fetchCoordinates())
