@@ -6,7 +6,8 @@
     android:layout_height="fill_parent"
     android:animateLayoutChanges="true"
     android:fillViewport="true"
-    tools:context=".presentation.feature_home.view.HomeFragment">
+    tools:context=".presentation.feature_home.view.HomeFragment"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,6 +37,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/black"
             android:text="@string/what_do_you_want"
             android:textSize="@dimen/_13sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +65,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/black"
             android:text="@string/event_today"
             android:textSize="@dimen/_13sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,6 +96,7 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_8sdp"
             android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/black"
             android:text="@string/explore_your_area"
             android:textSize="@dimen/_13sdp"
             app:layout_constraintEnd_toEndOf="parent"

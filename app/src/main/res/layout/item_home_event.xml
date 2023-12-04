@@ -13,6 +13,7 @@
         android:clipToPadding="false"
         android:elevation="@dimen/_3sdp"
         app:cardCornerRadius="@dimen/_10sdp"
+        app:cardBackgroundColor="@color/white"
         app:cardElevation="@dimen/_3sdp"
         app:cardPreventCornerOverlap="true"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -19,7 +19,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -76,6 +77,7 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:ellipsize="end"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/nunito_bold"
                     android:maxLines="1"
                     android:text="The Brazen Head"
@@ -98,6 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
                     android:fontFamily="@font/nunito_bold"
+                    android:textColor="@color/black"
                     android:text="9.2"
                     android:textSize="@dimen/_11sdp"
                     app:layout_constraintStart_toEndOf="@id/starIconImageView"
@@ -109,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_2sdp"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/nunito_regular"
                     android:text="Excellent"
                     android:textSize="@dimen/_10sdp"
@@ -121,6 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_2sdp"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/nunito_regular"
                     android:text="(2298)"
                     android:textSize="@dimen/_10sdp"
@@ -133,6 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:alpha=".5"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/nunito_regular"
                     android:text="Bar Restaurant - 0.8km from city center"
                     android:textSize="@dimen/_8sdp"
@@ -161,6 +167,7 @@
                     android:layout_marginTop="@dimen/_6sdp"
                     android:fontFamily="@font/nunito_regular"
                     android:text="@string/see_details"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_9sdp"
                     app:layout_constraintEnd_toStartOf="@+id/seeDetailsArrow"
                     app:layout_constraintTop_toBottomOf="@+id/barDistanceTextView" />

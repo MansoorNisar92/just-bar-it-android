@@ -31,6 +31,7 @@
         android:id="@+id/showProfileTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:alpha=".6"
         android:fontFamily="@font/nunito_medium"
         android:text="Show profile"
